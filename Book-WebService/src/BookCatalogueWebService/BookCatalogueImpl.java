@@ -1,7 +1,5 @@
 package BookCatalogueWebService;
 
-import org.json.JSONObject;
-
 import javax.jws.WebService;
 import javax.xml.ws.Endpoint;
 
@@ -11,15 +9,14 @@ public class BookCatalogueImpl implements BookCatalogue {
     private GoogleBookAPI googleBookAPI = new GoogleBookAPI();
     private GoogleBookResultHandler resultHandler = new GoogleBookResultHandler();
 
-    public JSONObject searchBook(String title) throws Exception{
-
+    public String searchBook(String title) throws Exception{
         String result = googleBookAPI.searchBook(title);
-        return resultHandler.parseSearch(result);
+        return resultHandler.parseSearch(result).toString();
     }
 
-    public JSONObject getBookDetail(String bookId) throws Exception{
+    public String getBookDetail(String bookId) throws Exception{
         String result = googleBookAPI.getBookDetail(bookId);
-        return resultHandler.parseBookDetail(result);
+        return resultHandler.parseBookDetail(result).toString();
     }
 
     // Publisher part

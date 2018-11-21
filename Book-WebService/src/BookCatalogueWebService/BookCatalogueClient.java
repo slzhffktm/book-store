@@ -1,5 +1,7 @@
 package BookCatalogueWebService;
 
+import org.json.JSONObject;
+
 import java.net.URL;
 import javax.xml.namespace.QName;
 import javax.xml.ws.Service;
@@ -18,18 +20,10 @@ public class BookCatalogueClient {
         QName portName = new QName("http://BookCatalogueWebService/", "BookCatalogueImplPort");
         BookCatalogue catalogue = service.getPort(portName, BookCatalogue.class);
 
-        System.out.println("Client : "+ catalogue.searchBook("Anavel"));
-
-//        System.out.println("Client : "+ catalogue.searchBook("Charlotte"));
-//        System.out.println("Client : "+ catalogue.getBookDetail("KWod-7mqDGAC"));
-
-
-
-
-
-
+        String result = catalogue.searchBook("Anavel");
+        JSONObject jsonResult = new JSONObject(result);
+        System.out.println(jsonResult);
 
 
     }
-
 }
