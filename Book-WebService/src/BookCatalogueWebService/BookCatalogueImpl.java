@@ -11,12 +11,12 @@ public class BookCatalogueImpl implements BookCatalogue {
 
     public String searchBook(String title) throws Exception{
         String result = googleBookAPI.searchBook(title);
-        return resultHandler.parseSearch(result).toString();
+        return resultHandler.parseSearch(result);
     }
 
     public String getBookDetail(String bookId) throws Exception{
         String result = googleBookAPI.getBookDetail(bookId);
-        return resultHandler.parseBookDetail(result).toString();
+        return resultHandler.parseBookDetail(result);
     }
 
     // Publisher part

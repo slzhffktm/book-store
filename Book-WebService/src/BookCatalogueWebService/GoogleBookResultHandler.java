@@ -7,7 +7,7 @@ import java.util.StringJoiner;
 
 class GoogleBookResultHandler {
 
-    JSONObject parseSearch(String jsonString) throws Exception {
+    String parseSearch(String jsonString) throws Exception {
 
         StringBuilder parsedResult = new StringBuilder();
         parsedResult.append("{\"Result\" :");
@@ -36,13 +36,24 @@ class GoogleBookResultHandler {
         parsedResult.append(resultList.toString());
         parsedResult.append("}");
 
-        return new JSONObject(parsedResult.toString());
+        return parsedResult.toString();
     }
 
-    JSONObject parseBookDetail(String jsonString) throws Exception {
-        JSONObject jsonResult = new JSONObject(jsonString);
-        System.out.println(jsonResult);
-        return new JSONObject();
+    String parseBookDetail(String jsonString) throws Exception {
+
+        JSONObject book = new JSONObject(jsonString);
+
+        StringJoiner parsedBook = new StringJoiner(",", "{", "}");
+        parsedBook.add(("\"ID\" :\"" + getBookId(book) + '"'));
+        parsedBook.add(("\"URL\" :\"" + getBookUrl(book) + '"'));
+        parsedBook.add(("\"Title\" :\"" + escapeSpecialChar(getBookTitle(book)) + '"'));
+        parsedBook.add(("\"SubTitle\" :\"" + escapeSpecialChar(getBookSubTitle(book)) + '"'));
+        parsedBook.add(("\"Author\" :\"" + getBookAuthor(book) + '"'));
+        parsedBook.add(("\"Description\" :\"" + escapeSpecialChar(getBookDescription(book)) + '"'));
+        parsedBook.add(("\"Price\" :\"" + getBookPrice(book) + '"'));
+        parsedBook.add(("\"Thumbnail\" :\"" + getBookThumbnail(book) + '"'));
+
+        return parsedBook.toString();
     }
 
     private String getBookId(JSONObject book) {

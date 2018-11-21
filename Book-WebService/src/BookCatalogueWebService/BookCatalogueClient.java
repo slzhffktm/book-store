@@ -20,10 +20,15 @@ public class BookCatalogueClient {
         QName portName = new QName("http://BookCatalogueWebService/", "BookCatalogueImplPort");
         BookCatalogue catalogue = service.getPort(portName, BookCatalogue.class);
 
+        System.out.println("Testing search function");
         String result = catalogue.searchBook("Anavel");
         JSONObject jsonResult = new JSONObject(result);
         System.out.println(jsonResult);
 
+        System.out.println("Testing get book details function");
+        result = catalogue.getBookDetail("hjEFCAAAQBAJ");
+        jsonResult = new JSONObject(result);
+        System.out.println(jsonResult);
 
     }
 }
