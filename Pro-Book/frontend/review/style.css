@@ -1,0 +1,129 @@
+#book-id {
+	display:none;
+}
+
+#content {
+	position: absolute;
+	margin-top: 8vh;
+}
+
+.display-block {
+	display:block !important;
+}
+
+#first-row {
+	margin-top: 0vh;
+}
+
+#book-image {
+	max-height: 13vw;
+	width:auto;
+	margin-left:20px;
+	margin-top:10px;
+}
+
+@media screen and (max-width: 800px){
+	#book-image {
+		max-height: 25vw;
+		width:auto;
+		margin-left:20px;
+		margin-top:10px;
+	}
+}
+
+#book-image-div {
+	justify-content: flex-end;
+}
+
+.center {
+	display:flex;
+}
+
+.center h1{
+	margin:auto;
+}
+
+.display-center {
+	position:relative;
+	margin-top:15%;
+}
+
+#second-row {
+	margin-top: 3%;
+}
+
+.review-star {
+	max-width:40px;
+	height:auto;
+	margin-top:20px;
+}
+
+#star-group{
+	margin:auto;
+	display: flex;
+}
+
+#comment {
+	width:100%;
+	min-height: 100px;
+}
+
+.align-right {
+	justify-content: flex-end;
+}
+
+button {
+	width : 100px;
+	height: 30px;
+	background-color:transparent;
+	border-style:none;
+}
+
+#submit-button {
+	background-color:blue;
+	color:white;
+	border-radius: 5px;
+}
+
+#back-button {
+	background-color:transparent;
+	color:red;
+	border-radius: 5px;
+	border-style:solid;
+	border-color:red;	
+}
+
+#sixth-row {
+	margin-top: 20px;
+}
+
+.review-star-full {
+	display:none;
+	max-width:40px;
+	height:auto;
+	margin-top:20px;
+}
+
+#overlay {
+	display:none;
+	position: absolute;
+	height: 100vh;
+	width: 100vw;
+	z-index: 99;
+	background-color: rgba(0,0,0,0.5);
+}
+
+#feedback {
+	display:none;
+	width: 30vw;
+    height: 15vh;
+    background-color: rgba(0,174,239,1);
+    color:white;
+    margin: auto;
+    border-style: bold;
+    border-radius: 30px;
+}
+
+#feedback h2 {
+	margin:auto;
+}
