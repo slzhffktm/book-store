@@ -1,0 +1,126 @@
+#content {
+	position: absolute;
+	margin-top: 12vh;
+}
+
+.display-block {
+	display:block !important;
+}
+
+#first-row {
+    margin-top: 4%;
+}
+
+.book-info {
+    margin-bottom: 10px;
+}
+
+.order-row{
+    margin-bottom: 20px;
+}
+
+.reviews-row {
+    margin-bottom: 30px;
+}
+
+.image-wrapper {
+    margin: auto 0 0 auto;
+}
+
+.book-thumbnail {
+    max-width: 25vw;
+    max-height: 25vh;
+    overflow: hidden;
+    border: 1px black solid;
+    padding: 0 15px;
+}
+
+.review-star {
+    max-width:4vw;
+    max-height: 4vh;
+    height: auto;
+    margin: 2px -1px 0 0;
+}
+
+.star-wrapper {
+    margin: auto 0 auto auto;
+}
+
+.rating-wrapper {
+    font-weight: bold;
+    width: 100%;
+    margin: 0 auto; 
+    align-items: center; 
+    justify-content: center;
+}
+
+#order-btn {
+    float: right;
+    text-align: center;
+    color: #fff;
+    background-color:rgb(0, 174, 239);
+    border-radius: 4px;
+    border: none;
+    padding: 5px 25px;
+    margin: 0 0 0 auto;
+}
+
+.wrapper {
+    margin: auto 0 auto auto;
+}
+
+.info-text-wrapper{
+    padding-right: 10px;
+    text-align: justify;
+}
+
+.profile-picture-wrapper {
+    /*height: 12vh;*/
+}
+
+.profile-picture {
+    width: 6vw;
+    height: 6vw;
+    border: 1px grey solid;
+  /*  background-position: center center;
+    background-size: cover;*/
+}
+
+.review-info-wrapper {
+    padding-left: 10px;
+}
+
+.review-info-star {
+    height: 50px;
+    width: 50px;
+    margin: 0 auto 10px auto;
+}
+
+.review-star-wrapper {
+    /*margin: 0px auto;*/
+    height: 80px;
+}
+#overlay {
+	display:none;
+	position: fixed;
+	height: 100vh;
+	width: 100vw;
+	z-index: 99;
+	background-color: rgba(0,0,0,0.5);
+}
+
+#feedback {
+	display:none;
+	width: 30vw;
+    height: 24vh;
+    background-color: white;
+    color:black;
+    margin: auto;
+    border-style: bold;
+    border-radius: 5px;
+}
+
+#success-message {
+    margin:auto;
+    font-size:1em;
+}
