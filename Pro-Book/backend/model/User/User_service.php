@@ -5,7 +5,7 @@ class User_service {
     public function register($name, $username, $email, $password, $address, $phone, $card) {
         $url = 'http://localhost:3000/validateCard?card='.$card;
         $contents = file_get_contents($url);
-        if($contents == "True") {
+        if($contents == "\"True\"") {
             $conn = OpenCon();
             $sql = "SELECT name FROM user WHERE username = '$username' or email = '$email'";
             $result = $conn->query($sql);
