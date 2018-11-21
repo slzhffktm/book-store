@@ -71,9 +71,6 @@ class GoogleBookAPI {
     }
 
 
-
-
-
     // HTTP POST request
 //    private void sendPost() throws Exception {
 //

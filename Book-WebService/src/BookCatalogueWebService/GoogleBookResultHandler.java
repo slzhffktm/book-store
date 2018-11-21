@@ -3,36 +3,44 @@ package BookCatalogueWebService;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import java.util.StringJoiner;
+
 class GoogleBookResultHandler {
 
     JSONObject parseSearch(String jsonString) throws Exception {
 
-        JSONObject jsonResult = new JSONObject(jsonString);
+        StringBuilder parsedResult = new StringBuilder();
+        parsedResult.append("{\"Result\" :");
 
+        StringJoiner resultList = new StringJoiner(",", "[", "]");
+
+        JSONObject jsonResult = new JSONObject(jsonString);
         JSONArray foundBooks = jsonResult.getJSONArray("items");
         for (int i = 0; i < foundBooks.length(); i++) {
 
             JSONObject book = foundBooks.getJSONObject(i);
-            System.out.println("ID : " + getBookId(book));
-            System.out.println("URL : " + getBookUrl(book));
-            System.out.println("Title : " + getBookTitle(book));
-            System.out.println("SubTitle : " + getBookSubTitle(book));
-            System.out.println("Author : " + getBookAuthor(book));
-            System.out.println("Description : " + getBookDescription(book));
-            System.out.println("Price : " + getBookPrice(book));
-            System.out.println("Thumbnail : " + getBookThumbnail(book));
-            System.out.println();
+            StringJoiner parsedBook = new StringJoiner(",", "{", "}");
+
+            parsedBook.add(("\"ID\" :\"" + getBookId(book) + '"'));
+            parsedBook.add(("\"URL\" :\"" + getBookUrl(book) + '"'));
+            parsedBook.add(("\"Title\" :\"" + escapeSpecialChar(getBookTitle(book)) + '"'));
+            parsedBook.add(("\"SubTitle\" :\"" + escapeSpecialChar(getBookSubTitle(book)) + '"'));
+            parsedBook.add(("\"Author\" :\"" + getBookAuthor(book) + '"'));
+            parsedBook.add(("\"Description\" :\"" + escapeSpecialChar(getBookDescription(book)) + '"'));
+            parsedBook.add(("\"Price\" :\"" + getBookPrice(book) + '"'));
+            parsedBook.add(("\"Thumbnail\" :\"" + getBookThumbnail(book) + '"'));
+
+            resultList.add(parsedBook.toString());
         }
 
-        System.out.println(jsonResult);
+        parsedResult.append(resultList.toString());
+        parsedResult.append("}");
 
-        return jsonResult;
+        return new JSONObject(parsedResult.toString());
     }
 
     JSONObject parseBookDetail(String jsonString) throws Exception {
-
         JSONObject jsonResult = new JSONObject(jsonString);
-
         System.out.println(jsonResult);
         return new JSONObject();
     }
@@ -57,6 +65,7 @@ class GoogleBookResultHandler {
         try {
             JSONObject details = book.getJSONObject("volumeInfo");
             return details.getString("title");
+
         } catch (Exception e) {
             return "Undefined";
         }
@@ -66,6 +75,7 @@ class GoogleBookResultHandler {
         try {
             JSONObject details = book.getJSONObject("volumeInfo");
             return details.getString("subtitle");
+
         } catch (Exception e) {
             return "Undefined";
         }
@@ -90,6 +100,7 @@ class GoogleBookResultHandler {
         try {
             JSONObject details = book.getJSONObject("volumeInfo");
             return details.getString("description");
+
         } catch (Exception e) {
             return "Undefined";
         }
@@ -128,10 +139,7 @@ class GoogleBookResultHandler {
                     return saleability;
                 }
             }
-
-
         } catch (Exception e) {
-
             return "Undefined";
         }
     }
@@ -145,14 +153,10 @@ class GoogleBookResultHandler {
             return "Undefined";
         }
     }
-//    private String getBookSaleability(JSONObject book){
-//        try{
-//            JSONObject saleability = book.getJSONObject("saleInfo");
-//            return saleability.getString("saleability");
-//        } catch (Exception e){
-//            return "Undefined";
-//        }
-//    }
 
+    private String escapeSpecialChar(String input) {
+        String regex = "(\"|\\\\)";
+        return input.replaceAll(regex, "\\\\$1");
+    }
 
 }
