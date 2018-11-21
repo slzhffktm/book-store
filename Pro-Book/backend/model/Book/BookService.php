@@ -1,5 +1,4 @@
 <?php
-    
     require_once 'backend/model/db/db_connection.php';
     class BookService {
         public function searchBook($keyword) {
