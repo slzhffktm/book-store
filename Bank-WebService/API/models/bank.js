@@ -82,20 +82,4 @@ Bank.createTransaction = function(senderCardNumber, recCardNumber, deltaSaldo, r
   });
 }
 
-// function select(query, callback) 
-// {
-//     con.query(query,function(err,rows){
-//         if(err) throw err;
-//         return callback(rows);
-//     });
-// }
-
-// function insert(query, callback)
-// {
-//   con.query(query,function(err,rows){
-//     if(err) throw err;
-//     return callback(rows);
-//   });
-// }
-
 module.exports = Bank;
