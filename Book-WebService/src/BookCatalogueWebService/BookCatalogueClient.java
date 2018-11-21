@@ -23,12 +23,17 @@ public class BookCatalogueClient {
         System.out.println("Testing search function");
         String result = catalogue.searchBook("Anavel");
         JSONObject jsonResult = new JSONObject(result);
-        System.out.println(jsonResult);
+//        System.out.println(jsonResult);
 
         System.out.println("Testing get book details function");
-        result = catalogue.getBookDetail("hjEFCAAAQBAJ");
-        jsonResult = new JSONObject(result);
-        System.out.println(jsonResult);
+        String book = catalogue.getBookDetail("hjEFCAAAQBAJ");
+        JSONObject jsonBook = new JSONObject(book);
+//        System.out.println(jsonBook);
 
+        System.out.println("Testing buy book function");
+        boolean res = catalogue.buyBook(jsonBook.getString("ID").toString(),"Horror",5);
+								res = catalogue.buyBook(jsonBook.getString("ID").toString(),"Horror",3);
+//        jsonResult = new JSONObject(result);
+//        System.out.println(res);
     }
 }

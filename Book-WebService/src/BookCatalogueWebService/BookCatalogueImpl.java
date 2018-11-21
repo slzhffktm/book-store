@@ -19,6 +19,10 @@ public class BookCatalogueImpl implements BookCatalogue {
         return resultHandler.parseBookDetail(result);
     }
 
+    public boolean buyBook(String id, String author, int total) throws  Exception {
+        boolean result = BuyBook.upsert(id,author,total);
+        return result;
+    }
     // Publisher part
     public static void main(String[] argv) {
         Object implementor = new BookCatalogueImpl();
