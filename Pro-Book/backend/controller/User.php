@@ -98,10 +98,11 @@ class User {
             $address = $_POST['address'];
             $phone = $_POST['phone'];
             $imageUrl = false;
+            $card = $_POST['card'];
 
             if (move_uploaded_file($_FILES["profile-img-hidden-input"]["tmp_name"], $target_file)) {
                 $imageUrl = "/tugasbesar2_2018/Pro-Book/frontend/img_resource/".$user->getUsername().strtotime("now").basename($_FILES["profile-img-hidden-input"]["name"]);
-                $user = $this->us->edit($user, $name, $address, $phone, $imageUrl);
+                $user = $this->us->edit($user, $name, $address, $phone, $imageUrl, $card);
                 $this->view->render_profile_page($user);
             }else{
                 echo "<script>alert('image not valid');window.location='http://localhost/tugasbesar2_2018/Pro-Book/index.php/User/showEditProfile';</script>";

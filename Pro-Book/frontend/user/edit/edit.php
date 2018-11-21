@@ -74,6 +74,16 @@
         <div class="row row-margin">
           <div class="kolom-md-2">
           </div>
+          <div class="kolom-md-3">
+            <h3>Card number</h3>
+          </div>
+          <div class="kolom-md-5">
+            <input type="number" class="input-text" id="card" name="card" value="<?php echo $user->getCard() ?>" />
+          </div>
+        </div>
+        <div class="row row-margin">
+          <div class="kolom-md-2">
+          </div>
           <div class="kolom-md-4">
             <a href="http://localhost/tugasbesar2_2018/Pro-Book/index.php/User/showUserProfile">
               <button type="button" id="back-button" onclick="back()">Back</button>

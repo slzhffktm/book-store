@@ -10,7 +10,7 @@ class AuthService {
         $result = $conn->query($sql);
         if($result->num_rows === 1) {
             $val = mysqli_fetch_assoc($result);
-            $user = new User_model($val['name'], $val['username'], $val['email'], $val['hashedPassword'], $val['address'], $val['phone'],$val['image_url']);
+            $user = new User_model($val['name'], $val['username'], $val['email'], $val['hashedPassword'], $val['address'], $val['phone'],$val['image_url'], $val['card']);
             if($user->checkPassword($password)) {
                 $accesToken = new Auth_model($username);
                 $accesToken->save($conn);
@@ -34,7 +34,7 @@ class AuthService {
         if($result->num_rows === 1){
             $val = mysqli_fetch_assoc($result);          
             CloseCon($conn);
-            return new User_model($val['name'], $val['username'], $val['email'], $val['hashedPassword'], $val['address'], $val['phone'],$val['image_url']);
+            return new User_model($val['name'], $val['username'], $val['email'], $val['hashedPassword'], $val['address'], $val['phone'],$val['image_url'], $val['card']);
         }
         CloseCon($conn);
         return false;

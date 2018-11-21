@@ -8,8 +8,9 @@ class User_model{
     private $address;
     private $phone;
     private $imageUrl;
+    private $card;
 
-    function __construct($name, $username, $email, $hashedPassword, $address, $phone, $imageUrl) {
+    function __construct($name, $username, $email, $hashedPassword, $address, $phone, $imageUrl, $card) {
         $this->setName($name);
         $this->setUsername($username);
         $this->setEmail($email);
@@ -17,6 +18,7 @@ class User_model{
         $this->setAddress($address);
         $this->setPhone($phone);
         $this->setImageUrl($imageUrl);
+        $this->setCard($card);
     }
 
     function setName($name) {
@@ -75,8 +77,15 @@ class User_model{
         return $this->imageUrl;
     }
 
+    function setCard($card) {
+        $this->card = $card;
+    }
+
+    function getCard(){
+        return $this->card;
+    }
     function save($conn) {
-        $sql = "INSERT INTO user (name, username, email, hashedPassword, address, phone, image_url) VALUES ('$this->name','$this->username','$this->email','$this->hashedPassword', '$this->address','$this->phone','$this->imageUrl')";
+        $sql = "INSERT INTO user (name, username, email, hashedPassword, address, phone, image_url, card) VALUES ('$this->name','$this->username','$this->email','$this->hashedPassword', '$this->address','$this->phone','$this->imageUrl', '$this->card')";
         if ($conn->query($sql) === TRUE) {
             header('Content-Type: application/json');
             header('Status: Success');
@@ -94,7 +103,7 @@ class User_model{
     }
 
     function update($conn) {
-        $sql = "UPDATE user SET name='$this->name', address='$this->address', phone='$this->phone', image_url='$this->imageUrl' WHERE username='$this->username'";   
+        $sql = "UPDATE user SET name='$this->name', address='$this->address', phone='$this->phone', image_url='$this->imageUrl', card = '$this->card' WHERE username='$this->username'";   
         if ($conn->query($sql) === TRUE) {
             return true;
         } else {
