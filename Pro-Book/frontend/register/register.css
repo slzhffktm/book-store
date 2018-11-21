@@ -1,0 +1,78 @@
+.outer {
+    background-color: rgb(0, 174, 239);
+    margin: auto;
+    width: 20%;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    border-radius: 10px; 
+}
+.class1{
+    margin: auto;
+    background-image: url("/tugasbesar2_2018/Pro-Book/frontend/img_resource/bg.PNG");
+    width: 92%;
+    /* border: 3px solid rgb(0, 174, 239); */
+    padding: 10px;
+}
+.title{
+    text-align: center;
+    font-family: "Pathway Gothic One";
+    letter-spacing: 10px;
+}
+
+.input{
+    display: block;
+    text-align: right;
+}
+body {
+    overflow: hidden;
+    display:flex;
+    min-width:100vw;
+    min-height:100vh;
+}
+input{
+    width: 166px;
+}
+
+input[name=username] {
+    width: 152px;
+}
+
+input[name=email] {
+    width: 152px;
+}
+
+.checklistForm div{
+    display: inline-block; 
+}
+.checklist{
+    width: 10px;
+    display: none;
+    visibility: hidden;
+}
+
+input{
+    margin-bottom: 10px;    
+}
+
+label{
+    vertical-align: top;
+}
+
+textarea{
+    resize: none;
+}
+
+input[type=submit] {
+    padding:5px 15px; 
+    background-color: white; 
+    border:0 none;
+    cursor:pointer;
+    -webkit-border-radius: 5px;
+    border-radius: 10px; 
+    border: 2px solid orange;
+    color: orange;
+    display: block;
+    margin: auto;
+    width: 100px;
+    
+}

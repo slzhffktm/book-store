@@ -1,0 +1,35 @@
+#content {
+	position: absolute;
+	margin-top: 12vh;
+}
+
+.display-block {
+	display:block !important;
+}
+
+#first-row {
+    margin-top: 4%;
+}
+
+input[type="text"] {
+    width:100%;
+    padding: 5px;
+    border-radius: 4px;
+    border: 1px grey solid;  
+}
+
+#search-btn {
+    float: right;
+    text-align: center;
+    color: #fff;
+    background-color:rgb(0, 174, 239);
+    border-radius: 4px;
+    border: none;
+    padding: 5px 25px;
+    margin-top: 10px;
+}
+
+#search-book-title {
+    margin-bottom: 30px;
+    color: orangered; 
+}

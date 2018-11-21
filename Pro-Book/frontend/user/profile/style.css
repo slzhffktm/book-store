@@ -1,0 +1,68 @@
+#content {
+	position: absolute;
+	margin-top: 15vh;
+}
+
+.display-name {
+    display:block !important;
+    margin: auto;
+    text-align: center;
+    color: white;
+}
+
+#first-row {
+    background-color: rgb(0,55,76);
+    height: 400px;
+
+}
+
+div.circle{
+    display: flex;
+    width: 300px;
+    height: 300px;
+    background-repeat:no-repeat;   
+    -moz-border-radius: 150px;
+    -webkit-border-radius: 150px;
+    background-position:50% 50%;
+    background-size: 110%;
+    margin: auto;
+    border: 8px solid rgb(242,216,0);
+    padding-top: 10px;
+}
+
+#profile-image {
+	max-width: 50%;
+	margin-left:20px;
+	height: auto;
+}
+
+#edit-icon {
+    width: 50px;
+    height: 50px;
+}
+#profile-icon {
+    width: 25px;
+    height: 25px;
+}
+
+.center {
+	display:flex;
+}
+
+.center h1{
+	margin:auto;
+}
+
+.display-center {
+	position:relative;
+	margin-top:15%;
+}
+
+#second-row {
+    margin-top: 3%;
+    color: orange;
+}
+
+.margin {
+    margin-top:10px;
+}

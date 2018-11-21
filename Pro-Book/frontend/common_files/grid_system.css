@@ -1,0 +1,98 @@
+body {
+    margin: 0px;
+    top:0px;
+}
+
+.img-responsive {
+    height:100%;
+    width:auto;
+}
+
+h1, h2, h3, h4, h5 {
+    margin-block-start: 0;
+    margin-block-end: 0;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+}
+
+* {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -ms-box-sizing: border-box;
+    box-sizing: border-box;
+    font-family: 'Nunito', sans-serif;
+    font-weight: 100;
+}
+
+.container {
+    margin: 0 auto;
+    width: 100%;
+}
+
+.row {
+    width: 100%;
+    display: -webkit-flex; /* Safari */
+    -webkit-flex-wrap: wrap; /* Safari 6.1+ */
+    display: flex;   
+    flex-wrap: wrap;
+}
+
+.kolom-md-1, .kolom-md-2, .kolom-md-3, .kolom-md-4, .kolom-md-5, .kolom-md-6, .kolom-md-7, .kolom-md-8, .kolom-md-9, .kolom-md-10, .kolom-md-11, .kolom-md-12
+{
+    position: relative;
+    min-height: 1px;
+    display: -webkit-flex; 
+    -webkit-flex-wrap: wrap; 
+    flex-wrap: wrap;
+    margin : 0;
+}
+
+.kolom-md-1 {
+    width: 8.33%;
+}
+
+.kolom-md-2 {
+    width: 16.66%;
+}
+
+.kolom-md-3 {
+    width: 25%;
+}
+
+.kolom-md-4 {
+    width: 33.33%;
+}
+
+.kolom-md-5 {
+    width: 41.66%;
+}
+
+.kolom-md-6 {
+    width: 50%;
+}
+
+.kolom-md-7 {
+    width: 58.33%;
+}
+
+.kolom-md-8 {
+    width: 66.66%;
+}
+
+.kolom-md-9 {
+    width: 75%;
+}
+
+.kolom-md-10 {
+    width: 83.33%;
+}
+
+.kolom-md-11 {
+    width: 91.66%;
+}
+
+.kolom-md-12 {
+    width: 100%;
+}
+
+

@@ -1,0 +1,71 @@
+#navbar {
+	height:15vh;
+	width:100%;
+	overflow-y: hidden;
+	position:fixed;
+	top:0px;
+	z-index: 999;
+}
+
+#navbar-first-row {
+	display:flex;
+	height:50%;
+	width:100%;
+	background-color: rgba(0,174,239,1);
+	overflow-y: hidden;
+	overflow-x: hidden;
+}
+
+#navbar-second-row {
+	display:flex;
+	height:50%;
+	width:100%;
+	background-color: rgba(0,148,204,1);
+	overflow-y: hidden;
+	overflow-x: hidden;
+}
+
+#navbar-second-row div h1 {
+	color:white;
+	margin: auto;
+}
+
+#right-side-navbar {
+	justify-content: flex-end;
+	height:100%;
+}
+
+#right-title {
+	height:100%;
+	padding:10px;
+}
+
+#left-title {
+	height: 100%;
+}
+
+.title {
+	display: flex;
+	padding-left: 3%;
+}
+
+.title h1 {
+	margin:auto;
+}
+
+.title h3 {
+	margin: auto;
+}
+
+#onoff-image {
+	height:100%;
+	width:auto;
+}
+
+.active {
+	background-color: rgba(242,102,0,1);
+}
+
+.navbar-block {
+	display:flex;
+}
