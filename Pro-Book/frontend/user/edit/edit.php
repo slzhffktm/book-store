@@ -3,9 +3,9 @@
 <html>
 	<head>
   	<meta content="width=device-width, initial-scale=1" name="viewport" />
-    <link rel="stylesheet" type="text/css" href="/tugasbesar1_2018/frontend/common_files/grid_system.css">
-    <link rel="stylesheet" type="text/css" href="/tugasbesar1_2018/frontend/common_files/navbar.css">
-    <link rel="stylesheet" type="text/css" href="/tugasbesar1_2018/frontend/user/edit/style.css">
+    <link rel="stylesheet" type="text/css" href="/tugasbesar2_2018/Pro-Book/frontend/common_files/grid_system.css">
+    <link rel="stylesheet" type="text/css" href="/tugasbesar2_2018/Pro-Book/frontend/common_files/navbar.css">
+    <link rel="stylesheet" type="text/css" href="/tugasbesar2_2018/Pro-Book/frontend/user/edit/style.css">
   </head>
   <body>
   	<?php include 'frontend/common_files/navbar.php'; ?>
@@ -17,7 +17,7 @@
           <h1 style="color:orange">Edit Profile</h1>
         </div>
       </div>
-      <form name= "edit" action="http://localhost/tugasbesar1_2018/index.php/User/editProfile" onsubmit="return validateForm()" method="POST" enctype="multipart/form-data">
+      <form name= "edit" action="http://localhost/tugasbesar2_2018/Pro-Book/index.php/User/editProfile" onsubmit="return validateForm()" method="POST" enctype="multipart/form-data">
         <div class="row">
           <div class="kolom-md-2">
           </div>
@@ -75,7 +75,7 @@
           <div class="kolom-md-2">
           </div>
           <div class="kolom-md-4">
-            <a href="http://localhost/tugasbesar1_2018/index.php/User/showUserProfile">
+            <a href="http://localhost/tugasbesar2_2018/Pro-Book/index.php/User/showUserProfile">
               <button type="button" id="back-button" onclick="back()">Back</button>
             </a>
           </div>
@@ -86,5 +86,5 @@
       </form>
       </div>
   </body>
-  <script type="text/javascript" src="/tugasbesar1_2018/frontend/user/edit/script.js"></script>
+  <script type="text/javascript" src="/tugasbesar2_2018/Pro-Book/frontend/user/edit/script.js"></script>
 </html>

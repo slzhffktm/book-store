@@ -72,7 +72,7 @@ function validateUsername(username) {
       }
     };
 
-    xhttp.open("GET", "http://localhost/tugasbesar1_2018/index.php/User/checkAvailability?username="+username, true);
+    xhttp.open("GET", "http://localhost/tugasbesar2_2018/Pro-Book/index.php/User/checkAvailability?username="+username, true);
     xhttp.send();
 }
 
@@ -93,7 +93,7 @@ function validateEmail(email) {
         }
       }
     };
-    xhttp.open("GET", "http://localhost/tugasbesar1_2018/index.php/User/checkAvailability?email="+email, true);
+    xhttp.open("GET", "http://localhost/tugasbesar2_2018/Pro-Book/index.php/User/checkAvailability?email="+email, true);
     xhttp.send();
 }
 

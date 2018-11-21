@@ -10,19 +10,19 @@ function showStars(rating) {
     star5 = document.getElementById("star5");
 
     if (rating >= 1) {
-        star1.src = "/tugasbesar1_2018/frontend/img_resource/starFull.png";
+        star1.src = "/tugasbesar2_2018/Pro-Book/frontend/img_resource/starFull.png";
     }
     if (rating >= 2) {
-        star2.src = "/tugasbesar1_2018/frontend/img_resource/starFull.png";
+        star2.src = "/tugasbesar2_2018/Pro-Book/frontend/img_resource/starFull.png";
     }
     if (rating >= 3) {
-        star3.src = "/tugasbesar1_2018/frontend/img_resource/starFull.png";
+        star3.src = "/tugasbesar2_2018/Pro-Book/frontend/img_resource/starFull.png";
     }
     if (rating >= 4) {
-        star4.src = "/tugasbesar1_2018/frontend/img_resource/starFull.png";
+        star4.src = "/tugasbesar2_2018/Pro-Book/frontend/img_resource/starFull.png";
     }
     if (rating >= 5) {
-        star5.src = "/tugasbesar1_2018/frontend/img_resource/starFull.png";
+        star5.src = "/tugasbesar2_2018/Pro-Book/frontend/img_resource/starFull.png";
     }
 }
 
@@ -31,7 +31,7 @@ function makeOrder(username, book_id) {
     var e = document.getElementById("order-quantity");
     var amount = parseInt(e.options[e.selectedIndex].text);
     var xhttp = new XMLHttpRequest();
-    var url = "/tugasbesar1_2018/index.php/Order/orderBook";
+    var url = "/tugasbesar2_2018/Pro-Book/index.php/Order/orderBook";
     var params = 'username='+username+"&book_id="+book_id+"&amount="+amount;
     xhttp.open("POST", url, true);
     xhttp.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
@@ -39,7 +39,7 @@ function makeOrder(username, book_id) {
     xhttp.onreadystatechange = function() {
         if (xhttp.readyState == 4 && xhttp.status == 200) {
             if(xhttp.responseText == "false"){
-                window.location = "http://localhost/tugasbesar1_2018/index.php/Auth/index"
+                window.location = "http://localhost/tugasbesar2_2018/Pro-Book/index.php/Auth/index"
             }
             document.getElementById("success-message").innerHTML = "<p style='font-weight:bold'>Pesanan berhasil!</p><p>Nomor Transaksi:" + xhttp.responseText +"</p>";
             document.getElementById("overlay").style.display = "flex";

@@ -5,9 +5,9 @@
 		<title>Review Page</title>
 		<meta content="width=device-width, initial-scale=1" name="viewport" />
 		<link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
-		<link rel="stylesheet" type="text/css" href="/tugasbesar1_2018/frontend/common_files/grid_system.css">
-		<link rel="stylesheet" type="text/css" href="/tugasbesar1_2018/frontend/common_files/navbar.css">
-		<link rel="stylesheet" type="text/css" href="/tugasbesar1_2018/frontend/review/style.css">
+		<link rel="stylesheet" type="text/css" href="/tugasbesar2_2018/Pro-Book/frontend/common_files/grid_system.css">
+		<link rel="stylesheet" type="text/css" href="/tugasbesar2_2018/Pro-Book/frontend/common_files/navbar.css">
+		<link rel="stylesheet" type="text/css" href="/tugasbesar2_2018/Pro-Book/frontend/review/style.css">
 	</head>
 	<body id="body">
 		<?php include 'frontend/common_files/navbar.php' ?>
@@ -40,24 +40,24 @@
 				<div class="kolom-md-8">
 					<div id="star-group">
 						<div class="star-div" onclick="selectStar(1)">
-							<img id="star1fill" class="review-star-full" src="/tugasbesar1_2018/frontend/img_resource/starFull.png">
-							<img id="star1" class="review-star" src="/tugasbesar1_2018/frontend/img_resource/starEmpty.png">
+							<img id="star1fill" class="review-star-full" src="/tugasbesar2_2018/Pro-Book/frontend/img_resource/starFull.png">
+							<img id="star1" class="review-star" src="/tugasbesar2_2018/Pro-Book/frontend/img_resource/starEmpty.png">
 						</div>
 						<div class="star-div" onclick="selectStar(2)">
-							<img id="star1fill" class="review-star-full" src="/tugasbesar1_2018/frontend/img_resource/starFull.png">
-							<img id="star1" class="review-star" src="/tugasbesar1_2018/frontend/img_resource/starEmpty.png">
+							<img id="star1fill" class="review-star-full" src="/tugasbesar2_2018/Pro-Book/frontend/img_resource/starFull.png">
+							<img id="star1" class="review-star" src="/tugasbesar2_2018/Pro-Book/frontend/img_resource/starEmpty.png">
 						</div>
 						<div class="star-div" onclick="selectStar(3)">
-							<img id="star1fill" class="review-star-full" src="/tugasbesar1_2018/frontend/img_resource/starFull.png">
-							<img id="star1" class="review-star" src="/tugasbesar1_2018/frontend/img_resource/starEmpty.png">
+							<img id="star1fill" class="review-star-full" src="/tugasbesar2_2018/Pro-Book/frontend/img_resource/starFull.png">
+							<img id="star1" class="review-star" src="/tugasbesar2_2018/Pro-Book/frontend/img_resource/starEmpty.png">
 						</div>
 						<div class="star-div" onclick="selectStar(4)">
-							<img id="star1fill" class="review-star-full" src="/tugasbesar1_2018/frontend/img_resource/starFull.png">
-							<img id="star1" class="review-star" src="/tugasbesar1_2018/frontend/img_resource/starEmpty.png">
+							<img id="star1fill" class="review-star-full" src="/tugasbesar2_2018/Pro-Book/frontend/img_resource/starFull.png">
+							<img id="star1" class="review-star" src="/tugasbesar2_2018/Pro-Book/frontend/img_resource/starEmpty.png">
 						</div>
 						<div class="star-div" onclick="selectStar(5)">
-							<img id="star1fill" class="review-star-full" src="/tugasbesar1_2018/frontend/img_resource/starFull.png">
-							<img id="star1" class="review-star" src="/tugasbesar1_2018/frontend/img_resource/starEmpty.png">
+							<img id="star1fill" class="review-star-full" src="/tugasbesar2_2018/Pro-Book/frontend/img_resource/starFull.png">
+							<img id="star1" class="review-star" src="/tugasbesar2_2018/Pro-Book/frontend/img_resource/starEmpty.png">
 						</div>
 					</div>
 				</div>
@@ -89,5 +89,5 @@
 		</div>
 		<div id="overlay"><div id="feedback"><h2>Thank you for the review</h2></div></div>
 	</body>
-	<script src="/tugasbesar1_2018/frontend/review/script.js"></script>
+	<script src="/tugasbesar2_2018/Pro-Book/frontend/review/script.js"></script>
 </html>

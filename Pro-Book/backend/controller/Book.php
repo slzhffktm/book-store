@@ -28,12 +28,12 @@
                 if($user){
                     $this->bookView->render_search_result_page($result);
                 }else{
-                    header("Location: http://localhost/tugasbesar1_2018/index.php/Auth/index");
+                    header("Location: http://localhost/tugasbesar2_2018/Pro-Book/index.php/Auth/index");
                     // $this->auth_view->render_login_page();
                 }
             } else {
                 // $this->auth_view->render_login_page();
-                header("Location: http://localhost/tugasbesar1_2018/index.php/Auth/index");
+                header("Location: http://localhost/tugasbesar2_2018/Pro-Book/index.php/Auth/index");
             }
         }
 
@@ -44,10 +44,10 @@
                 if($user){
                     $this->bookView->render_search_page();
                 }else{
-                    header("Location: http://localhost/tugasbesar1_2018/index.php/Auth/index");
+                    header("Location: http://localhost/tugasbesar2_2018/Pro-Book/index.php/Auth/index");
                 }
             }else{
-                header("Location: http://localhost/tugasbesar1_2018/index.php/Auth/index");
+                header("Location: http://localhost/tugasbesar2_2018/Pro-Book/index.php/Auth/index");
                 
             }
         }
@@ -62,11 +62,11 @@
                 if($user){
                     $this->bookView->render_book_detail_page($result, $reviews);
                 }else{
-                    header("Location: http://localhost/tugasbesar1_2018/index.php/Auth/index");
+                    header("Location: http://localhost/tugasbesar2_2018/Pro-Book/index.php/Auth/index");
                 
                 }
             }else{
-                header("Location: http://localhost/tugasbesar1_2018/index.php/Auth/index");
+                header("Location: http://localhost/tugasbesar2_2018/Pro-Book/index.php/Auth/index");
 
             }
             

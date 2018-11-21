@@ -21,7 +21,7 @@ class Review {
 		$username = $GLOBALS['user']->getUserName();
 
 		if(!$username){
-			header("Location: http://localhost/tugasbesar1_2018/index.php/Auth/index");
+			header("Location: http://localhost/tugasbesar2_2018/Pro-Book/index.php/Auth/index");
 			exit();
 		}
 
@@ -50,7 +50,7 @@ class Review {
 
 	public function insert_review(){
 		if(!isset($GLOBALS['user'])){
-			header("Location: http://localhost/tugasbesar1_2018/index.php/Auth/index");
+			header("Location: http://localhost/tugasbesar2_2018/Pro-Book/index.php/Auth/index");
 			exit();
 		}
 

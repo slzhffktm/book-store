@@ -6,7 +6,7 @@ class User_service {
         $conn = OpenCon();
         $sql = "SELECT name FROM user WHERE username = '$username' or email = '$email'";
         $result = $conn->query($sql);
-        $defaultProfilePath = "/tugasbesar1_2018/frontend/img_resource/default-profile.jpg";
+        $defaultProfilePath = "/tugasbesar2_2018/Pro-Book/frontend/img_resource/default-profile.jpg";
         if($result->num_rows === 0) {
             $hashedPassword =  $this->hashPassword($password);
             $user = new User_model($name, $username, $email, $hashedPassword, $address, $phone, $defaultProfilePath);

@@ -54,7 +54,7 @@ function submit(){
 	} else {
 		var xhttp = new XMLHttpRequest();
 		
-		xhttp.open("POST", "/tugasbesar1_2018/index.php/Review/insert_review", true);
+		xhttp.open("POST", "/tugasbesar2_2018/Pro-Book/index.php/Review/insert_review", true);
 		xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
 		xhttp.onreadystatechange = function() {
 			setTimeout(function(){}, 2000);
@@ -67,6 +67,6 @@ function submit(){
 }
 
 function back(){
-	window.location = "http://localhost/tugasbesar1_2018/index.php/History/index";
+	window.location = "http://localhost/tugasbesar2_2018/Pro-Book/index.php/History/index";
 }
 

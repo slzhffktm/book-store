@@ -18,9 +18,9 @@
 		<title>Review Page</title>
 		<meta content="width=device-width, initial-scale=1" name="viewport" />
 		<link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
-		<link rel="stylesheet" type="text/css" href="/tugasbesar1_2018/frontend/common_files/grid_system.css">
-		<link rel="stylesheet" type="text/css" href="/tugasbesar1_2018/frontend/common_files/navbar.css">
-		<link rel="stylesheet" type="text/css" href="/tugasbesar1_2018/frontend/user/history/style.css">
+		<link rel="stylesheet" type="text/css" href="/tugasbesar2_2018/Pro-Book/frontend/common_files/grid_system.css">
+		<link rel="stylesheet" type="text/css" href="/tugasbesar2_2018/Pro-Book/frontend/common_files/navbar.css">
+		<link rel="stylesheet" type="text/css" href="/tugasbesar2_2018/Pro-Book/frontend/user/history/style.css">
 	</head>
 	<body>
 		<?php include 'frontend/common_files/navbar.php' ?>
@@ -39,7 +39,7 @@
 						$book['button'] = '';
 					} else {
 						$book['comment'] = 'Belum direview';
-						$book['button'] = "<a href='http://localhost/tugasbesar1_2018/index.php/Review/show_review_page?book_id={$book['book_id']}&order_id={$book['order_id']}'><button class='review' >Review</button></a>";
+						$book['button'] = "<a href='http://localhost/tugasbesar2_2018/Pro-Book/index.php/Review/show_review_page?book_id={$book['book_id']}&order_id={$book['order_id']}'><button class='review' >Review</button></a>";
 					}
 
 					$book['date'] = transform_date(explode(" ",$book['date'])[0]);

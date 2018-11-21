@@ -2,9 +2,9 @@
 <?php global $activeNavbar; $activeNavbar=3; ?>
 <html>
     <head>
-        <link rel="stylesheet" type="text/css" href="/tugasbesar1_2018/frontend/common_files/grid_system.css">
-        <link rel="stylesheet" type="text/css" href="/tugasbesar1_2018/frontend/common_files/navbar.css">
-        <link rel="stylesheet" type="text/css" href="/tugasbesar1_2018/frontend/user/profile/style.css">
+        <link rel="stylesheet" type="text/css" href="/tugasbesar2_2018/Pro-Book/frontend/common_files/grid_system.css">
+        <link rel="stylesheet" type="text/css" href="/tugasbesar2_2018/Pro-Book/frontend/common_files/navbar.css">
+        <link rel="stylesheet" type="text/css" href="/tugasbesar2_2018/Pro-Book/frontend/user/profile/style.css">
     </head>
     <body>
         <?php include 'frontend/common_files/navbar.php'?>
@@ -18,8 +18,8 @@
                         <div class="circle" style="background-image:url('<?php echo $user->getImageUrl();?>');"></div>
                     </div>
                     <div class="kolom-md-2" style="justify-content:flex-end;">
-                        <a href="http://localhost/tugasbesar1_2018/index.php/User/showEditProfile">
-                            <img id="edit-icon" src="/tugasbesar1_2018/frontend/img_resource/edit.png">
+                        <a href="http://localhost/tugasbesar2_2018/Pro-Book/index.php/User/showEditProfile">
+                            <img id="edit-icon" src="/tugasbesar2_2018/Pro-Book/frontend/img_resource/edit.png">
                         </a>
                     </div>
                 </div>
@@ -38,7 +38,7 @@
                 <div class="kolom-md-4">
                 </div>
                 <div class="kolom-md-3">
-                    <img id="profile-icon" src="/tugasbesar1_2018/frontend/img_resource/username.png"><h2>Username</h2>
+                    <img id="profile-icon" src="/tugasbesar2_2018/Pro-Book/frontend/img_resource/username.png"><h2>Username</h2>
                 </div>
                 <div class="kolom-md-3">
                     <h2 id="username">@<?php echo $user->getUsername(); ?></h2>
@@ -48,7 +48,7 @@
                 <div class="kolom-md-4">
                 </div>
                 <div class="kolom-md-3">
-                    <img id="profile-icon" src="/tugasbesar1_2018/frontend/img_resource/email.png"><h2>Email</h2>
+                    <img id="profile-icon" src="/tugasbesar2_2018/Pro-Book/frontend/img_resource/email.png"><h2>Email</h2>
                 </div>
                 <div class="kolom-md-3">
                     <h2 id="email"><?php echo $user->getEmail(); ?></h2>
@@ -58,7 +58,7 @@
                 <div class="kolom-md-4">
                 </div>
                 <div class="kolom-md-3">
-                    <img id="profile-icon" src="/tugasbesar1_2018/frontend/img_resource/address.png"><h2>Address</h2>
+                    <img id="profile-icon" src="/tugasbesar2_2018/Pro-Book/frontend/img_resource/address.png"><h2>Address</h2>
                 </div>
                 <div class="kolom-md-3">
                     <h2 id="address"><?php echo $user->getAddress(); ?></h2>
@@ -68,7 +68,7 @@
                 <div class="kolom-md-4">
                 </div>
                 <div class="kolom-md-3">
-                    <img id="profile-icon" src="/tugasbesar1_2018/frontend/img_resource/phone.png"><h2>Phone Number</h2>
+                    <img id="profile-icon" src="/tugasbesar2_2018/Pro-Book/frontend/img_resource/phone.png"><h2>Phone Number</h2>
                 </div>
                 <div class="kolom-md-3">
                     <h2 id="phone"><?php echo $user->getPhone(); ?></h2>

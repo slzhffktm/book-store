@@ -3,11 +3,11 @@
 <html>
     <head>
         <script>var rating = <?php echo $result["rating"] ?> </script>
-        <script type="text/javascript" src="/tugasbesar1_2018/frontend/book/detail/detail.js"></script>
+        <script type="text/javascript" src="/tugasbesar2_2018/Pro-Book/frontend/book/detail/detail.js"></script>
         <meta content="width=device-width, initial-scale=1" name="viewport" />
-        <link rel="stylesheet" href="/tugasbesar1_2018/frontend/common_files/grid_system.css">
-        <link rel="stylesheet" href="/tugasbesar1_2018/frontend/common_files/navbar.css">
-        <link rel="stylesheet" href="/tugasbesar1_2018/frontend/book/detail/detail.css">
+        <link rel="stylesheet" href="/tugasbesar2_2018/Pro-Book/frontend/common_files/grid_system.css">
+        <link rel="stylesheet" href="/tugasbesar2_2018/Pro-Book/frontend/common_files/navbar.css">
+        <link rel="stylesheet" href="/tugasbesar2_2018/Pro-Book/frontend/book/detail/detail.css">
     </head>
     <body>
         <?php include 'frontend/common_files/navbar.php' ?>
@@ -27,11 +27,11 @@
                                     <?php echo "<img src=".$result["cover"]." class=\"book-thumbnail\"/><img>" ?>
                                 </div>
                                 <div class="star-wrapper">
-                                    <img id="star1" class="review-star" src="/tugasbesar1_2018/frontend/img_resource/starEmpty.png">
-                                    <img id="star2" class="review-star" src="/tugasbesar1_2018/frontend/img_resource/starEmpty.png">
-                                    <img id="star3" class="review-star" src="/tugasbesar1_2018/frontend/img_resource/starEmpty.png">
-                                    <img id="star4" class="review-star" src="/tugasbesar1_2018/frontend/img_resource/starEmpty.png">
-                                    <img id="star5" class="review-star" src="/tugasbesar1_2018/frontend/img_resource/starEmpty.png">
+                                    <img id="star1" class="review-star" src="/tugasbesar2_2018/Pro-Book/frontend/img_resource/starEmpty.png">
+                                    <img id="star2" class="review-star" src="/tugasbesar2_2018/Pro-Book/frontend/img_resource/starEmpty.png">
+                                    <img id="star3" class="review-star" src="/tugasbesar2_2018/Pro-Book/frontend/img_resource/starEmpty.png">
+                                    <img id="star4" class="review-star" src="/tugasbesar2_2018/Pro-Book/frontend/img_resource/starEmpty.png">
+                                    <img id="star5" class="review-star" src="/tugasbesar2_2018/Pro-Book/frontend/img_resource/starEmpty.png">
                                 </div>
                                 <?php echo "<div class=\"row rating-wrapper\"> ".sprintf("%.1f", $result["rating"])." / 5.0</div>" ?>
                             </div>
@@ -81,7 +81,7 @@
                             <div class="kolom-md-1">
                                 <!--star and review rating -->
                                 <div class="review-star-wrapper">
-                                    <img src="/tugasbesar1_2018/frontend/img_resource/starFull.png" class="review-info-star">
+                                    <img src="/tugasbesar2_2018/Pro-Book/frontend/img_resource/starFull.png" class="review-info-star">
                                     <div class="row" style="font-weight: bold">
                                         <?php echo sprintf("%.1f", $review["rating"]) ?> / 5.0
                                     </div>
@@ -104,7 +104,7 @@
                 </div>
                 <div class="row" style="height:80%">
                     <div class="kolom-md-3">
-                        <img src="/tugasbesar1_2018/frontend/img_resource/checklist-black.png" style="width:100%;height:80%">
+                        <img src="/tugasbesar2_2018/Pro-Book/frontend/img_resource/checklist-black.png" style="width:100%;height:80%">
                     </div>
                     <div class="kolom-md-6">
                         <h4 id="success-message"></h4>

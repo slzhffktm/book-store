@@ -33,7 +33,7 @@ class Auth{
         $username = $_POST["username"];
         $password = $_POST["password"];
         if($this->createAccessToken($username,$password)){
-            header("Location: http://localhost/tugasbesar1_2018/index.php/Book/index");
+            header("Location: http://localhost/tugasbesar2_2018/Pro-Book/index.php/Book/index");
         }else{
             echo "<script>
                 alert('Wrong username or password');

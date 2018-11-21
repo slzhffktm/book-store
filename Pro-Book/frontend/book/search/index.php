@@ -2,10 +2,10 @@
 <!DOCTYPE HTML>
 <html>
     <head>
-        <script type="text/javascript" src="/tugasbesar1_2018/frontend/book/search/search.js"></script>
-        <link rel="stylesheet" href="/tugasbesar1_2018/frontend/common_files/grid_system.css">
-        <link rel="stylesheet" href="/tugasbesar1_2018/frontend/common_files/navbar.css">
-        <link rel="stylesheet" href="/tugasbesar1_2018/frontend/book/search/search-book.css">
+        <script type="text/javascript" src="/tugasbesar2_2018/Pro-Book/frontend/book/search/search.js"></script>
+        <link rel="stylesheet" href="/tugasbesar2_2018/Pro-Book/frontend/common_files/grid_system.css">
+        <link rel="stylesheet" href="/tugasbesar2_2018/Pro-Book/frontend/common_files/navbar.css">
+        <link rel="stylesheet" href="/tugasbesar2_2018/Pro-Book/frontend/book/search/search-book.css">
     </head>
     <body>
         <?php include 'frontend/common_files/navbar.php' ?>

@@ -33,7 +33,7 @@ class User {
         $user = $this->us->register($name, $username, $email, 
             $password, $address, $phone);
         $this->createAccessToken($username,$password);
-        header("Location: http://localhost/tugasbesar1_2018/index.php/Book/index");
+        header("Location: http://localhost/tugasbesar2_2018/Pro-Book/index.php/Book/index");
     }
     function checkAvailability(){
         if(isset($_GET['username'])) {
@@ -95,11 +95,11 @@ class User {
             $imageUrl = false;
 
             if (move_uploaded_file($_FILES["profile-img-hidden-input"]["tmp_name"], $target_file)) {
-                $imageUrl = "/tugasbesar1_2018/frontend/img_resource/".$user->getUsername().strtotime("now").basename($_FILES["profile-img-hidden-input"]["name"]);
+                $imageUrl = "/tugasbesar2_2018/Pro-Book/frontend/img_resource/".$user->getUsername().strtotime("now").basename($_FILES["profile-img-hidden-input"]["name"]);
                 $user = $this->us->edit($user, $name, $address, $phone, $imageUrl);
                 $this->view->render_profile_page($user);
             }else{
-                echo "<script>alert('image not valid');window.location='http://localhost/tugasbesar1_2018/index.php/User/showEditProfile';</script>";
+                echo "<script>alert('image not valid');window.location='http://localhost/tugasbesar2_2018/Pro-Book/index.php/User/showEditProfile';</script>";
             }
         }else{
             $this->view->render_profile_page($user);

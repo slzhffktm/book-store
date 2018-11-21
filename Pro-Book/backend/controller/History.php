@@ -18,7 +18,7 @@
 				$history = $this->model->get_user_history($page);
 				$this->view->render_history_page($history);
 			}else{
-				header('Location: http://localhost/tugasbesar1_2018/index.php/Auth/index');
+				header('Location: http://localhost/tugasbesar2_2018/Pro-Book/index.php/Auth/index');
 			}
 		}
 	}
