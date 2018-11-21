@@ -3,9 +3,9 @@ package BookCatalogueWebService;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-public class GoogleBookResultHandler {
+class GoogleBookResultHandler {
 
-    public JSONObject parseSearch(String jsonString) throws Exception {
+    JSONObject parseSearch(String jsonString) throws Exception {
 
         JSONObject jsonResult = new JSONObject(jsonString);
 
@@ -29,7 +29,7 @@ public class GoogleBookResultHandler {
         return jsonResult;
     }
 
-    public JSONObject parseBookDetail(String jsonString) throws Exception {
+    JSONObject parseBookDetail(String jsonString) throws Exception {
 
         JSONObject jsonResult = new JSONObject(jsonString);
 
@@ -77,7 +77,7 @@ public class GoogleBookResultHandler {
             JSONArray authorList = details.getJSONArray("authors");
 
             String authors = authorList.toString();
-            authors = authors.replaceAll("(\\\"|\\]|\\[)", "");
+            authors = authors.replaceAll("(\"|]|\\[)", "");
             authors = authors.replaceAll("(,)", ", ");
             return authors;
 
@@ -108,17 +108,28 @@ public class GoogleBookResultHandler {
     private String getBookPrice(JSONObject book) {
         try {
             String saleability = getBookSaleability(book);
-            if (saleability.equals("FOR_SALE")) {
 
-                JSONObject saleInfo = book.getJSONObject("saleInfo");
-                JSONObject listPrice = saleInfo.getJSONObject("listPrice");
-                Double price = listPrice.getDouble("amount");
-                String currency = listPrice.getString("currencyCode");
+            switch (saleability) {
+                case ("FOR_SALE"): {
+                    JSONObject saleInfo = book.getJSONObject("saleInfo");
+                    JSONObject listPrice = saleInfo.getJSONObject("listPrice");
+                    Double price = listPrice.getDouble("amount");
+                    String currency = listPrice.getString("currencyCode");
 
-                return price.toString() + " " + currency;
-            } else {
-                return saleability;
+                    return String.format("%,.2f", price) + " " + currency;
+                }
+                case ("FREE"): {
+                    return "Free";
+                }
+                case ("NOT_FOR_SALE"): {
+                    return "Not available";
+                }
+                default: {
+                    return saleability;
+                }
             }
+
+
         } catch (Exception e) {
 
             return "Undefined";

@@ -32,14 +32,14 @@ class GoogleBookAPI {
         title = title.replaceAll("\\s", "+");
 
         String url = "https://www.googleapis.com/books/v1/volumes";
-        String getParameter = "key=" + GOOGLE_API_KEY + "&q=" + title + "&maxResults=25";
+        String getParameter = "key=" + GOOGLE_API_KEY + "&q=" + title + "&maxResults=40";
         return url + "?" + getParameter;
     }
 
     private String getBookDetailsUrl(String bookId) {
 
         String url = "https://www.googleapis.com/books/v1/volumes/" + bookId;
-        String getParameter = "key=" + GOOGLE_API_KEY;
+        String getParameter = "key=" + GOOGLE_API_KEY + "&projection=lite";
         return url + "?" + getParameter;
     }
 
