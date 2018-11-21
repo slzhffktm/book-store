@@ -32,7 +32,7 @@ class AuthService {
         $sql = "SELECT * FROM auth NATURAL JOIN user WHERE token = '$token' AND expiredAt > '$currentTimestamp'";
         $result = $conn->query($sql);
         if($result->num_rows === 1){
-            $val = mysqli_fetch_assoc($result);          
+            $val = mysqli_fetch_assoc($result);
             CloseCon($conn);
             return new User_model($val['name'], $val['username'], $val['email'], $val['hashedPassword'], $val['address'], $val['phone'],$val['image_url'], $val['card']);
         }

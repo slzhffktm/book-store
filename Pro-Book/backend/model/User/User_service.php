@@ -4,7 +4,7 @@ require_once 'backend/model/User/User_model.php';
 class User_service {
     public function register($name, $username, $email, $password, $address, $phone, $card) {
         $url = 'http://localhost:3000/validateCard?card='.$card;
-        $contents = file_get_contents($url );
+        $contents = file_get_contents($url);
         if($contents == "True") {
             $conn = OpenCon();
             $sql = "SELECT name FROM user WHERE username = '$username' or email = '$email'";
@@ -33,7 +33,7 @@ class User_service {
         $user->setPhone($phone);
         $url = 'http://localhost:3000/validateCard?card='.$card;
         $contents = file_get_contents($url);
-        if($contents == "True") {
+        if($contents == "\"True\"") {
             $user->setCard($card);
         }else {
             echo "<script>
@@ -45,6 +45,11 @@ class User_service {
             $user->setImageUrl($imageUrl);
         }
         $user->update($conn);
+        if(!$user){
+            echo "<script>
+                alert('ERROR');
+                </script>";
+        }
         CloseCon($conn);
         return $user;
     }
