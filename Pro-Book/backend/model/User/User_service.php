@@ -2,32 +2,54 @@
 require_once 'backend/model/User/User_model.php';
 
 class User_service {
-    public function register($name, $username, $email, $password, $address, $phone) {
-        $conn = OpenCon();
-        $sql = "SELECT name FROM user WHERE username = '$username' or email = '$email'";
-        $result = $conn->query($sql);
-        $defaultProfilePath = "/tugasbesar2_2018/Pro-Book/frontend/img_resource/default-profile.jpg";
-        if($result->num_rows === 0) {
-            $hashedPassword =  $this->hashPassword($password);
-            $user = new User_model($name, $username, $email, $hashedPassword, $address, $phone, $defaultProfilePath);
-            $user->save($conn, $user);
-            return $user;
-        } else {
-            return NULL;
+    public function register($name, $username, $email, $password, $address, $phone, $card) {
+        $url = 'http://localhost:3000/validateCard?card='.$card;
+        $contents = file_get_contents($url);
+        if($contents == "\"True\"") {
+            $conn = OpenCon();
+            $sql = "SELECT name FROM user WHERE username = '$username' or email = '$email'";
+            $result = $conn->query($sql);
+            $defaultProfilePath = "/tugasbesar2_2018/Pro-Book/frontend/img_resource/default-profile.jpg";
+            if($result->num_rows === 0) {
+                $hashedPassword =  $this->hashPassword($password);
+                $user = new User_model($name, $username, $email, $hashedPassword, $address, $phone, $defaultProfilePath, $card);
+                $user->save($conn, $user);
+                return $user;
+            } else {
+                return NULL;
+            }
+            CloseCon($conn);
+        }else{
+            echo "<script>
+                alert('Invalid number');
+                </script>";
         }
-        CloseCon($conn);
     }
 
-    public function edit($user, $name, $address, $phone, $imageUrl) {
+    public function edit($user, $name, $address, $phone, $imageUrl, $card) {
         $conn = OpenCon();
         $user->setName($name);
         $user->setAddress($address);
         $user->setPhone($phone);
+        $url = 'http://localhost:3000/validateCard?card='.$card;
+        $contents = file_get_contents($url);
+        if($contents == "\"True\"") {
+            $user->setCard($card);
+        }else {
+            echo "<script>
+                alert('Invalid number');
+                </script>";
+        }
         if($imageUrl){
 
             $user->setImageUrl($imageUrl);
         }
         $user->update($conn);
+        if(!$user){
+            echo "<script>
+                alert('ERROR');
+                </script>";
+        }
         CloseCon($conn);
         return $user;
     }

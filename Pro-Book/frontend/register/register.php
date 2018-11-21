@@ -28,6 +28,7 @@
                             <label>Confirm Password <input type ="password" name="confirmPassword"><br></label>
                             <label>Address <textarea rows="3" cols="21" name="address"></textarea><br></label>
                             <label>Phone Number <input type="number" name="phone"><br></label>
+                            <label>Card Number<input type="number" name="card"><br></label>
                         </div>
                         <br>
                         <a href="http://localhost/tugasbesar2_2018/Pro-Book/index.php/Auth/index"> Already have account?</a><br><br>

@@ -74,6 +74,16 @@
                     <h2 id="phone"><?php echo $user->getPhone(); ?></h2>
                 </div>
             </div>
+            <div class="row margin" id="seventh-row">
+                <div class="kolom-md-4">
+                </div>
+                <div class="kolom-md-3">
+                    <img id="profile-icon" src="/tugasbesar2_2018/Pro-Book/frontend/img_resource/card.png"><h2>Card Number</h2>
+                </div>
+                <div class="kolom-md-3">
+                    <h2 id="phone"><?php echo $user->getCard(); ?></h2>
+                </div>
+            </div>
         </div>
     </body>
 </html>

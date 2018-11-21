@@ -30,10 +30,15 @@ class User {
         $password = $_POST["password"];
         $address = $_POST["address"];
         $phone = $_POST["phone"];
+        $card = $_POST["card"];
         $user = $this->us->register($name, $username, $email, 
-            $password, $address, $phone);
-        $this->createAccessToken($username,$password);
-        header("Location: http://localhost/tugasbesar2_2018/Pro-Book/index.php/Book/index");
+            $password, $address, $phone, $card);
+        if($user){
+            $this->createAccessToken($username,$password);
+            header("Location: http://localhost/tugasbesar2_2018/Pro-Book/index.php/Book/index");
+        }else{
+            $this->view->render_register_page();
+        }
     }
     function checkAvailability(){
         if(isset($_GET['username'])) {
@@ -85,23 +90,25 @@ class User {
 
         $base =  getcwd();
         $target_dir = $base."/frontend/img_resource/"; 
+        $target_file = $target_dir . $user->getUsername().strtotime("now").basename($_FILES["profile-img-hidden-input"]["name"]);
+        $uploadOk = 1;
+        $imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
+        $name = $_POST['name'];
+        $address = $_POST['address'];
+        $phone = $_POST['phone'];
+        $imageUrl = false;
+        $card = $_POST['card'];
         if($_FILES["profile-img-hidden-input"]["name"]){
-            $target_file = $target_dir . $user->getUsername().strtotime("now").basename($_FILES["profile-img-hidden-input"]["name"]);
-            $uploadOk = 1;
-            $imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
-            $name = $_POST['name'];
-            $address = $_POST['address'];
-            $phone = $_POST['phone'];
-            $imageUrl = false;
 
             if (move_uploaded_file($_FILES["profile-img-hidden-input"]["tmp_name"], $target_file)) {
                 $imageUrl = "/tugasbesar2_2018/Pro-Book/frontend/img_resource/".$user->getUsername().strtotime("now").basename($_FILES["profile-img-hidden-input"]["name"]);
-                $user = $this->us->edit($user, $name, $address, $phone, $imageUrl);
+                $user = $this->us->edit($user, $name, $address, $phone, $imageUrl, $card);
                 $this->view->render_profile_page($user);
             }else{
                 echo "<script>alert('image not valid');window.location='http://localhost/tugasbesar2_2018/Pro-Book/index.php/User/showEditProfile';</script>";
             }
         }else{
+            $user = $this->us->edit($user, $name, $address, $phone, $imageUrl, $card);
             $this->view->render_profile_page($user);
         }
 

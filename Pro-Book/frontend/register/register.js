@@ -9,6 +9,7 @@ function validateForm() {
     var confirmPassword = document.forms["register"]["confirmPassword"].value;
     var address = document.forms["register"]["address"].value;
     var phone = document.forms["register"]["phone"].value;
+    var phone = document.forms["register"]["card"].value;
     if (name == "") {
         alert("Name must be filled out");
         return false;
@@ -47,6 +48,12 @@ function validateForm() {
         return false;
     } else if(phone.length < 9 || phone.length > 12){
         alert("Phone number must be in range 9 and 12");
+        return false;
+    } else if (card == "") {
+        alert("Card number must be filled out");
+        return false;
+    } else if (card.length != 12) {
+        alert("Card number length must be 12");
         return false;
     }
      else {
