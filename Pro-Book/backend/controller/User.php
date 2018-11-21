@@ -30,10 +30,15 @@ class User {
         $password = $_POST["password"];
         $address = $_POST["address"];
         $phone = $_POST["phone"];
+        $card = $_POST["card"];
         $user = $this->us->register($name, $username, $email, 
-            $password, $address, $phone);
-        $this->createAccessToken($username,$password);
-        header("Location: http://localhost/tugasbesar2_2018/Pro-Book/index.php/Book/index");
+            $password, $address, $phone, $card);
+        if($user){
+            $this->createAccessToken($username,$password);
+            header("Location: http://localhost/tugasbesar2_2018/Pro-Book/index.php/Book/index");
+        }else{
+            $this->view->render_register_page();
+        }
     }
     function checkAvailability(){
         if(isset($_GET['username'])) {
