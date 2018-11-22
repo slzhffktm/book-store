@@ -31,8 +31,8 @@ public class BookCatalogueClient {
 //        System.out.println(jsonBook);
 
         System.out.println("Testing buy book function");
-        boolean res = catalogue.buyBook("hjEFCAAAQBAJ","12312312312",5);
-								res = catalogue.buyBook("hjEFCAAAQBAJ","12312312312",3);
+        boolean res = catalogue.buyBook("-LjlAgAAQBAJ","123456789123",50);
+//								res = catalogue.buyBook("hjEFCAAAQBAJ","12312312312",3);
 //        jsonResult = new JSONObject(result);
 //        System.out.println(res);
 

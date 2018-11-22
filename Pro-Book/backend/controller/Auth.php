@@ -3,6 +3,7 @@ require_once 'backend/model/Auth/Auth_service.php';
 require_once 'backend/model/db/db_connection.php';
 require_once 'backend/model/User/User_model.php';
 require_once 'backend/view/Auth_view.php';
+require_once 'backend/controller/helper.php';
 require_once 'backend/view/Book_view.php';
 class Auth{
     private $as;
@@ -32,10 +33,7 @@ class Auth{
 
     function logout(){
         if(isset($_COOKIE["accessToken"])){
-            $browser = $this->get_browser_name($_SERVER['HTTP_USER_AGENT']);
-            $ip = $this->getRealIpAddr();
-            $user_access_token = $_COOKIE["accessToken"];
-            $user = $this->as->checkAccessToken($user_access_token,$browser,$ip);
+            $user = checkAccessToken();
             if($user){
                 $this->as->deleteAccessToken($user->getUsername());
                 setcookie('accessToken',null);
@@ -46,51 +44,10 @@ class Auth{
         header("Location: http://localhost/tugasbesar2_2018/Pro-Book/index.php/Auth/index");
     }
 
-    function get_browser_name($user_agent) {
-        if (strpos($user_agent, 'Opera') || strpos($user_agent, 'OPR/')) return 'Opera';
-        elseif (strpos($user_agent, 'Edge')) return 'Edge';
-        elseif (strpos($user_agent, 'Chrome')) return 'Chrome';
-        elseif (strpos($user_agent, 'Safari')) return 'Safari';
-        elseif (strpos($user_agent, 'Firefox')) return 'Firefox';
-        elseif (strpos($user_agent, 'MSIE') || strpos($user_agent, 'Trident/7')) return 'Internet Explorer';
-        return 'Other';
-    }
-
-    function getRealIpAddr()
-    {
-        if (!empty($_SERVER['HTTP_CLIENT_IP']))   //check ip from share internet
-        {
-          $ip=$_SERVER['HTTP_CLIENT_IP'];
-        }
-        elseif (!empty($_SERVER['HTTP_X_FORWARDED_FOR']))   //to check ip is pass from proxy
-        {
-          $ip=$_SERVER['HTTP_X_FORWARDED_FOR'];
-        }
-        else
-        {
-          $ip=$_SERVER['REMOTE_ADDR'];
-        }
-        return $ip;
-    }
     
-    function checkAccessToken(){
-        if (isset($_COOKIE['accessToken'])){
-            $browser = $this->get_browser_name($_SERVER['HTTP_USER_AGENT']);
-            $ip = $this->getRealIpAddr();
-            $user_access_token = $_COOKIE["accessToken"];
-            $user = $this->as->checkAccessToken($user_access_token,$browser,$ip);
-            if($user) {
-                return $user;
-            }else{
-                return false;
-            }
-        } else{
-            return false;
-        }
-    }
     function createAccessToken($username, $password){
-        $browser = $this->get_browser_name($_SERVER['HTTP_USER_AGENT']);
-        $ip = $this->getRealIpAddr();
+        $browser = get_browser_name($_SERVER['HTTP_USER_AGENT']);
+        $ip = getRealIpAddr();
         $authToken = $this->as->createAccessToken($username,$password, $browser, $ip);
         if($authToken){
             setcookie("accessToken",$authToken->getToken(),time()+86400, "/");
