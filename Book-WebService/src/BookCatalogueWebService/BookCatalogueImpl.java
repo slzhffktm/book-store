@@ -20,10 +20,15 @@ public class BookCatalogueImpl implements BookCatalogue {
         return resultHandler.parseBookDetail(result);
     }
 
-    public boolean buyBook(String id, String card, int total) throws  Exception {
+    public boolean buyBook(String id, String cardId, int total) throws  Exception {
         String result =  getBookDetail(id);
         JSONObject jsonResult = new JSONObject(result);
         String[] genre = jsonResult.getString("Category").replaceAll(" ","").split("/");
+        float cost = BuyBook.getCost(id) * total;
+        System.out.println("Cost: " + cost);
+        String postResponse = BuyBook.sendPost(cardId, cost);
+        System.out.println(postResponse);
+        // TODO: response checking
         boolean response = BuyBook.upsert(id, genre, total);
         return response;
     }
