@@ -1,4 +1,5 @@
 package BookCatalogueWebService;
+import org.json.JSONObject;
 
 import javax.jws.WebService;
 import javax.xml.ws.Endpoint;
@@ -19,9 +20,12 @@ public class BookCatalogueImpl implements BookCatalogue {
         return resultHandler.parseBookDetail(result);
     }
 
-    public boolean buyBook(String id, String author, int total) throws  Exception {
-        boolean result = BuyBook.upsert(id,author,total);
-        return result;
+    public boolean buyBook(String id, String card, int total) throws  Exception {
+        String result =  getBookDetail(id);
+        JSONObject jsonResult = new JSONObject(result);
+        String[] genre = jsonResult.getString("Category").replaceAll(" ","").split("/");
+        boolean response = BuyBook.upsert(id, genre, total);
+        return response;
     }
     // Publisher part
     public static void main(String[] argv) {

@@ -123,13 +123,13 @@ class GoogleBookResultHandler {
         try {
             JSONObject details = book.getJSONObject("volumeInfo");
             JSONArray categoryList = details.getJSONArray("categories");
-
             String categories = categoryList.toString();
             categories = categories.replaceAll("(\"|]|\\[)", "");
             categories = categories.replaceAll("(,)", ", ");
             return categories;
 
         } catch (Exception e) {
+            System.out.println(e);
             return "Undefined";
         }
     }

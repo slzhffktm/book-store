@@ -13,6 +13,6 @@ public interface BookCatalogue {
     String getBookDetail(String bookId) throws Exception;
 
     @WebMethod
-    boolean buyBook(String id, String author, int total) throws Exception;
+    boolean buyBook(String id, String card, int total) throws Exception;
 
 }

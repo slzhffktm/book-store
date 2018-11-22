@@ -21,18 +21,18 @@ public class BookCatalogueClient {
         BookCatalogue catalogue = service.getPort(portName, BookCatalogue.class);
 
         System.out.println("Testing search function");
-        String result = catalogue.searchBook("Anavel");
-        JSONObject jsonResult = new JSONObject(result);
+//        String result = catalogue.searchBook("Anavel");
+//        JSONObject jsonResult = new JSONObject(result);
 //        System.out.println(jsonResult);
 
         System.out.println("Testing get book details function");
-        String book = catalogue.getBookDetail("hjEFCAAAQBAJ");
-        JSONObject jsonBook = new JSONObject(book);
+//        String book = catalogue.getBookDetail("hjEFCAAAQBAJ");
+//        JSONObject jsonBook = new JSONObject(book);
 //        System.out.println(jsonBook);
 
         System.out.println("Testing buy book function");
-        boolean res = catalogue.buyBook(jsonBook.getString("ID").toString(),"Horror",5);
-								res = catalogue.buyBook(jsonBook.getString("ID").toString(),"Horror",3);
+        boolean res = catalogue.buyBook("hjEFCAAAQBAJ","12312312312",5);
+								res = catalogue.buyBook("hjEFCAAAQBAJ","12312312312",3);
 //        jsonResult = new JSONObject(result);
 //        System.out.println(res);
     }
