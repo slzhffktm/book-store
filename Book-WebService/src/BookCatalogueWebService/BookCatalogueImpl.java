@@ -3,6 +3,7 @@ import org.json.JSONObject;
 
 import javax.jws.WebService;
 import javax.xml.ws.Endpoint;
+import java.sql.ResultSet;
 
 @WebService()
 public class BookCatalogueImpl implements BookCatalogue {
@@ -27,6 +28,12 @@ public class BookCatalogueImpl implements BookCatalogue {
         boolean response = BuyBook.upsert(id, genre, total);
         return response;
     }
+
+    public String getRecommendation(String[] genres) {
+        String result = Recommendation.get(genres);
+        return result;
+    }
+
     // Publisher part
     public static void main(String[] argv) {
         Object implementor = new BookCatalogueImpl();
