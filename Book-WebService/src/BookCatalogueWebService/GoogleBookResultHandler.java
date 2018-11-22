@@ -25,6 +25,7 @@ class GoogleBookResultHandler {
             parsedBook.add(("\"URL\" :\"" + getBookUrl(book) + '"'));
             parsedBook.add(("\"Title\" :\"" + escapeSpecialChar(getBookTitle(book)) + '"'));
             parsedBook.add(("\"SubTitle\" :\"" + escapeSpecialChar(getBookSubTitle(book)) + '"'));
+            parsedBook.add(("\"Category\" :\"" + getBookCategory(book) + '"'));
             parsedBook.add(("\"Author\" :\"" + getBookAuthor(book) + '"'));
             parsedBook.add(("\"Description\" :\"" + escapeSpecialChar(getBookDescription(book)) + '"'));
             parsedBook.add(("\"Price\" :\"" + getBookPrice(book) + '"'));
@@ -48,6 +49,7 @@ class GoogleBookResultHandler {
         parsedBook.add(("\"URL\" :\"" + getBookUrl(book) + '"'));
         parsedBook.add(("\"Title\" :\"" + escapeSpecialChar(getBookTitle(book)) + '"'));
         parsedBook.add(("\"SubTitle\" :\"" + escapeSpecialChar(getBookSubTitle(book)) + '"'));
+        parsedBook.add(("\"Category\" :\"" + getBookCategory(book) + '"'));
         parsedBook.add(("\"Author\" :\"" + getBookAuthor(book) + '"'));
         parsedBook.add(("\"Description\" :\"" + escapeSpecialChar(getBookDescription(book)) + '"'));
         parsedBook.add(("\"Price\" :\"" + getBookPrice(book) + '"'));
@@ -111,6 +113,21 @@ class GoogleBookResultHandler {
         try {
             JSONObject details = book.getJSONObject("volumeInfo");
             return details.getString("description");
+
+        } catch (Exception e) {
+            return "Undefined";
+        }
+    }
+
+    private String getBookCategory(JSONObject book){
+        try {
+            JSONObject details = book.getJSONObject("volumeInfo");
+            JSONArray categoryList = details.getJSONArray("categories");
+
+            String categories = categoryList.toString();
+            categories = categories.replaceAll("(\"|]|\\[)", "");
+            categories = categories.replaceAll("(,)", ", ");
+            return categories;
 
         } catch (Exception e) {
             return "Undefined";
