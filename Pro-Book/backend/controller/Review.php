@@ -5,23 +5,21 @@ class Review {
 	private $view;
 	private $auth;
 	private $order_record;
-	private $ac;
 	public function __construct(){
 		require_once("backend/model/Review_model.php");
 		require_once("backend/model/Auth/Auth_service.php");
 		require_once("backend/model/db/db_connection.php");
-		require_once('backend/controller/Auth.php');
+		require_once('backend/controller/helper.php');
 		require_once("backend/view/Review_view.php");
 
 		$this->model = new Review_model();
 		$this->auth = new AuthService();
 		$this->view = new Review_view();	
-		$this->ac =  new Auth;	
 	}
 
 	public function show_review_page(){
 		if(isset($_COOKIE["accessToken"])){
-			$user = $this->ac->checkAccessToken();
+			$user = checkAccessToken();
 
 			if($user){
 				$history = $this->model->get_user_history($page);
@@ -69,7 +67,7 @@ class Review {
 	}
 
 	private function get_username_from_cookie(){
-		$user = $this->ac->checkAccessToken();
+		$user = checkAccessToken();
 		$username = $user->getUsername();
 
 		return $username;

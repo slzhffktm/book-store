@@ -3,7 +3,6 @@
     class Book {
         private $bookService;
         private $bookView;
-        private $ac;
         private $auth_view;
 
         function __construct() {
@@ -12,10 +11,9 @@
             require_once('backend/view/Book_view.php');
             require_once('backend/model/Auth/Auth_service.php');
             require_once('backend/view/Auth_view.php');
-            require_once('backend/controller/Auth.php');
+            require_once('backend/controller/helper.php');
             $this->bookService = new BookService();
             $this->bookView = new Book_view();
-            $this->ac =  new Auth;
             $this->auth_view = new Auth_view();
         }
 
@@ -23,7 +21,7 @@
             $keyword = $_GET['keyword'];
             $result = $this->bookService->searchBook($keyword);
             if(isset($_COOKIE["accessToken"])){
-                $user = $this->ac->checkAccessToken();
+                $user = checkAccessToken();
     
                 if($user){
                     $this->bookView->render_search_result_page($result);
@@ -39,7 +37,7 @@
 
         function index() {
             if(isset($_COOKIE["accessToken"])){
-                $user = $this->ac->checkAccessToken();
+                $user = checkAccessToken();
                 if($user){
                     $this->bookView->render_search_page();
                 }else{
@@ -56,7 +54,7 @@
             $result = $this->bookService->getBookDetail($book_id);
             $reviews = $this->bookService->getBookReviews($book_id);
             if(isset($_COOKIE["accessToken"])){
-                $user = $this->ac->checkAccessToken();
+                $user = checkAccessToken();
                 if($user){
                     $this->bookView->render_book_detail_page($result, $reviews);
                 }else{
