@@ -18,9 +18,12 @@ class Auth{
     }
     function checkAccessToken(){
         if (isset($_COOKIE['accessToken'])){
-            $user = $this->as->checkAccessToken($_COOKIE['accessToken']);
+            $browser = $this->get_browser_name($_SERVER['HTTP_USER_AGENT']);
+            $ip = $this->getRealIpAddr();
+            $user_access_token = $_COOKIE["accessToken"];
+            $user = $this->as->checkAccessToken($user_access_token,$browser,$ip);
             if($user) {
-                return true;
+                return $user;
             }else{
                 return false;
             }
@@ -39,14 +42,15 @@ class Auth{
                 alert('Wrong username or password');
                 </script>";
             $this->view->render_login_page();
-            
         }
     }
 
     function logout(){
         if(isset($_COOKIE["accessToken"])){
+            $browser = $this->get_browser_name($_SERVER['HTTP_USER_AGENT']);
+            $ip = $this->getRealIpAddr();
             $user_access_token = $_COOKIE["accessToken"];
-            $user = $this->as->checkAccessToken($user_access_token);
+            $user = $this->as->checkAccessToken($user_access_token,$browser,$ip);
             if($user){
                 $this->as->deleteAccessToken($user->getUsername());
                 setcookie('accessToken',null);
@@ -54,11 +58,40 @@ class Auth{
         }
         unset($_COOKIE['accessToken']);
         setcookie('accessToken',null,-1,'/');
-        $this->view->render_login_page();
+        header("Location: http://localhost/tugasbesar2_2018/Pro-Book/index.php/Auth/index");
+    }
+
+    public static function get_browser_name($user_agent) {
+        if (strpos($user_agent, 'Opera') || strpos($user_agent, 'OPR/')) return 'Opera';
+        elseif (strpos($user_agent, 'Edge')) return 'Edge';
+        elseif (strpos($user_agent, 'Chrome')) return 'Chrome';
+        elseif (strpos($user_agent, 'Safari')) return 'Safari';
+        elseif (strpos($user_agent, 'Firefox')) return 'Firefox';
+        elseif (strpos($user_agent, 'MSIE') || strpos($user_agent, 'Trident/7')) return 'Internet Explorer';
+        return 'Other';
+    }
+
+    public static function getRealIpAddr()
+    {
+        if (!empty($_SERVER['HTTP_CLIENT_IP']))   //check ip from share internet
+        {
+          $ip=$_SERVER['HTTP_CLIENT_IP'];
+        }
+        elseif (!empty($_SERVER['HTTP_X_FORWARDED_FOR']))   //to check ip is pass from proxy
+        {
+          $ip=$_SERVER['HTTP_X_FORWARDED_FOR'];
+        }
+        else
+        {
+          $ip=$_SERVER['REMOTE_ADDR'];
+        }
+        return $ip;
     }
 
     function createAccessToken($username, $password){
-        $authToken = $this->as->createAccessToken($username,$password);
+        $browser = $this->get_browser_name($_SERVER['HTTP_USER_AGENT']);
+        $ip = $this->getRealIpAddr();
+        $authToken = $this->as->createAccessToken($username,$password, $browser, $ip);
         if($authToken){
             setcookie("accessToken",$authToken->getToken(),time()+86400, "/");
             return true;

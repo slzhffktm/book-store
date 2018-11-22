@@ -3,12 +3,16 @@
 
 class Auth_model{
     private $username;
-    private $token; 
+    private $token;
+    private $browser;
+    private $ip;
     private $expiredAt;
 
 
-    function __construct($username) {
+    function __construct($username, $browser, $ip) {
         $this->setUsername($username);
+        $this->browser = $browser;
+        $this->ip = $ip;
         $this->generateAccessToken();
         $this->refreshToken();
 
@@ -32,13 +36,12 @@ class Auth_model{
     function generateAccessToken() {
         $this->token=password_hash($this->username, PASSWORD_DEFAULT);
     }
-    
     function save($conn) { 
-        $sql = "INSERT INTO auth (username,token,expiredAt) VALUES ('$this->username','$this->token','$this->expiredAt')";
+        $sql = "INSERT INTO auth (username,token,browser,ip,expiredAt) VALUES ('$this->username','$this->token','$this->browser','$this->ip' ,'$this->expiredAt')";
         if ($conn->query($sql)) {
             return true;
         } else {
-            $sql = "UPDATE auth SET token = '$this->token', expiredAt = '$this->expiredAt' WHERE username = '$this->username'";
+            $sql = "UPDATE auth SET token = '$this->token', browser = '$this->browser', ip = '$this->ip', expiredAt = '$this->expiredAt' WHERE username = '$this->username'";
             if ($conn->query($sql) === TRUE) {
                 return true;
             }else{

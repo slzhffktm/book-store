@@ -1,5 +1,6 @@
 <?php
-	require_once 'backend/model/Auth/Auth_service.php';
+    require_once 'backend/model/Auth/Auth_service.php';
+    require_once 'backend/controller/Auth.php';
 	require_once 'backend/model/db/db_connection.php';
 
     // error_reporting(E_ALL);
@@ -8,9 +9,10 @@
     define('INDEX_PATH', 'backend/controller/');
     define('BASE_PATH', getcwd());
 
-	$authService = new AuthService;
+    $authController = new Auth;
+
 	if(isset($_COOKIE['accessToken'])){
-		$user = $authService->checkAccessToken($_COOKIE['accessToken']);
+        $user = $authController->checkAccessToken();
 	}
     
 	$url = explode("?",$_SERVER['REQUEST_URI'])[0];
@@ -61,7 +63,7 @@
 
 
     if(isset($_COOKIE['accessToken']) AND $url[$fileIndex] != 'User' AND $url[$fileIndex+1] != 'index'){
-        $user = $authService->checkAccessToken($_COOKIE['accessToken']);
+        $user = $authController->checkAccessToken();
         if(!$user){
             require_once('backend/controller/Auth.php');
             $auth = new Auth;

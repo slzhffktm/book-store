@@ -12,6 +12,7 @@
             require_once('backend/view/Book_view.php');
             require_once('backend/model/Auth/Auth_service.php');
             require_once('backend/view/Auth_view.php');
+            require_once('backend/controller/Auth.php');
             $this->bookService = new BookService();
             $this->bookView = new Book_view();
             $this->as = new AuthService();
@@ -22,8 +23,10 @@
             $keyword = $_GET['keyword'];
             $result = $this->bookService->searchBook($keyword);
             if(isset($_COOKIE["accessToken"])){
+                $browser = Auth::get_browser_name($_SERVER['HTTP_USER_AGENT']);
+                $ip = Auth::getRealIpAddr();
                 $user_access_token = $_COOKIE["accessToken"];
-                $user = $this->as->checkAccessToken($user_access_token);
+                $user = $this->as->checkAccessToken($user_access_token,$browser,$ip);
     
                 if($user){
                     $this->bookView->render_search_result_page($result);
@@ -39,8 +42,10 @@
 
         function index() {
             if(isset($_COOKIE["accessToken"])){
+                $browser = Auth::get_browser_name($_SERVER['HTTP_USER_AGENT']);
+                $ip = Auth::getRealIpAddr();
                 $user_access_token = $_COOKIE["accessToken"];
-                $user = $this->as->checkAccessToken($user_access_token);
+                $user = $this->as->checkAccessToken($user_access_token,$browser,$ip);
                 if($user){
                     $this->bookView->render_search_page();
                 }else{
@@ -57,8 +62,10 @@
             $result = $this->bookService->getBookDetail($book_id);
             $reviews = $this->bookService->getBookReviews($book_id);
             if(isset($_COOKIE["accessToken"])){
+                $browser = Auth::get_browser_name($_SERVER['HTTP_USER_AGENT']);
+                $ip = Auth::getRealIpAddr();
                 $user_access_token = $_COOKIE["accessToken"];
-                $user = $this->as->checkAccessToken($user_access_token);
+                $user = $this->as->checkAccessToken($user_access_token,$browser,$ip);
                 if($user){
                     $this->bookView->render_book_detail_page($result, $reviews);
                 }else{

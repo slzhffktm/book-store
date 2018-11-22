@@ -5,6 +5,8 @@ require_once 'backend/model/db/db_connection.php';
 require_once 'backend/model/Auth/Auth_service.php';
 require_once 'backend/view/Book_view.php';
 require_once 'backend/view/Auth_view.php';
+require_once 'backend/controller/Auth.php';
+
 class User {
     private $us;
     private $view;
@@ -49,8 +51,10 @@ class User {
     }
     public function showUserProfile(){
         if(isset($_COOKIE["accessToken"])){
-            $user_access_token = $_COOKIE["accessToken"];
-            $user = $this->as->checkAccessToken($user_access_token);
+            $browser = Auth::get_browser_name($_SERVER['HTTP_USER_AGENT']);
+                $ip = Auth::getRealIpAddr();
+                $user_access_token = $_COOKIE["accessToken"];
+                $user = $this->as->checkAccessToken($user_access_token,$browser,$ip);
             if($user){
                 $this->view->render_profile_page($user);
             }else{
@@ -69,8 +73,10 @@ class User {
     
     public function showEditProfile() {
         if(isset($_COOKIE["accessToken"])){
+            $browser = Auth::get_browser_name($_SERVER['HTTP_USER_AGENT']);
+            $ip = Auth::getRealIpAddr();
             $user_access_token = $_COOKIE["accessToken"];
-            $user = $this->as->checkAccessToken($user_access_token);
+            $user = $this->as->checkAccessToken($user_access_token,$browser,$ip);
 
             if($user){
                 $this->view->render_edit_profile_page($user);
@@ -85,8 +91,10 @@ class User {
 
 
     public function editProfile(){
+        $browser = Auth::get_browser_name($_SERVER['HTTP_USER_AGENT']);
+        $ip = Auth::getRealIpAddr();
         $user_access_token = $_COOKIE["accessToken"];
-        $user = $this->as->checkAccessToken($user_access_token);
+        $user = $this->as->checkAccessToken($user_access_token,$browser,$ip);
 
         $base =  getcwd();
         $target_dir = $base."/frontend/img_resource/"; 
@@ -114,8 +122,10 @@ class User {
 
     }
     public function get_username_from_cookie(){
-		$user_access_token = $_COOKIE["accessToken"];
-		$user = $this->as->checkAccessToken($user_access_token);
+		$browser = Auth::get_browser_name($_SERVER['HTTP_USER_AGENT']);
+        $ip = Auth::getRealIpAddr();
+        $user_access_token = $_COOKIE["accessToken"];
+        $user = $this->as->checkAccessToken($user_access_token,$browser,$ip);
 		$username = $user->getUsername();
 
 		return $username;
