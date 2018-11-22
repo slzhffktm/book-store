@@ -5,7 +5,7 @@ class Review {
 	private $view;
 	private $auth;
 	private $order_record;
-
+	private $ac;
 	public function __construct(){
 		require_once("backend/model/Review_model.php");
 		require_once("backend/model/Auth/Auth_service.php");
@@ -15,15 +15,13 @@ class Review {
 
 		$this->model = new Review_model();
 		$this->auth = new AuthService();
-		$this->view = new Review_view();		
+		$this->view = new Review_view();	
+		$this->ac =  new Auth;	
 	}
 
 	public function show_review_page(){
 		if(isset($_COOKIE["accessToken"])){
-			$browser = Auth::get_browser_name($_SERVER['HTTP_USER_AGENT']);
-			$ip = Auth::getRealIpAddr();
-			$user_access_token = $_COOKIE["accessToken"];
-			$user = $this->as->checkAccessToken($user_access_token,$browser,$ip);
+			$user = $this->ac->checkAccessToken();
 
 			if($user){
 				$history = $this->model->get_user_history($page);
@@ -71,10 +69,7 @@ class Review {
 	}
 
 	private function get_username_from_cookie(){
-		$browser = Auth::get_browser_name($_SERVER['HTTP_USER_AGENT']);
-		$ip = Auth::getRealIpAddr();
-		$user_access_token = $_COOKIE["accessToken"];
-		$user = $this->as->checkAccessToken($user_access_token,$browser,$ip);
+		$user = $this->ac->checkAccessToken();
 		$username = $user->getUsername();
 
 		return $username;

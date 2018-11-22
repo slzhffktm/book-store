@@ -16,21 +16,6 @@ class Auth{
     function index(){
         $this->view->render_login_page();
     }
-    function checkAccessToken(){
-        if (isset($_COOKIE['accessToken'])){
-            $browser = $this->get_browser_name($_SERVER['HTTP_USER_AGENT']);
-            $ip = $this->getRealIpAddr();
-            $user_access_token = $_COOKIE["accessToken"];
-            $user = $this->as->checkAccessToken($user_access_token,$browser,$ip);
-            if($user) {
-                return $user;
-            }else{
-                return false;
-            }
-        } else{
-            return false;
-        }
-    }
 
     function login(){
         $username = $_POST["username"];
@@ -61,7 +46,7 @@ class Auth{
         header("Location: http://localhost/tugasbesar2_2018/Pro-Book/index.php/Auth/index");
     }
 
-    public static function get_browser_name($user_agent) {
+    function get_browser_name($user_agent) {
         if (strpos($user_agent, 'Opera') || strpos($user_agent, 'OPR/')) return 'Opera';
         elseif (strpos($user_agent, 'Edge')) return 'Edge';
         elseif (strpos($user_agent, 'Chrome')) return 'Chrome';
@@ -71,7 +56,7 @@ class Auth{
         return 'Other';
     }
 
-    public static function getRealIpAddr()
+    function getRealIpAddr()
     {
         if (!empty($_SERVER['HTTP_CLIENT_IP']))   //check ip from share internet
         {
@@ -87,7 +72,22 @@ class Auth{
         }
         return $ip;
     }
-
+    
+    function checkAccessToken(){
+        if (isset($_COOKIE['accessToken'])){
+            $browser = $this->get_browser_name($_SERVER['HTTP_USER_AGENT']);
+            $ip = $this->getRealIpAddr();
+            $user_access_token = $_COOKIE["accessToken"];
+            $user = $this->as->checkAccessToken($user_access_token,$browser,$ip);
+            if($user) {
+                return $user;
+            }else{
+                return false;
+            }
+        } else{
+            return false;
+        }
+    }
     function createAccessToken($username, $password){
         $browser = $this->get_browser_name($_SERVER['HTTP_USER_AGENT']);
         $ip = $this->getRealIpAddr();
