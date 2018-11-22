@@ -35,5 +35,10 @@ public class BookCatalogueClient {
 //								res = catalogue.buyBook("hjEFCAAAQBAJ","12312312312",3);
 //        jsonResult = new JSONObject(result);
 //        System.out.println(res);
+
+        System.out.println("Testing recommendation function");
+        String[] genres = {"Computers", "General"};
+        String recommendation = Recommendation.get(genres);
+        System.out.println(recommendation);
     }
 }
