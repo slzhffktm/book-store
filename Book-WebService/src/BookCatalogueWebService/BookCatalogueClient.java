@@ -18,7 +18,7 @@ public class BookCatalogueClient {
         Service service = Service.create(url, serviceName);
 
         QName portName = new QName("http://BookCatalogueWebService/", "BookCatalogueImplPort");
-        BookCatalogue catalogue = service.getPort(portName, BookCatalogue.class);
+            BookCatalogue catalogue = service.getPort(portName, BookCatalogue.class);
 
         System.out.println("Testing search function");
 //        String result = catalogue.searchBook("Anavel");

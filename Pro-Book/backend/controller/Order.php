@@ -25,6 +25,11 @@
                 $book_id = $_POST["book_id"];
                 $amount = $_POST["amount"];
                 $username = strval($username);
+
+                $client = connectToBookWebService();
+                $params = array("arg0" => "-6lwCgAAQBAJ", "arg1" => "123456789123", "arg2" => 2);
+                $response = $client->buyBook($params);
+
                 $order_id = $this->orderService->orderBook($username, $book_id, $amount);
                 echo "$order_id";
             }
