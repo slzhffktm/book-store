@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 22, 2018 at 01:56 PM
+-- Generation Time: Nov 23, 2018 at 04:27 AM
 -- Server version: 10.1.36-MariaDB
 -- PHP Version: 7.0.32
 
@@ -2227,9 +2227,14 @@ CREATE TABLE `genre` (
 --
 
 INSERT INTO `genre` (`id`, `genre`) VALUES
+(13, 'Biography&Autobiography'),
 (3, 'Computers'),
 (9, 'General'),
-(8, 'SoftwareDevelopment&Engineering');
+(17, 'General,Education'),
+(16, 'LiteraryCriticism'),
+(14, 'PersonalMemoirs'),
+(8, 'SoftwareDevelopment&Engineering'),
+(15, 'Undefined');
 
 -- --------------------------------------------------------
 
@@ -2249,7 +2254,13 @@ CREATE TABLE `genresold` (
 INSERT INTO `genresold` (`id`, `genre_idx`) VALUES
 ('hjEFCAAAQBAJ', 3),
 ('hjEFCAAAQBAJ', 8),
-('hjEFCAAAQBAJ', 9);
+('hjEFCAAAQBAJ', 9),
+('-LjlAgAAQBAJ', 13),
+('-LjlAgAAQBAJ', 14),
+('-6g0AQAAMAAJ', 15),
+('-6lwCgAAQBAJ', 16),
+('-6lwCgAAQBAJ', 17),
+('-6lwCgAAQBAJ', 9);
 
 -- --------------------------------------------------------
 
@@ -2267,6 +2278,9 @@ CREATE TABLE `sold` (
 --
 
 INSERT INTO `sold` (`id`, `Total`) VALUES
+('-6g0AQAAMAAJ', 2),
+('-6lwCgAAQBAJ', 4),
+('-LjlAgAAQBAJ', 105),
 ('hjEFCAAAQBAJ', 8);
 
 --
@@ -2307,7 +2321,7 @@ ALTER TABLE `sold`
 -- AUTO_INCREMENT for table `genre`
 --
 ALTER TABLE `genre`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- Constraints for dumped tables

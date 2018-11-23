@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.8.0
+-- version 4.8.3
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 22, 2018 at 02:45 AM
--- Server version: 10.1.31-MariaDB
--- PHP Version: 7.2.4
+-- Generation Time: Nov 23, 2018 at 04:27 AM
+-- Server version: 10.1.36-MariaDB
+-- PHP Version: 7.0.32
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -30,8 +30,8 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `nasabah` (
   `Nama` text NOT NULL,
-  `Nomor_kartu` int(11) NOT NULL,
-  `saldo` int(11) NOT NULL
+  `Nomor_kartu` varchar(12) NOT NULL,
+  `saldo` float NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -39,8 +39,9 @@ CREATE TABLE `nasabah` (
 --
 
 INSERT INTO `nasabah` (`Nama`, `Nomor_kartu`, `saldo`) VALUES
-('Ayrton', 917361823, 60000),
-('Nicholas Wijaya', 2147483647, 540000);
+('Nicholas Wijaya', '2147483647', 539703),
+('toko', '123123123123', 777.896),
+('Ayrton', '123456789123', -478.336);
 
 -- --------------------------------------------------------
 
@@ -51,7 +52,7 @@ INSERT INTO `nasabah` (`Nama`, `Nomor_kartu`, `saldo`) VALUES
 CREATE TABLE `transaksi` (
   `nomor_pengirim` int(11) NOT NULL,
   `nomor_penerima` int(11) NOT NULL,
-  `jumlah` int(11) NOT NULL DEFAULT '0',
+  `jumlah` float NOT NULL DEFAULT '0',
   `waktu` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -60,7 +61,13 @@ CREATE TABLE `transaksi` (
 --
 
 INSERT INTO `transaksi` (`nomor_pengirim`, `nomor_penerima`, `jumlah`, `waktu`) VALUES
-(917361823, 2147483647, 10000, '2018-11-21 20:29:21');
+(917361823, 2147483647, 10000, '2018-11-21 20:29:21'),
+(2147483647, 2147483647, 26.96, '2018-11-22 23:21:00'),
+(2147483647, 2147483647, 269.6, '2018-11-22 23:21:58'),
+(2147483647, 2147483647, 269.6, '2018-11-22 23:24:09'),
+(2147483647, 2147483647, -2, '2018-11-23 09:57:10'),
+(2147483647, 2147483647, 106.868, '2018-11-23 10:12:08'),
+(2147483647, 2147483647, 106.868, '2018-11-23 10:18:58');
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
