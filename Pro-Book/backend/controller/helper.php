@@ -1,5 +1,6 @@
 <?php
 require_once 'backend/model/Auth/Auth_service.php';
+require_once 'backend/lib/nusoap.php';
 
 function get_browser_name($user_agent) {
     if (strpos($user_agent, 'Opera') || strpos($user_agent, 'OPR/')) return 'Opera';
@@ -28,6 +29,30 @@ function getRealIpAddr()
     return $ip;
 }
 
+function getLocationForPort($wsdl, $portName)
+{
+    $file = file_get_contents($wsdl);
+ 
+    $xml = new SimpleXmlElement($file);
+ 
+    $query = "wsdl:service/wsdl:port[@name='$portName']/soap:address";
+    $address = $xml->xpath($query);
+    if (!empty($address)) {
+        $location = (string)$address[0]['location'];
+        return $location;
+    }
+ 
+    return false;
+}
+
+function connectToBookWebService(){
+    $wsdl = 'http://localhost:9000/BookCatalogueWebService?wsdl';
+    $client = new SoapClient($wsdl,array(
+            "trace"=>1,
+            "exceptions"=>0));
+    return $client;
+}
+
 function checkAccessToken(){
     $as = new AuthService;
     if (isset($_COOKIE['accessToken'])){
@@ -35,6 +60,7 @@ function checkAccessToken(){
         $ip = getRealIpAddr();
         $user_access_token = $_COOKIE["accessToken"];
         $user = $as->checkAccessToken($user_access_token,$browser,$ip);
+
         if($user) {
             return $user;
         }else{

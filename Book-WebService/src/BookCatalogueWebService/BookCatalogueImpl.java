@@ -2,10 +2,12 @@ package BookCatalogueWebService;
 import org.json.JSONObject;
 
 import javax.jws.WebService;
+import javax.jws.soap.SOAPBinding;
 import javax.xml.ws.Endpoint;
 import java.sql.ResultSet;
 
 @WebService()
+@SOAPBinding()
 public class BookCatalogueImpl implements BookCatalogue {
 
     private GoogleBookAPI googleBookAPI = new GoogleBookAPI();
@@ -18,6 +20,7 @@ public class BookCatalogueImpl implements BookCatalogue {
 
     public String getBookDetail(String bookId) throws Exception{
         String result = googleBookAPI.getBookDetail(bookId);
+
         return resultHandler.parseBookDetail(result);
     }
 
@@ -27,10 +30,19 @@ public class BookCatalogueImpl implements BookCatalogue {
         String[] genre = jsonResult.getString("Category").replaceAll(" ","").split("/");
         float cost = BuyBook.getCost(id) * total;
         System.out.println("Cost: " + cost);
-        String postResponse = BuyBook.sendPost(cardId, cost);
-        System.out.println(postResponse);
-        // TODO: response checking
-        boolean response = BuyBook.upsert(id, genre, total);
+        boolean response = false    ;
+        try{
+            if (cost < 0){
+                throw new Exception();
+            }
+            String postResponse = BuyBook.sendPost(cardId, cost);
+            System.out.println(postResponse);
+            // TODO: response checking
+            response = BuyBook.upsert(id, genre, total);
+        } catch (Exception e){
+
+        }
+
         return response;
     }
 
