@@ -46,5 +46,6 @@ public class BookCatalogueClient {
 //        String[] genres = {"Computers", "General"};
 //        String recommendation = Recommendation.get(genres);
 //        System.out.println(recommendation);
+
     }
 }

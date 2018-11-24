@@ -21,6 +21,7 @@ public class BookCatalogueImpl implements BookCatalogue {
 
     public String getBookDetail(String bookId) throws Exception{
         String result = googleBookAPI.getBookDetail(bookId);
+
         return resultHandler.parseBookDetail(result);
     }
 
@@ -49,6 +50,7 @@ public class BookCatalogueImpl implements BookCatalogue {
         return soapMsg;
     }
 
+
     public boolean buyBook(String id, String cardId, int total) throws  Exception {
         String result =  getBookDetail(id);
         JSONObject jsonResult = new JSONObject(result);
@@ -71,7 +73,7 @@ public class BookCatalogueImpl implements BookCatalogue {
         return response;
     }
 
-    public String getRecommendation(String[] genres){
+    public String getRecommendation(String[] genres) {
         String result = Recommendation.get(genres);
         return result;
     }
