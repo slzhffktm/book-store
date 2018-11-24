@@ -4,6 +4,7 @@ import org.json.JSONObject;
 
 import java.net.URL;
 import javax.xml.namespace.QName;
+import javax.xml.soap.SOAPMessage;
 import javax.xml.ws.Service;
 
 public class BookCatalogueClient {
@@ -18,27 +19,33 @@ public class BookCatalogueClient {
         Service service = Service.create(url, serviceName);
 
         QName portName = new QName("http://BookCatalogueWebService/", "BookCatalogueImplPort");
-            BookCatalogue catalogue = service.getPort(portName, BookCatalogue.class);
+        BookCatalogue catalogue = service.getPort(portName, BookCatalogue.class);
 
-        System.out.println("Testing search function");
+        SOAPMessage result = catalogue.searchBookSOAP("Anavel");
+        System.out.println(result);
+
+//        System.out.println(result.toString());
+
+//        System.out.println("Testing search function");
 //        String result = catalogue.searchBook("Anavel");
 //        JSONObject jsonResult = new JSONObject(result);
 //        System.out.println(jsonResult);
-
-        System.out.println("Testing get book details function");
+//
+//        System.out.println("Testing get book details function");
 //        String book = catalogue.getBookDetail("hjEFCAAAQBAJ");
 //        JSONObject jsonBook = new JSONObject(book);
 //        System.out.println(jsonBook);
+//
+//        System.out.println("Testing buy book function");
+//        boolean res = catalogue.buyBook("-LjlAgAAQBAJ","123456789123",50);
+////								res = catalogue.buyBook("hjEFCAAAQBAJ","12312312312",3);
+////        jsonResult = new JSONObject(result);
+////        System.out.println(res);
+//
+//        System.out.println("Testing recommendation function");
+//        String[] genres = {"Computers", "General"};
+//        String recommendation = Recommendation.get(genres);
+//        System.out.println(recommendation);
 
-        System.out.println("Testing buy book function");
-        boolean res = catalogue.buyBook("-LjlAgAAQBAJ","123456789123",50);
-//								res = catalogue.buyBook("hjEFCAAAQBAJ","12312312312",3);
-//        jsonResult = new JSONObject(result);
-//        System.out.println(res);
-
-        System.out.println("Testing recommendation function");
-        String[] genres = {"Computers", "General"};
-        String recommendation = Recommendation.get(genres);
-        System.out.println(recommendation);
     }
 }
