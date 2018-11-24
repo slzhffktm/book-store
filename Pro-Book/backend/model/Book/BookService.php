@@ -2,14 +2,13 @@
     require_once 'backend/model/db/db_connection.php';
     class BookService {
 
-        private $client = Null;
+        private $client;
 
         public function __construct() {
             $this->client = connectToBookWebService();
         }
 
         public function searchBook($keyword) {
-<<<<<<< HEAD
             $params = array("arg0" => $keyword);
             return $this->client->searchBook($params);
         }
@@ -17,13 +16,6 @@
         public function getBookDetail($book_id) {
             $params = array("arg0" => $book_id);
             return $this->client->getBookDetail($params);
-=======
-            return $this->client->searchBook($keyword);
-        }
-
-        public function getBookDetail($book_id) {
-            return $this->client->getBookDetail($book_id);
->>>>>>> d5afd3f7f45d53935bfa84009a6d99c3c02d3783
         }
 
         // TODO

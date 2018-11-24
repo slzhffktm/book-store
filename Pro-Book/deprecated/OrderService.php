@@ -1,13 +1,6 @@
 <?php
     require_once 'backend/model/db/db_connection.php';
     class OrderService {
-
-        private $client;
-
-        public function __construct() {
-            $this->client = connectToBookWebService();
-        }
-
         public function history($user_id) {
             $conn = OpenCon();
             $sql = "SELECT * FROM book_order WHERE user_id = $user_id";
@@ -17,8 +10,13 @@
         }
 
         public function orderBook($username, $book_id, $amount) {
-            $params = array("arg0" => $username, "arg1" => $book_id, "arg2" => $amount);
-            return $this->client->buyBook($params);
+            $conn = OpenCon();
+            $username = strval($username);
+            $sql = "INSERT INTO book_order(username, book_id, amount) VALUES ('$username', $book_id, $amount);";
+            $conn->query($sql);
+            $order_id = $conn->insert_id;
+            CloseCon($conn);
+            return $order_id;
         }
     }
 ?> 
