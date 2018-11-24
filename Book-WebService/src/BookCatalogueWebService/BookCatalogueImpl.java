@@ -3,6 +3,7 @@ import org.json.JSONObject;
 
 import javax.jws.WebService;
 import javax.jws.soap.SOAPBinding;
+import javax.xml.soap.*;
 import javax.xml.ws.Endpoint;
 import java.sql.ResultSet;
 
@@ -20,8 +21,32 @@ public class BookCatalogueImpl implements BookCatalogue {
 
     public String getBookDetail(String bookId) throws Exception{
         String result = googleBookAPI.getBookDetail(bookId);
-
         return resultHandler.parseBookDetail(result);
+    }
+
+    public SOAPMessage searchBookSOAP(String title)throws Exception{
+        // Test SOAP message
+
+        MessageFactory factory = MessageFactory.newInstance();
+        SOAPMessage soapMsg = factory.createMessage();
+        SOAPPart part = soapMsg.getSOAPPart();
+
+
+        SOAPEnvelope envelope = part.getEnvelope();
+        SOAPHeader header = envelope.getHeader();
+        SOAPBody body = envelope.getBody();
+
+        header.addTextNode("Training Details");
+
+        SOAPBodyElement element = body.addBodyElement(envelope.createName("JAVA", "training", "https://jitendrazaa.com/blog"));
+        element.addChildElement("WS").addTextNode("Training on Web service");
+
+        SOAPBodyElement element1 = body.addBodyElement(envelope.createName("JAVA", "training", "https://jitendrazaa.com/blog"));
+        element1.addChildElement("Spring").addTextNode("Training on Spring 3.0");
+
+        soapMsg.writeTo(System.out);
+
+        return soapMsg;
     }
 
     public boolean buyBook(String id, String cardId, int total) throws  Exception {
@@ -46,7 +71,7 @@ public class BookCatalogueImpl implements BookCatalogue {
         return response;
     }
 
-    public String getRecommendation(String[] genres) {
+    public String getRecommendation(String[] genres){
         String result = Recommendation.get(genres);
         return result;
     }
