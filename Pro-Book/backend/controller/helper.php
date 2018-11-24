@@ -1,6 +1,5 @@
 <?php
 require_once 'backend/model/Auth/Auth_service.php';
-require_once 'backend/lib/nusoap.php';
 
 function get_browser_name($user_agent) {
     if (strpos($user_agent, 'Opera') || strpos($user_agent, 'OPR/')) return 'Opera';
