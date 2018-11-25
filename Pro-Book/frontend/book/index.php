@@ -7,6 +7,7 @@
         <link rel="stylesheet" href="/tugasbesar2_2018/Pro-Book/frontend/common_files/grid_system.css">
         <link rel="stylesheet" href="/tugasbesar2_2018/Pro-Book/frontend/common_files/navbar.css">
         <link rel="stylesheet" href="/tugasbesar2_2018/Pro-Book/frontend/book/book.css">
+        <link rel="stylesheet" href="/tugasbesar2_2018/Pro-Book/frontend/book/search/search-book.css">
     </head>
     <body>
         <?php include 'frontend/common_files/navbar.php' ?>
@@ -27,7 +28,6 @@
                 </div>
             </div>
 
-            <link rel="stylesheet" href="/tugasbesar2_2018/Pro-Book/frontend/book/search/search-book.css">
             <div ng-class="resultClass" id="content">
                 <div class="row" id="first-row">
                     <div class="kolom-md-1"></div>
