@@ -1,6 +1,7 @@
 var app = angular.module('searchBook', []);
 app.controller('myCtrl', function($scope) {
-    $scope.inputClass = "";
+    $scope.inputClass = "container";
+    $scope.resultClass = "hidden";
     $scope.getBooks = function(keyword) {
         var xhttp;    
         if (keyword == "") {
@@ -9,11 +10,15 @@ app.controller('myCtrl', function($scope) {
         xhttp = new XMLHttpRequest();
         xhttp.onreadystatechange = function() {
             if (this.readyState == 4 && this.status == 200) {
-                $scope.results = this.response;
-                console.log(this.response);
+                $scope.results = JSON.parse(this.response);
+                console.log($scope.results);
+                console.log($scope.results.length);
+                $scope.resultsLength = $scope.results.length;
                 $scope.inputClass = "hidden";
+                $scope.resultClass = "container";
                 $scope.headTitle = "Search Result";
-                document.getElementById("content").innerHTML = $scope.results;
+            } else if (xmlhttp.status == 400) {
+                alert('There was an error 400');
             }
         };
 
