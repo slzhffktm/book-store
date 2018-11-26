@@ -7,14 +7,13 @@
         <link rel="stylesheet" href="/tugasbesar2_2018/Pro-Book/frontend/common_files/grid_system.css">
         <link rel="stylesheet" href="/tugasbesar2_2018/Pro-Book/frontend/common_files/navbar.css">
         <link rel="stylesheet" href="/tugasbesar2_2018/Pro-Book/frontend/book/book.css">
-        <link rel="stylesheet" href="/tugasbesar2_2018/Pro-Book/frontend/book/search/search-book.css">
     </head>
     <body>
         <?php include 'frontend/common_files/navbar.php' ?>
 
         <div ng-app="searchBook" ng-controller="myCtrl">
 
-            <div ng-class="inputClass" id="content">
+            <div class="container" id="content">
                 <div class="row" id="first-row">
                     <div class="kolom-md-1"></div>
                     <div class="kolom-md-10">
@@ -28,13 +27,13 @@
                 </div>
             </div>
 
-            <div ng-class="resultClass" id="content">
-                <div class="row" id="first-row">
+            <div ng-class="resultClass">
+                <div class="row" id="second-row">
                     <div class="kolom-md-1"></div>
                     <div class="kolom-md-10">
                         <div class="row">
                             <div class="kolom-md-6">
-                                <h1 id="search-book-title">Search Result</h1>
+                                
                             </div>
                             <div class="kolom-md-6">
                                 <p id="num-result-banner">Found {{resultsLength}} result(s)</h2>
@@ -47,20 +46,16 @@
                                     <div ng-repeat="row in results track by $index">
                                         <div class="row">
                                             <div class="kolom-md-2">
-                                                <img class="img-thumbnail" src="{{row.cover}}" alt="{{row.title}}" label="{{row.title}}">
-                                                <!-- <img class="img-thumbnail" src=<?php echo $row["cover"]." alt=".$row["title"]." label=".$row["title"] ?>> -->
+                                                <img class="img-thumbnail" src="{{row.URL}}" alt="{{row.Title}}" label="{{row.Title}}">
                                             </div>
                                             <div class="kolom-md-10 display-block">
-                                                <h2 class='book-title'>{{row.title}}</h2>
-                                                <h3>{{row.author}} - {{row.rating == null ? "0.0" : row.rating | number:1}}/5.0 ({{row.voters}} votes)</h3>
-                                                <p>{{row.description}}</p>
-                                                <!-- <?php echo "<h2 class='book-title'>".$row["title"]."</h2>" ?>
-                                                <?php echo "<h3>".$row["author"]." - ".sprintf("%.1f", $row["rating"])."/5.0 (".$row["voters"]." votes)</h3>" ?>
-                                                <?php echo "<p>".$row["description"]."</p>" ?> -->
+                                                <h2 class='book-title'>{{row.Title}}</h2>
+                                                <h3>{{row.Author}} - {{row.rating == null ? "0.0" : row.rating | number:1}}/5.0 ({{row.voters}} votes)</h3>
+                                                <p>{{row.Description}}</p>
                                             </div>
                                         </div>
                                         <div class="row">
-                                            <button class="detail-btn" onClick="redirectToDetails(row.book_id)">Detail</button>
+                                            <button class="detail-btn" onClick="redirectToDetails(row.ID)">Detail</button>
                                         </div>                                   
                                     </div>
                                 <!--End of contoh satu baris hasil buku -->

@@ -11,6 +11,10 @@
     margin-top: 4%;
 }
 
+#second-row {
+    margin-top: 20%;
+}
+
 input[type="text"] {
     width:100%;
     padding: 5px;
@@ -36,4 +40,34 @@ input[type="text"] {
 
 .hidden {
     display: none;
+}
+
+#num-result-banner {
+    margin: auto 0 0 auto;
+    text-align: right;
+}
+
+#search-result-list {
+    margin-top : 25px; 
+}
+
+.img-thumbnail {
+    max-width: 16vw;
+    max-height: 16vh;
+    border: 1px black solid;
+    padding: 0 15px;
+}
+
+.detail-btn {
+    text-align: center;
+    color: #fff;
+    background-color:rgb(0, 174, 239);
+    border-radius: 4px;
+    border: none;
+    padding: 5px 25px;
+    margin: 0 0 0 auto;
+}
+
+.book-title {
+    color : rgba(242,102,0,1);
 }
