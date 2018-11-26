@@ -24,7 +24,9 @@ public class BookCatalogueImpl implements BookCatalogue {
     }
 
     public boolean buyBook(String id, String cardId, int total) throws  Exception {
+        System.out.println("buybook");
         String result =  getBookDetail(id);
+        System.out.println(result);
         JSONObject jsonResult = new JSONObject(result);
         String[] genre = jsonResult.getString("Category").replaceAll(" ","").split("/");
         float cost = BuyBook.getCost(id) * total;
@@ -35,9 +37,13 @@ public class BookCatalogueImpl implements BookCatalogue {
                 throw new Exception();
             }
             String postResponse = BuyBook.sendPost(cardId, cost);
-            System.out.println(postResponse);
-            // TODO: response checking
-            response = BuyBook.upsert(id, genre, total);
+            JSONObject res = new JSONObject(postResponse);
+            if(! res.getBoolean("err")){
+                System.out.println("UPDATE");
+                response = BuyBook.upsert(id, genre, total);
+            }else{
+                response = false;
+            }
         } catch (Exception e){
 
         }

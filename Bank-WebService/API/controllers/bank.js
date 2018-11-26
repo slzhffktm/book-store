@@ -21,8 +21,10 @@ exports.transfer = function(req, res) {
         if (err) {
             res.send(err);
         } else {
-            if (saldo < req.body["jumlah"]) {
-                res.json({message: "Saldo tidak mencukupi."});
+            console.log("saldo", saldo[0].saldo);
+            console.log("jumlah", req.body["jumlah"]);
+            if (saldo[0].saldo < req.body["jumlah"]) {
+                res.json({err: "True", message: "Saldo tidak mencukupi."});
             } else {
                 Bank.substractBalanceByCardNumber(req.body["jumlah"], req.body["nomor_pengirim"], function(err, nasabah) {
                     if (err) {

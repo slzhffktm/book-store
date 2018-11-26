@@ -74,7 +74,7 @@ public class BuyBook {
 		con.setRequestProperty("User-Agent", USER_AGENT);
 		con.setRequestProperty("Accept-Language", "en-US,en;q=0.5");
 
-		String urlParameters = "nomor_pengirim="+ senderCardId + "&jumlah= "+ sum +"&nomor_penerima="+ storeCardId +" ";
+		String urlParameters = "nomor_pengirim="+ senderCardId + "&jumlah="+ sum +"&nomor_penerima="+ storeCardId +" ";
 
 		// Send post request
 		con.setDoOutput(true);
