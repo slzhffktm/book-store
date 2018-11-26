@@ -3,6 +3,7 @@ require_once 'backend/model/Auth/Auth_service.php';
 require_once 'backend/model/db/db_connection.php';
 require_once 'backend/model/User/User_model.php';
 require_once 'backend/view/Auth_view.php';
+require_once 'backend/controller/helper.php';
 require_once 'backend/view/Book_view.php';
 class Auth{
     private $as;
@@ -16,18 +17,6 @@ class Auth{
     function index(){
         $this->view->render_login_page();
     }
-    function checkAccessToken(){
-        if (isset($_COOKIE['accessToken'])){
-            $user = $this->as->checkAccessToken($_COOKIE['accessToken']);
-            if($user) {
-                return true;
-            }else{
-                return false;
-            }
-        } else{
-            return false;
-        }
-    }
 
     function login(){
         $username = $_POST["username"];
@@ -39,14 +28,12 @@ class Auth{
                 alert('Wrong username or password');
                 </script>";
             $this->view->render_login_page();
-            
         }
     }
 
     function logout(){
         if(isset($_COOKIE["accessToken"])){
-            $user_access_token = $_COOKIE["accessToken"];
-            $user = $this->as->checkAccessToken($user_access_token);
+            $user = checkAccessToken();
             if($user){
                 $this->as->deleteAccessToken($user->getUsername());
                 setcookie('accessToken',null);
@@ -54,11 +41,14 @@ class Auth{
         }
         unset($_COOKIE['accessToken']);
         setcookie('accessToken',null,-1,'/');
-        $this->view->render_login_page();
+        header("Location: http://localhost/tugasbesar2_2018/Pro-Book/index.php/Auth/index");
     }
 
+    
     function createAccessToken($username, $password){
-        $authToken = $this->as->createAccessToken($username,$password);
+        $browser = get_browser_name($_SERVER['HTTP_USER_AGENT']);
+        $ip = getRealIpAddr();
+        $authToken = $this->as->createAccessToken($username,$password, $browser, $ip);
         if($authToken){
             setcookie("accessToken",$authToken->getToken(),time()+86400, "/");
             return true;

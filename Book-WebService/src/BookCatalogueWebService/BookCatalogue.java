@@ -1,7 +1,5 @@
 package BookCatalogueWebService;
 
-import org.json.JSONObject;
-
 import javax.jws.WebMethod;
 import javax.jws.WebService;
 
@@ -9,9 +7,14 @@ import javax.jws.WebService;
 public interface BookCatalogue {
 
     @WebMethod
-    JSONObject searchBook(String id) throws Exception;
+    String searchBook(String title) throws Exception;
 
     @WebMethod
-    JSONObject getBookDetail(String bookId) throws Exception;
+    String getBookDetail(String bookId) throws Exception;
 
+    @WebMethod
+    boolean buyBook(String id, String card, int total) throws Exception;
+
+    @WebMethod
+    String getRecommendation(String[] genres);
 }

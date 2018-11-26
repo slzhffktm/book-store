@@ -6,7 +6,7 @@
             require_once('backend/model/Order/OrderModel.php');
             require_once('backend/model/Order/OrderService.php');
 
-            $this->orderService = new OrderService;
+            $this->orderService = new OrderService();
         }
 
         function orderHistory() {
@@ -25,6 +25,7 @@
                 $book_id = $_POST["book_id"];
                 $amount = $_POST["amount"];
                 $username = strval($username);
+
                 $order_id = $this->orderService->orderBook($username, $book_id, $amount);
                 echo "$order_id";
             }

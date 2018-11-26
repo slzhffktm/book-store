@@ -4,13 +4,16 @@ require_once 'backend/view/User_view.php';
 require_once 'backend/model/db/db_connection.php';
 require_once 'backend/model/Auth/Auth_service.php';
 require_once 'backend/view/Book_view.php';
-require_once 'backend/view/Auth_view.php';
+require_once 'backend/controller/helper.php';
+require_once 'backend/controller/Auth.php';
+
 class User {
     private $us;
     private $view;
     private $auth_view;
     private $as;
     private $book_view;
+
     function __construct(){
         $this->us = new User_service;
         $this->view = new User_view;
@@ -49,8 +52,7 @@ class User {
     }
     public function showUserProfile(){
         if(isset($_COOKIE["accessToken"])){
-            $user_access_token = $_COOKIE["accessToken"];
-            $user = $this->as->checkAccessToken($user_access_token);
+                $user = checkAccessToken();
             if($user){
                 $this->view->render_profile_page($user);
             }else{
@@ -69,8 +71,7 @@ class User {
     
     public function showEditProfile() {
         if(isset($_COOKIE["accessToken"])){
-            $user_access_token = $_COOKIE["accessToken"];
-            $user = $this->as->checkAccessToken($user_access_token);
+            $user = checkAccessToken();
 
             if($user){
                 $this->view->render_edit_profile_page($user);
@@ -85,8 +86,7 @@ class User {
 
 
     public function editProfile(){
-        $user_access_token = $_COOKIE["accessToken"];
-        $user = $this->as->checkAccessToken($user_access_token);
+        $user = checkAccessToken();
 
         $base =  getcwd();
         $target_dir = $base."/frontend/img_resource/"; 
@@ -114,8 +114,7 @@ class User {
 
     }
     public function get_username_from_cookie(){
-		$user_access_token = $_COOKIE["accessToken"];
-		$user = $this->as->checkAccessToken($user_access_token);
+        $user = checkAccessToken();
 		$username = $user->getUsername();
 
 		return $username;

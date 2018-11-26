@@ -3,38 +3,59 @@ package BookCatalogueWebService;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-public class GoogleBookResultHandler {
+import java.util.StringJoiner;
 
-    public JSONObject parseSearch(String jsonString) throws Exception {
+class GoogleBookResultHandler {
+
+    String parseSearch(String jsonString) throws Exception {
+
+        StringBuilder parsedResult = new StringBuilder();
+        parsedResult.append("{\"Result\" :");
+
+        StringJoiner resultList = new StringJoiner(",", "[", "]");
 
         JSONObject jsonResult = new JSONObject(jsonString);
-
         JSONArray foundBooks = jsonResult.getJSONArray("items");
         for (int i = 0; i < foundBooks.length(); i++) {
 
             JSONObject book = foundBooks.getJSONObject(i);
-            System.out.println("ID : " + getBookId(book));
-            System.out.println("URL : " + getBookUrl(book));
-            System.out.println("Title : " + getBookTitle(book));
-            System.out.println("SubTitle : " + getBookSubTitle(book));
-            System.out.println("Author : " + getBookAuthor(book));
-            System.out.println("Description : " + getBookDescription(book));
-            System.out.println("Price : " + getBookPrice(book));
-            System.out.println("Thumbnail : " + getBookThumbnail(book));
-            System.out.println();
+            StringJoiner parsedBook = new StringJoiner(",", "{", "}");
+
+            parsedBook.add(("\"ID\" :\"" + getBookId(book) + '"'));
+            parsedBook.add(("\"URL\" :\"" + getBookUrl(book) + '"'));
+            parsedBook.add(("\"Title\" :\"" + escapeSpecialChar(getBookTitle(book)) + '"'));
+            parsedBook.add(("\"SubTitle\" :\"" + escapeSpecialChar(getBookSubTitle(book)) + '"'));
+            parsedBook.add(("\"Category\" :\"" + getBookCategory(book) + '"'));
+            parsedBook.add(("\"Author\" :\"" + getBookAuthor(book) + '"'));
+            parsedBook.add(("\"Description\" :\"" + escapeSpecialChar(getBookDescription(book)) + '"'));
+            parsedBook.add(("\"Price\" :\"" + getBookPrice(book) + '"'));
+            parsedBook.add(("\"Thumbnail\" :\"" + getBookThumbnail(book) + '"'));
+
+            resultList.add(parsedBook.toString());
         }
 
-        System.out.println(jsonResult);
+        parsedResult.append(resultList.toString());
+        parsedResult.append("}");
 
-        return jsonResult;
+        return parsedResult.toString();
     }
 
-    public JSONObject parseBookDetail(String jsonString) throws Exception {
+    String parseBookDetail(String jsonString) throws Exception {
 
-        JSONObject jsonResult = new JSONObject(jsonString);
+        JSONObject book = new JSONObject(jsonString);
 
-        System.out.println(jsonResult);
-        return new JSONObject();
+        StringJoiner parsedBook = new StringJoiner(",", "{", "}");
+        parsedBook.add(("\"ID\" :\"" + getBookId(book) + '"'));
+        parsedBook.add(("\"URL\" :\"" + getBookUrl(book) + '"'));
+        parsedBook.add(("\"Title\" :\"" + escapeSpecialChar(getBookTitle(book)) + '"'));
+        parsedBook.add(("\"SubTitle\" :\"" + escapeSpecialChar(getBookSubTitle(book)) + '"'));
+        parsedBook.add(("\"Category\" :\"" + getBookCategory(book) + '"'));
+        parsedBook.add(("\"Author\" :\"" + getBookAuthor(book) + '"'));
+        parsedBook.add(("\"Description\" :\"" + escapeSpecialChar(getBookDescription(book)) + '"'));
+        parsedBook.add(("\"Price\" :\"" + getBookPrice(book) + '"'));
+        parsedBook.add(("\"Thumbnail\" :\"" + getBookThumbnail(book) + '"'));
+
+        return parsedBook.toString();
     }
 
     private String getBookId(JSONObject book) {
@@ -57,6 +78,7 @@ public class GoogleBookResultHandler {
         try {
             JSONObject details = book.getJSONObject("volumeInfo");
             return details.getString("title");
+
         } catch (Exception e) {
             return "Undefined";
         }
@@ -66,6 +88,7 @@ public class GoogleBookResultHandler {
         try {
             JSONObject details = book.getJSONObject("volumeInfo");
             return details.getString("subtitle");
+
         } catch (Exception e) {
             return "Undefined";
         }
@@ -77,7 +100,7 @@ public class GoogleBookResultHandler {
             JSONArray authorList = details.getJSONArray("authors");
 
             String authors = authorList.toString();
-            authors = authors.replaceAll("(\\\"|\\]|\\[)", "");
+            authors = authors.replaceAll("(\"|]|\\[)", "");
             authors = authors.replaceAll("(,)", ", ");
             return authors;
 
@@ -90,6 +113,21 @@ public class GoogleBookResultHandler {
         try {
             JSONObject details = book.getJSONObject("volumeInfo");
             return details.getString("description");
+
+        } catch (Exception e) {
+            return "Undefined";
+        }
+    }
+
+    private String getBookCategory(JSONObject book){
+        try {
+            JSONObject details = book.getJSONObject("volumeInfo");
+            JSONArray categoryList = details.getJSONArray("categories");
+            String categories = categoryList.toString();
+            categories = categories.replaceAll("(\"|]|\\[)", "");
+            categories = categories.replaceAll("(,)", ", ");
+            return categories;
+
         } catch (Exception e) {
             return "Undefined";
         }
@@ -108,19 +146,27 @@ public class GoogleBookResultHandler {
     private String getBookPrice(JSONObject book) {
         try {
             String saleability = getBookSaleability(book);
-            if (saleability.equals("FOR_SALE")) {
 
-                JSONObject saleInfo = book.getJSONObject("saleInfo");
-                JSONObject listPrice = saleInfo.getJSONObject("listPrice");
-                Double price = listPrice.getDouble("amount");
-                String currency = listPrice.getString("currencyCode");
+            switch (saleability) {
+                case ("FOR_SALE"): {
+                    JSONObject saleInfo = book.getJSONObject("saleInfo");
+                    JSONObject listPrice = saleInfo.getJSONObject("listPrice");
+                    Double price = listPrice.getDouble("amount");
+                    String currency = listPrice.getString("currencyCode");
 
-                return price.toString() + " " + currency;
-            } else {
-                return saleability;
+                    return String.format("%,.2f", price) + " " + currency;
+                }
+                case ("FREE"): {
+                    return "Free";
+                }
+                case ("NOT_FOR_SALE"): {
+                    return "Not available";
+                }
+                default: {
+                    return saleability;
+                }
             }
         } catch (Exception e) {
-
             return "Undefined";
         }
     }
@@ -134,14 +180,10 @@ public class GoogleBookResultHandler {
             return "Undefined";
         }
     }
-//    private String getBookSaleability(JSONObject book){
-//        try{
-//            JSONObject saleability = book.getJSONObject("saleInfo");
-//            return saleability.getString("saleability");
-//        } catch (Exception e){
-//            return "Undefined";
-//        }
-//    }
 
+    private String escapeSpecialChar(String input) {
+        String regex = "(\"|\\\\)";
+        return input.replaceAll(regex, "\\\\$1");
+    }
 
 }
