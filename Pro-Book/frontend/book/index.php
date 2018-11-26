@@ -7,7 +7,7 @@
         <link rel="stylesheet" href="/tugasbesar2_2018/Pro-Book/frontend/common_files/grid_system.css">
         <link rel="stylesheet" href="/tugasbesar2_2018/Pro-Book/frontend/common_files/navbar.css">
         <link rel="stylesheet" href="/tugasbesar2_2018/Pro-Book/frontend/book/book.css">
-        <link rel="stylesheet" href="/tugasbesar2_2018/Pro-Book/frontend/book/search/search-book.css">
+        <link rel="stylesheet" href="/tugasbesar2_2018/Pro-Book/frontend/book/search-book.css">
     </head>
     <body>
         <?php include 'frontend/common_files/navbar.php' ?>
@@ -37,7 +37,7 @@
                                 <h1 id="search-book-title">Search Result</h1>
                             </div>
                             <div class="kolom-md-6">
-                                <p id="num-result-banner">Found {{resultsLength}} result(s)</h2>
+                                <h2 id="num-result-banner">Found {{resultsLength}} result(s)</h2>
                             </div>
                         </div>
                         <div class="row" id="search-result-list">
