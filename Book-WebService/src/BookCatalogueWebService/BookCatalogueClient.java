@@ -18,27 +18,26 @@ public class BookCatalogueClient {
         Service service = Service.create(url, serviceName);
 
         QName portName = new QName("http://BookCatalogueWebService/", "BookCatalogueImplPort");
-            BookCatalogue catalogue = service.getPort(portName, BookCatalogue.class);
+        BookCatalogue catalogue = service.getPort(portName, BookCatalogue.class);
 
         System.out.println("Testing search function");
-//        String result = catalogue.searchBook("Anavel");
-//        JSONObject jsonResult = new JSONObject(result);
-//        System.out.println(jsonResult);
+        String result = catalogue.searchBook("Anavel");
+        JSONObject jsonResult = new JSONObject(result);
+        System.out.println(jsonResult);
 
         System.out.println("Testing get book details function");
-//        String book = catalogue.getBookDetail("hjEFCAAAQBAJ");
-//        JSONObject jsonBook = new JSONObject(book);
-//        System.out.println(jsonBook);
+        String book = catalogue.getBookDetail("hjEFCAAAQBAJ");
+        JSONObject jsonBook = new JSONObject(book);
+        System.out.println(jsonBook);
 
         System.out.println("Testing buy book function");
         boolean res = catalogue.buyBook("-LjlAgAAQBAJ","123456789123",50);
-//								res = catalogue.buyBook("hjEFCAAAQBAJ","12312312312",3);
-//        jsonResult = new JSONObject(result);
-//        System.out.println(res);
+//				res = catalogue.buyBook("hjEFCAAAQBAJ","12312312312",3);
 
         System.out.println("Testing recommendation function");
         String[] genres = {"Computers", "General"};
         String recommendation = Recommendation.get(genres);
         System.out.println(recommendation);
+
     }
 }

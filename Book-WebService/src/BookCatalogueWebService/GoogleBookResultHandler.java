@@ -129,7 +129,6 @@ class GoogleBookResultHandler {
             return categories;
 
         } catch (Exception e) {
-            System.out.println(e);
             return "Undefined";
         }
     }

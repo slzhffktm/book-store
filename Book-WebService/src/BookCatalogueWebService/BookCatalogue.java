@@ -7,7 +7,7 @@ import javax.jws.WebService;
 public interface BookCatalogue {
 
     @WebMethod
-    String searchBook(String id) throws Exception;
+    String searchBook(String title) throws Exception;
 
     @WebMethod
     String getBookDetail(String bookId) throws Exception;
@@ -16,5 +16,5 @@ public interface BookCatalogue {
     boolean buyBook(String id, String card, int total) throws Exception;
 
     @WebMethod
-    String getRecommendation(String[] genres) throws Exception;
+    String getRecommendation(String[] genres);
 }

@@ -20,18 +20,16 @@
         function searchBook() {
             header('Content-Type: application/json');
             $keyword = $_GET['keyword'];
-            $result = $this->bookService->searchBook($keyword);
+
             if(isset($_COOKIE["accessToken"])){
                 $user = checkAccessToken();
-    
                 if($user){
+                    $result = $this->bookService->searchBook($keyword);
                     echo json_encode($result);
                 }else{
                     header("Location: http://localhost/tugasbesar2_2018/Pro-Book/index.php/Auth/index");
-                    // $this->auth_view->render_login_page();
                 }
             } else {
-                // $this->auth_view->render_login_page();
                 header("Location: http://localhost/tugasbesar2_2018/Pro-Book/index.php/Auth/index");
             }
         }
@@ -46,7 +44,7 @@
                 }
             }else{
                 header("Location: http://localhost/tugasbesar2_2018/Pro-Book/index.php/Auth/index");
-                
+
             }
         }
 

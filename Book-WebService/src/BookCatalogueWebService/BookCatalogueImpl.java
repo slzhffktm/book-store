@@ -4,7 +4,6 @@ import org.json.JSONObject;
 import javax.jws.WebService;
 import javax.jws.soap.SOAPBinding;
 import javax.xml.ws.Endpoint;
-import java.sql.ResultSet;
 
 @WebService()
 @SOAPBinding()
