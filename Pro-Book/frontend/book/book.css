@@ -74,6 +74,9 @@ input[type="text"] {
 .img-thumbnail {
     border: 1px black solid;
     padding: 0 15px;
+    max-height: 11vw;
+    max-width: 61%;
+    object-fit: contain;
 }
 
 .detail-btn {

@@ -27,8 +27,6 @@
                     $result = $this->bookService->searchBook($keyword);
                     $result = json_encode((array)$result);
                     echo $result;
-                    // echo var_dump($result);
-                    // echo json_encode('{"Result" :[{"ID" :"JgAMbNSt8ikC","URL" :"https://…ntcover&img=1&zoom=1&edge=curl&source=gbs_api"}]}');
                 }else{
                     header("Location: http://localhost/tugasbesar2_2018/Pro-Book/index.php/Auth/index");
                 }
