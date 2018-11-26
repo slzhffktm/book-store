@@ -18,13 +18,14 @@
         }
 
         function searchBook() {
+            header('Content-Type: application/json');
             $keyword = $_GET['keyword'];
 
             if(isset($_COOKIE["accessToken"])){
                 $user = checkAccessToken();
                 if($user){
                     $result = $this->bookService->searchBook($keyword);
-                    $this->bookView->render_search_result_page($result);
+                    echo json_encode($result);
                 }else{
                     header("Location: http://localhost/tugasbesar2_2018/Pro-Book/index.php/Auth/index");
                 }
