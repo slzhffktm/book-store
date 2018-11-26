@@ -13,6 +13,11 @@
     padding: 10px;
 }
 
+#login-google{
+    max-height: 30px;
+    width: auto;
+}
+
 body {
     overflow: hidden;
     display:flex;

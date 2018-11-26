@@ -31,7 +31,45 @@ class Auth{
         }
     }
 
+    function login_with_google(){
+        require_once "lib/vendor/autoload.php" ;
+        session_start();
+        $client = new Google_Client();
+        $client->setAuthConfigFile('backend/controller/client_secret.json');
+        $client->setRedirectUri("http://localhost/tugasbesar2_2018/Pro-Book/index.php/Book/index");
+        $client->setScopes(array(
+            "https://www.googleapis.com/auth/userinfo.email",
+            "https://www.googleapis.com/auth/userinfo.profile",
+            "https://www.googleapis.com/auth/plus.me"
+        ));
+        if (!isset($_GET['code'])) {
+        $auth_url = $client->createAuthUrl();
+        header('Location: ' . filter_var($auth_url, FILTER_SANITIZE_URL));
+        } else {
+        $client->authenticate($_GET['code']);
+        $_SESSION['access_token'] = $client->getAccessToken();
+        $_COOKIE['access_token'] = $client->getAccessToken();
+            
+        try {
+            // profile
+            $plus = new Google_Service_Plus($client);
+            $_SESSION['access_profile'] = $plus->people->get("me");
+        } catch (\Exception $e) {
+            echo $e->__toString();
+        
+            $_SESSION['access_token'] = "";
+            die;
+        }
+        // $this->view->render_login_page();
+        }
+    }
+
     function logout(){
+        session_start();
+        if(isset($_SESSION['access_token'])){
+            $_SESSION['access_token'] = "";
+            $_SESSION['access_profile'] = "";
+        }
         if(isset($_COOKIE["accessToken"])){
             $user = checkAccessToken();
             if($user){
