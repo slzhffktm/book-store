@@ -3,7 +3,7 @@ require_once 'backend/model/User/User_model.php';
 
 class User_service {
     public function register($name, $username, $email, $password, $address, $phone, $card) {
-        $url = 'http://localhost:3000/validateCard?card='.$card;
+        $url = 'http://localhost:3000/validateCard/'.$card;
         $contents = file_get_contents($url);
         if($contents == "\"True\"") {
             $conn = OpenCon();
@@ -31,7 +31,7 @@ class User_service {
         $user->setName($name);
         $user->setAddress($address);
         $user->setPhone($phone);
-        $url = 'http://localhost:3000/validateCard?card='.$card;
+        $url = 'http://localhost:3000/validateCard/'.$card;
         $contents = file_get_contents($url);
         if($contents == "\"True\"") {
             $user->setCard($card);
@@ -39,6 +39,7 @@ class User_service {
             echo "<script>
                 alert('Invalid number');
                 </script>";
+            return false;
         }
         if($imageUrl){
 
@@ -49,6 +50,7 @@ class User_service {
             echo "<script>
                 alert('ERROR');
                 </script>";
+            return false;
         }
         CloseCon($conn);
         return $user;
