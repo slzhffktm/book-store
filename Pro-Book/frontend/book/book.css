@@ -38,6 +38,10 @@ input[type="text"] {
     color: orangered; 
 }
 
+#search-result-container{
+    padding-top: 2%;
+}
+
 .hidden {
     display: none;
 }
@@ -48,12 +52,26 @@ input[type="text"] {
 }
 
 #search-result-list {
-    margin-top : 25px; 
+    margin-top : 25px;
+    display: flex;
+    flex-flow: column;
+}
+
+.image-container{
+    display: flex;
+    flex-grow: 2;
+    flex-basis: 0;
+    justify-content: center;
+}
+
+.detail-container{
+    display: flex;
+    flex-grow: 10;
+    flex-basis: 0;
+    flex-flow: column;
 }
 
 .img-thumbnail {
-    max-width: 16vw;
-    max-height: 16vh;
     border: 1px black solid;
     padding: 0 15px;
 }
@@ -70,4 +88,18 @@ input[type="text"] {
 
 .book-title {
     color : rgba(242,102,0,1);
+}
+
+.flex-container{
+    display: flex;
+    flex-flow: column;
+}
+
+.search-result-row{
+    display: flex;
+    flex-flow: column;
+}
+
+.search-result-row .row{
+    display: flex;
 }
