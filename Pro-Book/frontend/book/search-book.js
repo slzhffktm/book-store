@@ -9,6 +9,9 @@ app.controller('myCtrl', function ($scope) {
         if (keyword == "") {
             return;
         }
+        
+        document.getElementById("loader").style.display = "block";
+
         xhttp = new XMLHttpRequest();
         xhttp.onreadystatechange = function () {
 
@@ -19,9 +22,10 @@ app.controller('myCtrl', function ($scope) {
 
                 console.log("Sample");
                 console.log($scope.results[0]);
-
+                
+                document.getElementById("loader").style.display = "none";
                 $scope.resultsLength = $scope.results.length;
-                $scope.resultClass = "";
+                document.getElementById("search-result-container").style.display = "block";
                 $scope.headTitle = "Search Result";
 
             } else if (this.status == 400) {

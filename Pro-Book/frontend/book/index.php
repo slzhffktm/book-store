@@ -28,7 +28,9 @@
         </div>
     </div>
 
-    <div ng-class="resultClass" id="search-result-container">
+    <div id="loader"></div>
+
+    <div id="search-result-container">
         <div class="row" id="second-row">
             <div class="kolom-md-1"></div>
             <div class="kolom-md-10">
