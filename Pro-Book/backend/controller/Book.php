@@ -57,11 +57,7 @@
                 if($user){
 
                     $result = $this->bookService->getBookDetail($book_id);
-                    $result = json_decode(json_encode($result), true)['return'];
-                    $result = json_encode($result);
-                    var_dump($result);
-
-//                    echo $result;
+                    $result = json_decode($result->return, true);
 
                     $reviews = $this->bookService->getBookReviews($book_id);
                     $this->bookView->render_book_detail_page($result, $reviews);
