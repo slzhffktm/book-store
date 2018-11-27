@@ -16,5 +16,5 @@ public interface BookCatalogue {
     boolean buyBook(String id, String card, int total) throws Exception;
 
     @WebMethod
-    String getRecommendation(String[] genres);
+    String getRecommendation(String[] genres) throws Exception;
 }

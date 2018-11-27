@@ -19,7 +19,7 @@ public class Recommendation {
             Class.forName(Connection.driver);
             java.sql.Connection con = DriverManager.getConnection(Connection.database, Connection.user, Connection.password);
             java.sql.Statement st = con.createStatement();
-            ResultSet res = st.executeQuery("SELECT sold.id AS book_id, maxtot.genre AS genre " +
+            ResultSet res = st.executeQuery("SELECT sold.id AS book_id " +
                     "FROM sold INNER JOIN " +
                     "(SELECT sold.id AS book_id, MAX(total) AS maxtotal, genre " +
                     "FROM sold NATURAL JOIN genresold INNER JOIN genre ON genre.id = genresold.genre_idx " +
