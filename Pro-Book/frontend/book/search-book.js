@@ -31,11 +31,13 @@ app.controller('myCtrl', function ($scope) {
 
         xhttp.open("GET", "http://localhost//tugasbesar2_2018/Pro-Book/index.php/Book/searchBook?keyword=" + keyword, true);
         xhttp.send();
-    }
+    };
+
+    $scope.redirectToDetails = function (book_id) {
+        var url = "detail?id=" + String(book_id);
+        console.log("moving to ", url);
+        window.location.assign(url);
+    };
 
 });
 
-function redirectToDetails(book_id) {
-    var url = "detail?id=" + String(book_id);
-    window.location.assign(url);
-}

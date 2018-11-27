@@ -51,21 +51,27 @@
 
         function detail() {
             $book_id = $_GET['id'];
-            $result = $this->bookService->getBookDetail($book_id);
-            $reviews = $this->bookService->getBookReviews($book_id);
+
             if(isset($_COOKIE["accessToken"])){
                 $user = checkAccessToken();
                 if($user){
+
+                    $result = $this->bookService->getBookDetail($book_id);
+                    $result = json_decode(json_encode($result), true)['return'];
+                    $result = json_encode($result);
+                    var_dump($result);
+
+//                    echo $result;
+
+                    $reviews = $this->bookService->getBookReviews($book_id);
                     $this->bookView->render_book_detail_page($result, $reviews);
+
                 }else{
                     header("Location: http://localhost/tugasbesar2_2018/Pro-Book/index.php/Auth/index");
-                
                 }
             }else{
                 header("Location: http://localhost/tugasbesar2_2018/Pro-Book/index.php/Auth/index");
-
             }
-            
         }
     }
 ?>

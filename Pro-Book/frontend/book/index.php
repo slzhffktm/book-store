@@ -57,7 +57,7 @@
                             </div>
                         </div>
                         <div class="row">
-                            <button class="detail-btn" onClick="redirectToDetails(row.ID)">Detail</button>
+                            <button class="detail-btn" ng-click="redirectToDetails(row.ID)">Detail</button>
                         </div>
                     </div>
                 </div>
