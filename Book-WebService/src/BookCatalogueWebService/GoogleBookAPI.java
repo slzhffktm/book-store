@@ -23,7 +23,6 @@ class GoogleBookAPI {
         String url = getSearchUrlWithCategory(category);
         System.out.println(url);
         HttpURLConnection connection = getHttpConnection(url);
-        System.out.println(parseHttpResponseText(connection));
         return parseHttpResponseText(connection);
     }
 

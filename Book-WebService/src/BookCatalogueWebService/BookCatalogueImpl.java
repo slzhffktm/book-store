@@ -67,8 +67,9 @@ public class BookCatalogueImpl implements BookCatalogue {
         
         String result = Recommendation.get(genre);
         String bookDetail = "";
-        if (result == "[]") {
-            // TODO: add function from ayrton
+        System.out.println(result);
+        if (result.length() == 2) {
+										return searchBookWithCategory(genre);
         } else {
             JSONArray jsonArray;
             JSONObject jsonObject;
