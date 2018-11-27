@@ -39,8 +39,8 @@ class GoogleBookAPI {
     private String getBookDetailsUrl(String bookId) {
 
         String url = "https://www.googleapis.com/books/v1/volumes/" + bookId;
-        String getParameter = "key=" + GOOGLE_API_KEY + "&projection=lite";
-        return url;
+        String getParameter = "key=" + GOOGLE_API_KEY ;
+        return url + "?" + getParameter;
     }
 
     private HttpURLConnection getHttpConnection(String requestUrl) throws IOException {
