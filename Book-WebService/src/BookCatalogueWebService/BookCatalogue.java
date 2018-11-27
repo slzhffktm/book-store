@@ -10,6 +10,9 @@ public interface BookCatalogue {
     String searchBook(String title) throws Exception;
 
     @WebMethod
+    String searchBookWithCategory(String category) throws Exception;
+
+    @WebMethod
     String getBookDetail(String bookId) throws Exception;
 
     @WebMethod

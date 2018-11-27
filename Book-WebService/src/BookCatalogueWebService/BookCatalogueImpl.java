@@ -20,6 +20,11 @@ public class BookCatalogueImpl implements BookCatalogue {
         return resultHandler.parseSearch(result);
     }
 
+    public String searchBookWithCategory(String category) throws Exception{
+        String result = googleBookAPI.searchBookWithCategory(category);
+        return resultHandler.parseSearch(result);
+    }
+
     public String getBookDetail(String bookId) throws Exception{
         String result = googleBookAPI.getBookDetail(bookId);
 
