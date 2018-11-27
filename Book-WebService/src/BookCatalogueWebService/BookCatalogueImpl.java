@@ -1,9 +1,12 @@
 package BookCatalogueWebService;
+import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import javax.jws.WebService;
 import javax.jws.soap.SOAPBinding;
 import javax.xml.ws.Endpoint;
+import java.util.Random;
 
 @WebService()
 @SOAPBinding()
@@ -56,9 +59,32 @@ public class BookCatalogueImpl implements BookCatalogue {
         return response;
     }
 
-    public String getRecommendation(String[] genres) {
-        String result = Recommendation.get(genres);
-        return result;
+    public String getRecommendation(String[] genres) throws Exception{
+        // random genre
+        Random r = new Random();
+        int idx = r.nextInt(genres.length);
+        String genre = genres[idx];
+        
+        String result = Recommendation.get(genre);
+        String bookDetail = "";
+        if (result == "[]") {
+            // TODO: add function from ayrton
+        } else {
+            JSONArray jsonArray;
+            JSONObject jsonObject;
+            String bookID = "";
+            try {
+                jsonArray = new JSONArray(result);
+                jsonObject = jsonArray.getJSONObject(0);
+                bookID = jsonObject.getString("book_id");
+            } catch (JSONException e) {
+                System.out.println(e);
+            }
+
+            bookDetail = getBookDetail(bookID);
+        }
+
+        return bookDetail;
     }
 
     // Publisher part

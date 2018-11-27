@@ -34,9 +34,10 @@ public class BookCatalogueClient {
         boolean res = catalogue.buyBook("-LjlAgAAQBAJ","123456789123",50);
 //				res = catalogue.buyBook("hjEFCAAAQBAJ","12312312312",3);
 
+        BookCatalogueImpl bookCatalogueImpl = new BookCatalogueImpl();
         System.out.println("Testing recommendation function");
         String[] genres = {"Computers", "General"};
-        String recommendation = Recommendation.get(genres);
+        String recommendation = bookCatalogueImpl.getRecommendation(genres);
         System.out.println(recommendation);
 
     }
