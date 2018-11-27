@@ -61,7 +61,7 @@
                         </select>
                     </div>
                     <div class="row" style="margin: auto">
-                        <?php echo "<button onclick=\"makeOrder('" . $GLOBALS['user']->getUsername() . "'," . $result["book_id"] . ")\" id=\"order-btn\">Order</button>" ?>
+                        <?php echo "<button onclick=\"makeOrder('" . $GLOBALS['user']->getUsername() . "'," . $result["ID"] . ")\" id=\"order-btn\">Order</button>" ?>
                     </div>
                 </div>
             </div>
