@@ -6,6 +6,7 @@ import org.json.JSONObject;
 import javax.jws.WebService;
 import javax.jws.soap.SOAPBinding;
 import javax.xml.ws.Endpoint;
+import java.util.Random;
 
 @WebService()
 @SOAPBinding()
@@ -54,7 +55,12 @@ public class BookCatalogueImpl implements BookCatalogue {
     }
 
     public String getRecommendation(String[] genres) throws Exception{
-        String result = Recommendation.get(genres);
+        // random genre
+        Random r = new Random();
+        int idx = r.nextInt(genres.length);
+        String genre = genres[idx];
+        
+        String result = Recommendation.get(genre);
         String bookDetail = "";
         if (result == "[]") {
             // TODO: add function from ayrton

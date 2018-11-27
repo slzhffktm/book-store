@@ -5,14 +5,9 @@ import org.json.JSONObject;
 
 import java.sql.DriverManager;
 import java.sql.ResultSet;
-import java.util.Random;
 
 public class Recommendation {
-    public static String get(String[] genres) {
-        // random genre
-        Random r = new Random();
-        int idx = r.nextInt(genres.length);
-        String genre = genres[idx];
+    public static String get(String genre) {
         String result = "";
 
         try {
