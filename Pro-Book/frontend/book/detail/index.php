@@ -110,7 +110,7 @@
         </div>
         <div class="row" style="height:80%">
             <div class="kolom-md-3">
-                <img src="/tugasbesar2_2018/Pro-Book/frontend/img_resource/checklist-black.png"
+                <img id = "checklist" src="/tugasbesar2_2018/Pro-Book/frontend/img_resource/checklist-black.png"
                      style="width:100%;height:80%">
             </div>
             <div class="kolom-md-6">
