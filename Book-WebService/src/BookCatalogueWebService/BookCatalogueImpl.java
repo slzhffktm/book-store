@@ -21,6 +21,11 @@ public class BookCatalogueImpl implements BookCatalogue {
         return resultHandler.parseSearch(result);
     }
 
+    public String searchBookWithCategory(String category) throws Exception{
+        String result = googleBookAPI.searchBookWithCategory(category);
+        return resultHandler.parseSearch(result);
+    }
+
     public String getBookDetail(String bookId) throws Exception{
         String result = googleBookAPI.getBookDetail(bookId);
         return resultHandler.parseBookDetail(result);
@@ -75,8 +80,9 @@ public class BookCatalogueImpl implements BookCatalogue {
         
         String result = Recommendation.get(genre);
         String bookDetail = "";
-        if (result == "[]") {
-            // TODO: add function from ayrton
+        System.out.println(result);
+        if (result.length() == 2) {
+										return searchBookWithCategory(genre);
         } else {
             JSONArray jsonArray;
             JSONObject jsonObject;

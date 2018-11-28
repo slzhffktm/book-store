@@ -18,6 +18,14 @@ class GoogleBookAPI {
         return parseHttpResponseText(connection);
     }
 
+    String searchBookWithCategory(String category) throws Exception{
+
+        String url = getSearchUrlWithCategory(category);
+        System.out.println(url);
+        HttpURLConnection connection = getHttpConnection(url);
+        return parseHttpResponseText(connection);
+    }
+
     String getBookDetail(String bookId) throws Exception {
 
         String url = getBookDetailsUrl(bookId);
@@ -33,6 +41,16 @@ class GoogleBookAPI {
 
         String url = "https://www.googleapis.com/books/v1/volumes";
         String getParameter = "key=" + GOOGLE_API_KEY + "&q=" + title + "&maxResults=40" +"&printType=books";
+        return url + "?" + getParameter;
+    }
+
+    private String getSearchUrlWithCategory(String category) {
+
+        // Pre process title
+        category = category.replaceAll("\\s", "+");
+
+        String url = "https://www.googleapis.com/books/v1/volumes";
+        String getParameter = "key=" + GOOGLE_API_KEY + "&q=subject:" + category + "&maxResults=40";
         return url + "?" + getParameter;
     }
 

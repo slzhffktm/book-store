@@ -36,7 +36,7 @@ public class BookCatalogueClient {
 
         BookCatalogueImpl bookCatalogueImpl = new BookCatalogueImpl();
         System.out.println("Testing recommendation function");
-        String[] genres = {"Computers", "General"};
+        String[] genres = {"Science", "adventure"};
         String recommendation = bookCatalogueImpl.getRecommendation(genres);
         System.out.println(recommendation);
 
