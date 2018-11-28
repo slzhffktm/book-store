@@ -57,7 +57,7 @@ public class BookCatalogueImpl implements BookCatalogue {
             String checkoutResponse = BuyBook.checkout(cardId, totalBookPrice);
             JSONObject res = new JSONObject(checkoutResponse);
 
-            // is this the way to hceck for success ?
+            // is this the way to check for success ?
             if(! res.has("err")) {
                 System.out.println("UPDATE");
                 response = BuyBook.upsert(bookId, genres, bookAmount);
@@ -81,11 +81,16 @@ public class BookCatalogueImpl implements BookCatalogue {
         String result = Recommendation.get(genre);
         String bookDetail = "";
         System.out.println(result);
+
+        JSONArray jsonArray;
+        JSONObject jsonObject;
         if (result.length() == 2) {
-										return searchBookWithCategory(genre);
+            jsonObject = new JSONObject(searchBookWithCategory(genre));
+            jsonArray = jsonObject.getJSONArray("Result");
+            idx = r.nextInt(jsonArray.length());
+            bookDetail = jsonArray.getJSONObject(idx).toString();
         } else {
-            JSONArray jsonArray;
-            JSONObject jsonObject;
+
             String bookID = "";
             try {
                 jsonArray = new JSONArray(result);

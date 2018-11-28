@@ -127,11 +127,8 @@ class GoogleBookResultHandler {
             String categories = categoryList.toString();
             categories = categories.replaceAll("(\"|]|\\[)", "");
             categories = categories.replaceAll("(,)", "/");
-            String[] categoriesList = categories.split("/");
-            for (int i=0; i<categoriesList.length; i++) {
-                categoriesList[i] = categoriesList[i].trim();
-            }
-            return Arrays.toString(categoriesList);
+
+            return categories;
 
         } catch (Exception e) {
             return "Undefined";
