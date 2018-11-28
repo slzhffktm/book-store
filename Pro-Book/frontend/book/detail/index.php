@@ -39,7 +39,7 @@
                             <img id="star5" class="review-star"
                                  src="/tugasbesar2_2018/Pro-Book/frontend/img_resource/starEmpty.png">
                         </div>
-                        <?php echo "<div class=\"row rating-wrapper\"> " . sprintf("%.1f", $result["rating"]) . " / 5.0</div>" ?>
+                        <?php echo "<div class=\"row rating-wrapper\"> " . sprintf("%.1f", $result["Rating"]) . " / 5.0</div>" ?>
                     </div>
                 </div>
             </div>
@@ -98,13 +98,16 @@
                 <!-- end of sample review -->
             </div>
             <!-- recommendation -->
+            <br>
+            <h2>Recommendation</h2>
+            <br>
             <div class="row">
                 <div class="kolom-md-2">
                     <img class="img-thumbnail" src=<?php echo $recommendation["Thumbnail"]." alt=".$recommendation["Title"]." label=".$recommendation["Title"] ?>>
                 </div>
                 <div class="kolom-md-10 display-block">
                     <?php echo "<h2 class='book-title'>".$recommendation["Title"]."</h2>" ?>
-                    <?php echo "<h3>".$recommendation["Author"]." - ".sprintf("%.1f", $recommendation["rating"])."/5.0 (".$recommendation["voters"]." votes)</h3>" ?>
+                    <?php echo "<h3>".$recommendation["Author"]." - ".sprintf("%.1f", $recommendation["Rating"])."/5.0 (".$recommendation["Voters"]." votes)</h3>" ?>
                     <?php echo "<p>".$recommendation["Description"]."</p>" ?>
                 </div>
             </div>
