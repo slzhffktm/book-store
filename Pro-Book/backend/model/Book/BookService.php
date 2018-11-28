@@ -36,13 +36,16 @@
 
         // TODO
         public function getBookReviews($book_id) {
-            $conn = OpenCon();
+            $conn = OpenConPDO();
             $sql = "SELECT user.username, user.image_url, book_review.rating, book_review.comment 
                     FROM book INNER JOIN book_review ON book.book_id = book_review.book_id INNER JOIN user ON book_review.username = user.username 
-                    WHERE book.book_id = $book_id ORDER BY order_id DESC";
-            $result = mysqli_fetch_all($conn->query($sql), MYSQLI_ASSOC);
-            CloseCon($conn);
-            return $result;
+                    WHERE book.book_id = :book_id ORDER BY order_id DESC";
+            $query = $conn->prepare($sql);
+            $parameters = array(':book_id' => $book_id);
+            
+            $query->execute($parameters);
+
+            return $query->fetch();
         }
     }
 ?>

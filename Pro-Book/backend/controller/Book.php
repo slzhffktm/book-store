@@ -24,9 +24,18 @@
             if(isset($_COOKIE["accessToken"])){
                 $user = checkAccessToken();
                 if($user){
-                    $result = $this->bookService->searchBook($keyword);
-                    $result = json_encode((array)$result);
-                    echo $result;
+                    $results = $this->bookService->searchBook($keyword);
+                    $results = json_decode($results->return, true);
+                    $results = $results["Result"];
+
+                    foreach($results as $result) {
+                        $rating = $this->bookService->getBookDetailReview($result["ID"]);
+                        $result["Rating"] = $rating["rating"];
+                        $result["Voters"] = $rating["voters"];
+                    }
+
+                    $results = json_encode($results);
+                    echo $results;
                 }else{
                     header("Location: http://localhost/tugasbesar2_2018/Pro-Book/index.php/Auth/index");
                 }
