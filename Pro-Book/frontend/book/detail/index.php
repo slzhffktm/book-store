@@ -97,6 +97,20 @@
                 <?php } ?>
                 <!-- end of sample review -->
             </div>
+            <!-- recommendation -->
+            <div class="row">
+                <div class="kolom-md-2">
+                    <img class="img-thumbnail" src=<?php echo $recommendation["Thumbnail"]." alt=".$recommendation["Title"]." label=".$recommendation["Title"] ?>>
+                </div>
+                <div class="kolom-md-10 display-block">
+                    <?php echo "<h2 class='book-title'>".$recommendation["Title"]."</h2>" ?>
+                    <?php echo "<h3>".$recommendation["Author"]." - ".sprintf("%.1f", $recommendation["rating"])."/5.0 (".$recommendation["voters"]." votes)</h3>" ?>
+                    <?php echo "<p>".$recommendation["Description"]."</p>" ?>
+                </div>
+            </div>
+            <div class="row">
+                <button class="detail-btn" onClick="redirectToDetails(<?php echo $recommendation["ID"] ?>)">Detail</button>
+            </div>
         </div>
         <div class="kolom-md-1"></div>
     </div>
