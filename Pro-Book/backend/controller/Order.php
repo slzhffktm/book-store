@@ -28,8 +28,10 @@
                 $bookAmount = $_POST["amount"];
 
                 $order_id = $this->orderService->orderBook($username, $cardNum, $bookId, $bookAmount);
-                if(! $order_id){
+                if(!$order_id){
                     echo "failed";
+                }else{
+                    echo $order_id;
                 }
             }
         }

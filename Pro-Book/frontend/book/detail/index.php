@@ -60,7 +60,7 @@
                             ?>
                         </select>
                     </div>
-                    <div class="row" style="margin: auto">
+                    <div id = "order-btn-div" class="row" style="margin: auto">
                         <?php echo "<button onclick=\"makeOrder('" . $result['ID'] . "')\" id=\"order-btn\">Order</button>" ?>
                     </div>
                 </div>
