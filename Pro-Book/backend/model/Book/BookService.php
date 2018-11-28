@@ -23,6 +23,17 @@
             return $this->client->getRecommendation($params);
         }
 
+        public function getBookDetailReview($book_id) {
+            $conn = OpenConPDO();
+            $sql = "SELECT COUNT(order_id) AS voters, AVG(rating) AS rating FROM book_review WHERE book_id = :book_id GROUP BY book_id";
+            $query = $conn->prepare($sql);
+            $parameters = array(':book_id' => $book_id);
+            
+            $query->execute($parameters);
+
+            return $query->fetch();
+        }
+
         // TODO
         public function getBookReviews($book_id) {
             $conn = OpenCon();

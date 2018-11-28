@@ -22,4 +22,21 @@
             return '"' . addslashes($inputString) . '"';
         }
     }
+
+    if (!function_exists("OpenConPDO")) {
+        function OpenConPDO() {
+            $dbhost = "localhost";
+            $dbuser = "root";
+            $dbpass = "";
+            $db = "tayobook";
+            try {
+                $conn = new PDO("mysql:host=$dbhost;dbname=$db", $dbuser, $dbpass);
+                $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+            } catch(PDOException $e) {
+                die("Connect failed: %s\n" . $conn->error);
+            }
+ 
+            return $conn;
+        }
+    }
 ?>

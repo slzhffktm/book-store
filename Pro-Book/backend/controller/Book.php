@@ -59,11 +59,18 @@
                     $result = $this->bookService->getBookDetail($book_id);
                     $result = json_decode($result->return, true);
 
+                    $rating = $this->bookService->getBookDetailReview($book_id);
+                    $result["Rating"] = $rating["rating"];
+
                     $reviews = $this->bookService->getBookReviews($book_id);
 
                     $genres = explode('/', $result["Category"]);
                     $recommendation = $this->bookService->getRecommendation($genres);
                     $recommendation = json_decode($recommendation->return, true);
+                    $rating = $this->bookService->getBookDetailReview($recommendation["ID"]);
+                    $recommendation["Rating"] = $rating["rating"];
+                    $recommendation["Voters"] = $rating["voters"];
+
                     $this->bookView->render_book_detail_page($result, $reviews, $recommendation);
 
                 }else{
