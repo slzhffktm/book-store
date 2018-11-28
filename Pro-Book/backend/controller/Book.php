@@ -60,7 +60,11 @@
                     $result = json_decode($result->return, true);
 
                     $reviews = $this->bookService->getBookReviews($book_id);
-                    $this->bookView->render_book_detail_page($result, $reviews);
+
+                    $genres = explode('/', $result["Category"]);
+                    $recommendation = $this->bookService->getRecommendation($genres);
+                    $recommendation = json_decode($recommendation->return, true);
+                    $this->bookView->render_book_detail_page($result, $reviews, $recommendation);
 
                 }else{
                     header("Location: http://localhost/tugasbesar2_2018/Pro-Book/index.php/Auth/index");

@@ -18,6 +18,11 @@
             return $this->client->getBookDetail($params);
         }
 
+        public function getRecommendation($genres) {
+            $params = array("arg0" => $genres);
+            return $this->client->getRecommendation($params);
+        }
+
         // TODO
         public function getBookReviews($book_id) {
             $conn = OpenCon();
