@@ -35,7 +35,10 @@ public class BookCatalogueImpl implements BookCatalogue {
         String result = getBookDetail(bookId);
         JSONObject jsonResult = new JSONObject(result);
 
-        String[] genres = jsonResult.getString("Category").replaceAll(" ","").split("/");
+        String[] genres = jsonResult.getString("Category").split("/");
+        for (int i=0; i<genres.length; i++) {
+            genres[i] = genres[i].trim();
+        }
         float totalBookPrice = BuyBook.getPrice(bookId) * bookAmount;
 
         System.out.println("genres : " + Arrays.toString(genres));

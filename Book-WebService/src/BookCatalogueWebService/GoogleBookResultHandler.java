@@ -2,6 +2,7 @@ package BookCatalogueWebService;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
+import java.util.Arrays;
 
 import java.util.StringJoiner;
 
@@ -125,8 +126,12 @@ class GoogleBookResultHandler {
             JSONArray categoryList = details.getJSONArray("categories");
             String categories = categoryList.toString();
             categories = categories.replaceAll("(\"|]|\\[)", "");
-            categories = categories.replaceAll("(,)", ", ");
-            return categories;
+            categories = categories.replaceAll("(,)", "/");
+            String[] categoriesList = categories.split("/");
+            for (int i=0; i<categoriesList.length; i++) {
+                categoriesList[i] = categoriesList[i].trim();
+            }
+            return Arrays.toString(categoriesList);
 
         } catch (Exception e) {
             return "Undefined";
