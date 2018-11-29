@@ -18,6 +18,13 @@ class GoogleBookAPI {
         return parseHttpResponseText(connection);
     }
 
+    String searchBookWithCategory(String category) throws Exception{
+
+        String url = getSearchUrlWithCategory(category);
+        HttpURLConnection connection = getHttpConnection(url);
+        return parseHttpResponseText(connection);
+    }
+
     String getBookDetail(String bookId) throws Exception {
 
         String url = getBookDetailsUrl(bookId);
@@ -32,15 +39,25 @@ class GoogleBookAPI {
         title = title.replaceAll("\\s", "+");
 
         String url = "https://www.googleapis.com/books/v1/volumes";
-        String getParameter = "key=" + GOOGLE_API_KEY + "&q=" + title + "&maxResults=40";
+        String getParameter = "key=" + GOOGLE_API_KEY + "&q=" + title + "&maxResults=40" +"&printType=books";
+        return url + "?" + getParameter;
+    }
+
+    private String getSearchUrlWithCategory(String category) {
+
+        // Pre process title
+        category = category.replaceAll("\\s", "+");
+
+        String url = "https://www.googleapis.com/books/v1/volumes";
+        String getParameter = "key=" + GOOGLE_API_KEY + "&q=subject:" + category + "&maxResults=40";
         return url + "?" + getParameter;
     }
 
     private String getBookDetailsUrl(String bookId) {
 
         String url = "https://www.googleapis.com/books/v1/volumes/" + bookId;
-        String getParameter = "key=" + GOOGLE_API_KEY + "&projection=lite";
-        return url;
+        String getParameter = "key=" + GOOGLE_API_KEY ;
+        return url + "?" + getParameter;
     }
 
     private HttpURLConnection getHttpConnection(String requestUrl) throws IOException {
@@ -69,48 +86,4 @@ class GoogleBookAPI {
         in.close();
         return response.toString();
     }
-
-
-    // HTTP POST request
-//    private void sendPost() throws Exception {
-//
-//        String url = "https://selfsolve.apple.com/wcResults.do";
-//        URL obj = new URL(url);
-//        HttpsURLConnection con = (HttpsURLConnection) obj.openConnection();
-//
-//        //add request header
-//        con.setRequestMethod("POST");
-//        con.setRequestProperty("User-Agent", USER_AGENT);
-//        con.setRequestProperty("Accept-Language", "en-US,en;q=0.5");
-//
-//        String urlParameters = "sn=C02G8416DRJM&cn=&locale=&caller=&num=12345";
-//
-//        // Send post request
-//        con.setDoOutput(true);
-//        DataOutputStream wr = new DataOutputStream(con.getOutputStream());
-//        wr.writeBytes(urlParameters);
-//        wr.flush();
-//        wr.close();
-//
-//        int responseCode = con.getResponseCode();
-//        System.out.println("\nSending 'POST' request to URL : " + url);
-//        System.out.println("Post parameters : " + urlParameters);
-//        System.out.println("Response Code : " + responseCode);
-//
-//        BufferedReader in = new BufferedReader(
-//                new InputStreamReader(con.getInputStream()));
-//        String inputLine;
-//        StringBuffer response = new StringBuffer();
-//
-//        while ((inputLine = in.readLine()) != null) {
-//            response.append(inputLine);
-//        }
-//        in.close();
-//
-//        //print result
-//        System.out.println(response.toString());
-
-//
-//    }
-
 }

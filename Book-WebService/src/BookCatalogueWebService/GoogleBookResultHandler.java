@@ -2,6 +2,7 @@ package BookCatalogueWebService;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
+import java.util.Arrays;
 
 import java.util.StringJoiner;
 
@@ -28,7 +29,6 @@ class GoogleBookResultHandler {
             parsedBook.add(("\"Category\" :\"" + getBookCategory(book) + '"'));
             parsedBook.add(("\"Author\" :\"" + getBookAuthor(book) + '"'));
             parsedBook.add(("\"Description\" :\"" + escapeSpecialChar(getBookDescription(book)) + '"'));
-            parsedBook.add(("\"Price\" :\"" + getBookPrice(book) + '"'));
             parsedBook.add(("\"Thumbnail\" :\"" + getBookThumbnail(book) + '"'));
 
             resultList.add(parsedBook.toString());
@@ -52,7 +52,7 @@ class GoogleBookResultHandler {
         parsedBook.add(("\"Category\" :\"" + getBookCategory(book) + '"'));
         parsedBook.add(("\"Author\" :\"" + getBookAuthor(book) + '"'));
         parsedBook.add(("\"Description\" :\"" + escapeSpecialChar(getBookDescription(book)) + '"'));
-        parsedBook.add(("\"Price\" :\"" + getBookPrice(book) + '"'));
+        parsedBook.add(("\"Price\" :\"" + BuyBook.getPrice(getBookId(book)) + '"'));
         parsedBook.add(("\"Thumbnail\" :\"" + getBookThumbnail(book) + '"'));
 
         return parsedBook.toString();
@@ -65,7 +65,6 @@ class GoogleBookResultHandler {
             return "Undefined";
         }
     }
-
     private String getBookUrl(JSONObject book) {
         try {
             return book.getString("selfLink");
@@ -125,7 +124,8 @@ class GoogleBookResultHandler {
             JSONArray categoryList = details.getJSONArray("categories");
             String categories = categoryList.toString();
             categories = categories.replaceAll("(\"|]|\\[)", "");
-            categories = categories.replaceAll("(,)", ", ");
+            categories = categories.replaceAll("(,)", "/");
+
             return categories;
 
         } catch (Exception e) {

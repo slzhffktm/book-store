@@ -5,21 +5,16 @@ import org.json.JSONObject;
 
 import java.sql.DriverManager;
 import java.sql.ResultSet;
-import java.util.Random;
 
-public class Recommendation {
-    public static String get(String[] genres) {
-        // random genre
-        Random r = new Random();
-        int idx = r.nextInt(genres.length);
-        String genre = genres[idx];
+class Recommendation {
+    static String get(String genre) {
         String result = "";
 
         try {
             Class.forName(Connection.driver);
             java.sql.Connection con = DriverManager.getConnection(Connection.database, Connection.user, Connection.password);
             java.sql.Statement st = con.createStatement();
-            ResultSet res = st.executeQuery("SELECT sold.id AS book_id, maxtot.genre AS genre " +
+            ResultSet res = st.executeQuery("SELECT sold.id AS book_id " +
                     "FROM sold INNER JOIN " +
                     "(SELECT sold.id AS book_id, MAX(total) AS maxtotal, genre " +
                     "FROM sold NATURAL JOIN genresold INNER JOIN genre ON genre.id = genresold.genre_idx " +
@@ -28,14 +23,14 @@ public class Recommendation {
 
             JSONArray jsonArray = convertToJSON(res);
             result = jsonArray.toString();
+
         } catch (Exception e) {
-            System.out.println(e);
+            System.out.println(e.getMessage());
         }
         return result;
     }
 
-    public static JSONArray convertToJSON(ResultSet resultSet)
-            throws Exception {
+    static JSONArray convertToJSON(ResultSet resultSet) throws Exception {
         JSONArray jsonArray = new JSONArray();
         while (resultSet.next()) {
             int total_rows = resultSet.getMetaData().getColumnCount();

@@ -11,7 +11,7 @@
             require_once($this->search_file);
         }
 
-        public function render_book_detail_page($result, $reviews) {
+        public function render_book_detail_page($result, $reviews, $recommendation) {
             require_once($this->detail_file);
         }
     }

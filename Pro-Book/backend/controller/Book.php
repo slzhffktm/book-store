@@ -24,8 +24,18 @@
             if(isset($_COOKIE["accessToken"])){
                 $user = checkAccessToken();
                 if($user){
-                    $result = $this->bookService->searchBook($keyword);
-                    echo json_encode($result);
+                    $results = $this->bookService->searchBook($keyword);
+                    $results = json_decode($results->return, true);
+                    $results = $results["Result"];
+
+                    foreach($results as $result) {
+                        $rating = $this->bookService->getBookDetailReview($result["ID"]);
+                        $result["Rating"] = $rating["rating"];
+                        $result["Voters"] = $rating["voters"];
+                    }
+
+                    $results = json_encode($results);
+                    echo $results;
                 }else{
                     header("Location: http://localhost/tugasbesar2_2018/Pro-Book/index.php/Auth/index");
                 }
@@ -50,21 +60,37 @@
 
         function detail() {
             $book_id = $_GET['id'];
-            $result = $this->bookService->getBookDetail($book_id);
-            $reviews = $this->bookService->getBookReviews($book_id);
+
             if(isset($_COOKIE["accessToken"])){
                 $user = checkAccessToken();
                 if($user){
-                    $this->bookView->render_book_detail_page($result, $reviews);
+
+                    $result = $this->bookService->getBookDetail($book_id);
+                    $result = json_decode($result->return, true);
+
+                    $rating = $this->bookService->getBookDetailReview($book_id);
+                    $result["Rating"] = $rating["rating"];
+
+                    $reviews = $this->bookService->getBookReviews($book_id);
+
+                    $genres = explode('/', $result["Category"]);
+                    $recommendation = $this->bookService->getRecommendation($genres);
+                    $recommendation = json_decode($recommendation->return, true);
+                    $rating = $this->bookService->getBookDetailReview($recommendation["ID"]);
+                    $recommendation["Rating"] = $rating["rating"];
+                    if ($rating["voters"]) {
+                        $recommendation["Voters"] = $rating["voters"];
+                    } else {
+                        $recommendation["Voters"] = 0;
+                    }
+                    $this->bookView->render_book_detail_page($result, $reviews, $recommendation);
+
                 }else{
                     header("Location: http://localhost/tugasbesar2_2018/Pro-Book/index.php/Auth/index");
-                
                 }
             }else{
                 header("Location: http://localhost/tugasbesar2_2018/Pro-Book/index.php/Auth/index");
-
             }
-            
         }
     }
 ?>

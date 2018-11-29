@@ -34,49 +34,49 @@
 			</div>
 			<?php
 				foreach($history as $key => $book){ 
-					if($book['is_commented']){
-						$book['comment'] = 'Anda sudah memberikan review';
-						$book['button'] = '';
+					if($book[1]['is_commented']){
+						$book[1]['comment'] = 'Anda sudah memberikan review';
+						$book[1]['button'] = '';
 					} else {
-						$book['comment'] = 'Belum direview';
-						$book['button'] = "<a href='http://localhost/tugasbesar2_2018/Pro-Book/index.php/Review/show_review_page?book_id={$book['book_id']}&order_id={$book['order_id']}'><button class='review' >Review</button></a>";
+						$book[1]['comment'] = 'Belum direview';
+						$book[1]['button'] = "<a href='http://localhost/tugasbesar2_2018/Pro-Book/index.php/Review/show_review_page?book_id={$book[1]['book_id']}&order_id={$book[1]['order_id']}'><button class='review' >Review</button></a>";
 					}
 
-					$book['date'] = transform_date(explode(" ",$book['date'])[0]);
+					$book['date'] = transform_date(explode(" ",$book[1]['date'])[0]);
 					echo
 					"<div class='row first-row'>
 						<div class='kolom-md-1'>
 						</div>
 						<div class='kolom-md-3 book-cover-div'>
-							<img src='{$book['cover']}' class='book-cover'/>
+							<img src='{$book[0]['Thumbnail']}' class='book-cover'/>
 						</div>
 						<div class='kolom-md-4'>
 							<div class='row'>
 								<div class='kolom-md-12'>
-									<h2 class='book-title'>{$book['title']}</h2>
+									<h2 class='book-title'>{$book[0]['Title']}</h2>
 								</div>
 							</div>
 							<div class='row'>
 								<div class='kolom-md-12'>
-									<h4>Jumlah : {$book['amount']}</h4>
+									<h4>Jumlah : {$book[1]['amount']}</h4>
 								</div>
 							</div>
 							<div class='row'>
 								<div class='kolom-md-12'>
-									<h4>{$book['comment']}</h4>
+									<h4>{$book[1]['comment']}</h4>
 								</div>
 							</div>
 						</div>
 						<div class='kolom-md-3'>
 							<div class='row'>
 								<div class='kolom-md-12 display-block'>
-									<p style='font-weight:bold'>{$book['date']}</p>
-									<p style='font-weight:bold'>Nomor order : {$book['order_id']}</p>
+									<p style='font-weight:bold'>{$book[1]['date']}</p>
+									<p style='font-weight:bold'>Nomor order : {$book[1]['order_id']}</p>
 								</div>
 							</div>
 							<div class='row'>
 								<div class='kolom-md-12'>
-									{$book['button']}
+									{$book[1]['button']}
 								</div>
 							</div>
 						</div>

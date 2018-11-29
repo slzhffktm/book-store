@@ -1,3 +1,7 @@
 Bank-WebService/node_modules
 .idea
 Book-WebService/out/
+Bank-WebService\API\models\bank.js
+Pro-Book\backend\model\db\db_connection.php
+Book-WebService\src\BookCatalogueWebService\Connection.java
+Pro-Book/test.php
