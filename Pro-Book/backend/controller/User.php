@@ -65,7 +65,9 @@ class User {
     }
 
     function createAccessToken($username, $password){
-        $authToken = $this->as->createAccessToken($username,$password);
+        $browser = get_browser_name($_SERVER['HTTP_USER_AGENT']);
+        $ip = getRealIpAddr();
+        $authToken = $this->as->createAccessToken($username,$password, $browser, $ip);
         setcookie("accessToken",$authToken->getToken(),0, "/");
     }
     
