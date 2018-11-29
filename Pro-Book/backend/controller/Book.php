@@ -85,7 +85,7 @@
                     }
 
                     $reviews = $this->bookService->getBookReviews($book_id);
-                    $this->bookView->render_book_detail_page($result, $reviews);
+                    $this->bookView->render_book_detail_page($result, $reviews, $recommendation);
                     if($result["Price"] < 0){
                         echo "<script>document.getElementById(\"order-btn\").disabled = true;document.getElementById(\"order-btn\").innerHTML = \"Not For Sale\";</script>";
                     }
