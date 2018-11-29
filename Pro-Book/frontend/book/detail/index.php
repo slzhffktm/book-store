@@ -4,7 +4,7 @@
 <html>
 <head>
     <script>var rating = <?php echo $result['Rating'] ?> </script>
-    <script type="text/javascript" src="/tugasbesar2_2018/Pro-Book/frontend/book/detail/detail.js"></script>
+
     <meta content="width=device-width, initial-scale=1" name="viewport"/>
     <link rel="stylesheet" href="/tugasbesar2_2018/Pro-Book/frontend/common_files/grid_system.css">
     <link rel="stylesheet" href="/tugasbesar2_2018/Pro-Book/frontend/common_files/navbar.css">
@@ -44,6 +44,8 @@
                     </div>
                 </div>
             </div>
+
+
             <div class="row order-row">
                 <div class="row">
                     <h2>Order</h2>
@@ -62,10 +64,19 @@
                         </select>
                     </div>
                     <div id="order-btn-div" class="row" style="margin: auto">
-                        <?php echo "<button onclick=\"makeOrder('" . $result['ID'] . "')\" id=\"order-btn\">Order</button>" ?>
+                        <?php
+                            if ($result["Price"] < 0){
+                                echo "<button disabled id=\"order-btn\">Not For Sale</button>";
+                            }
+                            else{
+                                echo "<button onclick=\"makeOrder('" . $result['ID'] . "')\" id=\"order-btn\">Order</button>";
+                            }
+                        ?>
                     </div>
                 </div>
             </div>
+
+
             <div class="row reviews-row">
                 <h2>Reviews</h2>
                 <!-- sample review -->
@@ -149,6 +160,6 @@
     </div>
 </div>
 
-
+<script type="text/javascript" src="/tugasbesar2_2018/Pro-Book/frontend/book/detail/detail.js"></script>
 </body>
 </html>

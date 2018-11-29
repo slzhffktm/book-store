@@ -37,8 +37,8 @@ function makeOrder(book_id) {
 
     
     xhttp.onreadystatechange = function () {
-        if (xhttp.readyState == 4 && xhttp.status == 200) {
-            if (xhttp.responseText == "false") {
+        if (xhttp.readyState === 4 && xhttp.status === 200) {
+            if (xhttp.responseText === "false") {
                 window.location = "http://localhost/tugasbesar2_2018/Pro-Book/index.php/Auth/index"
             }
             if (this.responseText === " failed"){
@@ -61,14 +61,9 @@ function makeOrder(book_id) {
             }
             
         }
-    }
+    };
+
     xhttp.open("POST", url, true);
     xhttp.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
     xhttp.send(params);
 }
-
-// function redirectToDetails(book_id) {
-//     var url = "detail?id=" + book_id;
-//     console.log("moving to ", url);
-//     window.location = "http://localhost/tugasbesar2_2018/Pro-Book/index.php/Book/" + url;
-// };
