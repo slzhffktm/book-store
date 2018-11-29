@@ -35,22 +35,34 @@ function makeOrder(book_id) {
     let url = "/tugasbesar2_2018/Pro-Book/index.php/Order/orderBook";
     let params = "book_id=" + book_id + "&amount=" + amount;
 
-    xhttp.open("POST", url, true);
-    xhttp.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
-    xhttp.send(params);
-
+    
     xhttp.onreadystatechange = function () {
         if (xhttp.readyState == 4 && xhttp.status == 200) {
             if (xhttp.responseText == "false") {
                 window.location = "http://localhost/tugasbesar2_2018/Pro-Book/index.php/Auth/index"
             }
-            document.getElementById("success-message").innerHTML = "<p style='font-weight:bold'>Pesanan berhasil!</p><p>Nomor Transaksi:" + xhttp.responseText + "</p>";
-            document.getElementById("overlay").style.display = "flex";
-            document.getElementById("feedback").style.display = "block";
-            document.getElementById("close-X").addEventListener("click", function () {
-                document.getElementById("overlay").style.display = "none";
-                document.getElementById("feedback").style.display = "flex";
-            });
+            if (this.responseText === " failed"){
+                document.getElementById("success-message").innerHTML = "<p style='font-weight:bold'>Pesanan Gagal!</p>";
+                document.getElementById("overlay").style.display = "flex";
+                document.getElementById("checklist").style.display = "none";
+                document.getElementById("feedback").style.display = "block";
+                document.getElementById("close-X").addEventListener("click", function () {
+                    document.getElementById("overlay").style.display = "none";
+                    document.getElementById("feedback").style.display = "flex";
+                });
+            }else{
+                document.getElementById("success-message").innerHTML = "<p style='font-weight:bold'>Pesanan berhasil!</p><p>Nomor Transaksi:" + xhttp.responseText + "</p>";
+                document.getElementById("overlay").style.display = "flex";
+                document.getElementById("feedback").style.display = "block";
+                document.getElementById("close-X").addEventListener("click", function () {
+                    document.getElementById("overlay").style.display = "none";
+                    document.getElementById("feedback").style.display = "flex";
+                });
+            }
+            
         }
     }
+    xhttp.open("POST", url, true);
+    xhttp.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+    xhttp.send(params);
 }

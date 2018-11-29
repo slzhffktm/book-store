@@ -21,17 +21,18 @@
         public function orderBook($username, $cardId, $bookId, $bookAmount) {
             $params = array("arg0" => $bookId, "arg1" => $cardId, "arg2" => $bookAmount);
             $isPurchaseSuccess = $this->client->buyBook($params);
-
-            if ($isPurchaseSuccess) {
+            if ($isPurchaseSuccess->return) {
                 $conn = OpenCon();
                 $username = strval($username);
 
                 $stmt = $conn->prepare("INSERT INTO book_order (username, book_id, amount) VALUES (?, ?, ?)");
                 $stmt->bind_param("ssi", $username, $bookId, $bookAmount);
-                $stmt->execute();
-
+                try{
+                    $stmt->execute();
+                }catch(Exception $e){
+                    var_dump($e);
+                }
                 $order_id = $stmt->insert_id;
-
                 $stmt->close();
                 $conn->close();
                 return $order_id;
