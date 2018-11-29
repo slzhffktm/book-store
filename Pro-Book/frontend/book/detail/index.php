@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="/tugasbesar2_2018/Pro-Book/frontend/common_files/grid_system.css">
     <link rel="stylesheet" href="/tugasbesar2_2018/Pro-Book/frontend/common_files/navbar.css">
     <link rel="stylesheet" href="/tugasbesar2_2018/Pro-Book/frontend/book/detail/detail.css">
+
 </head>
 <body>
 <?php include 'frontend/common_files/navbar.php' ?>
@@ -19,7 +20,7 @@
             <div class="row book-info">
                 <div class="kolom-md-10 display-block info-text-wrapper">
                     <?php echo "<h1 style=\"color: orangered\">" . $result['Title'] . "</h1>" ?>
-                    <?php echo "<h5>" . $result['Author']. "</h5>" ?>
+                    <?php echo "<h5>" . $result['Author'] . "</h5>" ?>
                     <?php echo "<p>" . $result['Description'] . "</p>" ?>
                 </div>
                 <div class="kolom-md-2">
@@ -60,7 +61,7 @@
                             ?>
                         </select>
                     </div>
-                    <div id = "order-btn-div" class="row" style="margin: auto">
+                    <div id="order-btn-div" class="row" style="margin: auto">
                         <?php echo "<button onclick=\"makeOrder('" . $result['ID'] . "')\" id=\"order-btn\">Order</button>" ?>
                     </div>
                 </div>
@@ -103,38 +104,50 @@
             <br>
             <div class="row">
                 <div class="kolom-md-2">
-                    <img class="img-thumbnail" src=<?php echo $recommendation["Thumbnail"]." alt=".$recommendation["Title"]." label=".$recommendation["Title"] ?>>
+                    <img class="img-thumbnail"
+                         src=<?php echo $recommendation["Thumbnail"] . " alt=" . $recommendation["Title"] . " label=" . $recommendation["Title"] ?>>
                 </div>
                 <div class="kolom-md-10 display-block">
-                    <?php echo "<h2 class='book-title'>".$recommendation["Title"]."</h2>" ?>
-                    <?php echo "<h3>".$recommendation["Author"]." - ".sprintf("%.1f", $recommendation["Rating"])."/5.0 (".$recommendation["Voters"]." votes)</h3>" ?>
-                    <?php echo "<p>".$recommendation["Description"]."</p>" ?>
+                    <?php echo "<h2 class='book-title'>" . $recommendation["Title"] . "</h2>" ?>
+                    <?php echo "<h3>" . $recommendation["Author"] . " - " . sprintf("%.1f", $recommendation["Rating"]) . "/5.0 (" . $recommendation["Voters"] . " votes)</h3>" ?>
+                    <?php echo "<p>" . $recommendation["Description"] . "</p>" ?>
                 </div>
             </div>
             <div class="row">
-                <button class="detail-btn" onClick="redirectToDetails(<?php echo $recommendation["ID"] ?>)">Detail</button>
+                <button class="detail-btn" onClick="redirectToDetails(<?php echo $recommendation["ID"] ?>)">Detail
+                </button>
             </div>
         </div>
         <div class="kolom-md-1"></div>
     </div>
 </div>
+
+
+
 <div id="overlay">
     <div id="feedback">
+
         <div class="row">
-            <div class="kolom-md-12" style="justify-content:flex-end;margin-top:10px">
-                <h3 style="color:black;margin-right:3px" id="close-X">X</h3>
+            <div class="kolom-md-12" id="close-button-container">
+                <h3 class="close-button">X</h3>
             </div>
         </div>
+
         <div class="row" style="height:80%">
+
             <div class="kolom-md-3">
-                <img id = "checklist" src="/tugasbesar2_2018/Pro-Book/frontend/img_resource/checklist-black.png"
-                     style="width:100%;height:80%">
+                <img id="checklist" src="/tugasbesar2_2018/Pro-Book/frontend/img_resource/checklist-black.png">
             </div>
+
             <div class="kolom-md-6">
                 <h4 id="success-message"></h4>
             </div>
+
         </div>
+
     </div>
 </div>
+
+
 </body>
 </html>
