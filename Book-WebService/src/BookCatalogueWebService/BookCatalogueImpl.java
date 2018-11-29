@@ -122,6 +122,7 @@ public class BookCatalogueImpl implements BookCatalogue {
                 String bookID = jsonObject.getString("book_id");
                 bookDetail = getBookDetail(bookID);
             } catch (JSONException e) {
+                System.out.println("error in recommender");
                 System.out.println(e.getMessage());
             }
         }

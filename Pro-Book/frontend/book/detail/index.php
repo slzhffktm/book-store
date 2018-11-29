@@ -163,7 +163,7 @@
             </div>
         </div>
         <div class="otp-form">
-            <form onsubmit="makeOrder('<?= $result['ID'] ?>', getOtpTokenValue())">
+            <form onsubmit="makeOrder('<?= $result['ID'] ?>', getOtpTokenValue());return false">
                 <input title="otp-token-field" id="otp-token-field" type="text">
                 <button type="submit" id="order-btn">Order</button>
             </form>
