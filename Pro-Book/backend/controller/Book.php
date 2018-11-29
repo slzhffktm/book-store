@@ -84,7 +84,11 @@
                         $recommendation["Voters"] = 0;
                     }
 
-                    $this->bookView->render_book_detail_page($result, $reviews, $recommendation);
+                    $reviews = $this->bookService->getBookReviews($book_id);
+                    $this->bookView->render_book_detail_page($result, $reviews);
+                    if($result["Price"] < 0){
+                        echo "<script>document.getElementById(\"order-btn\").disabled = true;document.getElementById(\"order-btn\").innerHTML = \"Not For Sale\";</script>";
+                    }
 
                 }else{
                     header("Location: http://localhost/tugasbesar2_2018/Pro-Book/index.php/Auth/index");
