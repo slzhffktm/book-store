@@ -19,12 +19,12 @@
 				</div>
 				<div class="kolom-md-4 display-block">
 					<div class="display-center">
-						<h1><?php echo $book['title'] ?></h1>
-						<h5><?php echo $book['author'] ?></h5>	
+						<h1><?php echo $book['Title'] ?></h1>
+						<h5><?php echo $book['Author'] ?></h5>	
 					</div>		
 				</div>
 				<div class="kolom-md-4" id="book-image-div">
-					<img id="book-image" src="<?php echo $book['cover'] ?>">
+					<img id="book-image" src="<?php echo $book['Thumbnail'] ?>">
 				</div>
 			</div>
 			<div class="row" id="second-row">
