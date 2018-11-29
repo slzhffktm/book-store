@@ -7,9 +7,10 @@ import java.io.DataOutputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.sql.Statement;
 
 public class BuyBook {
-    public static boolean upsert(String bookId, String[] genres, int bookAmount) {
+    static boolean upsert(String bookId, String[] genres, int bookAmount) {
         try {
             Class.forName(Connection.driver);
             java.sql.Connection con = DriverManager.getConnection(Connection.database, Connection.user, Connection.password);
@@ -44,24 +45,45 @@ public class BuyBook {
         }
     }
 
-    public static float getPrice(String id) {
+    static float getPrice(String id) {
+
+        java.sql.Connection con = null;
+        java.sql.Statement st = null;
+        ResultSet res = null;
+
         try {
 
             Class.forName(Connection.driver);
-            java.sql.Connection con = DriverManager.getConnection(Connection.database, Connection.user, Connection.password);
-            java.sql.Statement st = con.createStatement();
-            ResultSet res = st.executeQuery("SELECT price FROM bookprices	 WHERE id = '" + id + "'");
+            con = DriverManager.getConnection(Connection.database, Connection.user, Connection.password);
+            st = con.createStatement();
+            res = st.executeQuery("SELECT price FROM bookprices	 WHERE id = '" + id + "'");
             if (res.next()) {
-                float total = Float.parseFloat(res.getString(1).split(" ")[0].replaceAll(",", ".").replaceAll(".00", ""));
-                return total;
+
+                String price = res.getString(1).toLowerCase();
+
+                switch (price){
+                    case "free":{
+                        return 0;
+                    }
+                    case "not available": {
+                        return -1;
+                    }
+                    default: {
+                        price = price.split(" ")[0].replaceAll(",", ".");
+                        price = price.replaceAll(".00", "");
+                        return Float.parseFloat(price);
+                    }
+                }
             }
         } catch (Exception e) {
-            System.out.println(e.getMessage());
+            System.out.println("Exception in getPrice");
+            e.printStackTrace();
         }
+
         return -1;
     }
 
-    public static String checkout(String senderCardId, float transferAmount) throws Exception {
+    static String checkout(String senderCardId, float transferAmount) throws Exception {
         String storeCardId = "123123123123";
         String url = "http://localhost:3000/transfer";
 
