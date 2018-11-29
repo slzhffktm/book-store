@@ -6,8 +6,8 @@ import org.json.JSONObject;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 
-public class Recommendation {
-    public static String get(String genre) {
+class Recommendation {
+    static String get(String genre) {
         String result = "";
 
         try {
@@ -23,14 +23,14 @@ public class Recommendation {
 
             JSONArray jsonArray = convertToJSON(res);
             result = jsonArray.toString();
+
         } catch (Exception e) {
-            System.out.println(e);
+            System.out.println(e.getMessage());
         }
         return result;
     }
 
-    public static JSONArray convertToJSON(ResultSet resultSet)
-            throws Exception {
+    static JSONArray convertToJSON(ResultSet resultSet) throws Exception {
         JSONArray jsonArray = new JSONArray();
         while (resultSet.next()) {
             int total_rows = resultSet.getMetaData().getColumnCount();

@@ -1,4 +1,5 @@
 package BookCatalogueWebService;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -16,23 +17,33 @@ public class BookCatalogueImpl implements BookCatalogue {
     private GoogleBookAPI googleBookAPI = new GoogleBookAPI();
     private GoogleBookResultHandler resultHandler = new GoogleBookResultHandler();
 
-    public String searchBook(String title) throws Exception{
+    public String searchBook(String title) throws Exception {
+
+        System.out.println(">>> Begin searchBook");
+
         String result = googleBookAPI.searchBook(title);
         return resultHandler.parseSearch(result);
     }
 
-    public String searchBookWithCategory(String category) throws Exception{
+    public String searchBookWithCategory(String category) throws Exception {
+
+        System.out.println(">>> Begin searchBookWithCategory");
+
         String result = googleBookAPI.searchBookWithCategory(category);
         return resultHandler.parseSearch(result);
     }
 
-    public String getBookDetail(String bookId) throws Exception{
+    public String getBookDetail(String bookId) throws Exception {
+
+        System.out.println(">>> Begin getBookDetail");
+
         String result = googleBookAPI.getBookDetail(bookId);
         return resultHandler.parseBookDetail(result);
     }
 
     public boolean buyBook(String bookId, String cardId, int bookAmount) throws Exception {
 
+        System.out.println(">>> Begin buyBook");
         System.out.println("bookId : " + bookId);
         System.out.println("cardId : " + cardId);
         System.out.println("bookAmount : " + bookAmount);
@@ -41,7 +52,7 @@ public class BookCatalogueImpl implements BookCatalogue {
         JSONObject jsonResult = new JSONObject(result);
 
         String[] genres = jsonResult.getString("Category").split("/");
-        for (int i=0; i<genres.length; i++) {
+        for (int i = 0; i < genres.length; i++) {
             genres[i] = genres[i].trim();
         }
         float totalBookPrice = BuyBook.getPrice(bookId) * bookAmount;
@@ -50,20 +61,21 @@ public class BookCatalogueImpl implements BookCatalogue {
         System.out.println("totalBookPrice : " + totalBookPrice);
 
         boolean response = false;
-        try{
-            if (totalBookPrice < 0){
+        try {
+            if (totalBookPrice < 0) {
                 throw new Exception("Cost less than 0");
             }
+
             String checkoutResponse = BuyBook.checkout(cardId, totalBookPrice);
             JSONObject res = new JSONObject(checkoutResponse);
 
             // is this the way to check for success ?
-            if(! res.has("err")) {
+            if (!res.has("err")) {
                 System.out.println("UPDATE");
                 response = BuyBook.upsert(bookId, genres, bookAmount);
             }
 
-        } catch (Exception e){
+        } catch (Exception e) {
             System.out.println("error in buy book");
             System.out.println(e.getMessage());
         }
@@ -71,38 +83,35 @@ public class BookCatalogueImpl implements BookCatalogue {
     }
 
 
+    public String getRecommendation(String[] genres) throws Exception {
 
-    public String getRecommendation(String[] genres) throws Exception{
+        System.out.println(">>> Begin getRecommendation");
+
         // random genre
-        Random r = new Random();
-        int idx = r.nextInt(genres.length);
-        String genre = genres[idx];
-        
-        String result = Recommendation.get(genre);
-        String bookDetail = "";
-        System.out.println(result);
+        Random randGenerator = new Random();
+        int randomIdx = randGenerator.nextInt(genres.length);
+        String chosenGenre = genres[randomIdx];
+        String result = Recommendation.get(chosenGenre);
 
+        String bookDetail = "";
         JSONArray jsonArray;
         JSONObject jsonObject;
-        if (result.length() == 2) {
-            jsonObject = new JSONObject(searchBookWithCategory(genre));
-            jsonArray = jsonObject.getJSONArray("Result");
-            idx = r.nextInt(jsonArray.length());
-            bookDetail = jsonArray.getJSONObject(idx).toString();
-        } else {
 
-            String bookID = "";
+        if (result.length() == 2) {
+            jsonObject = new JSONObject(searchBookWithCategory(chosenGenre));
+            jsonArray = jsonObject.getJSONArray("Result");
+            randomIdx = randGenerator.nextInt(jsonArray.length());
+            bookDetail = jsonArray.getJSONObject(randomIdx).toString();
+        } else {
             try {
                 jsonArray = new JSONArray(result);
                 jsonObject = jsonArray.getJSONObject(0);
-                bookID = jsonObject.getString("book_id");
+                String bookID = jsonObject.getString("book_id");
+                bookDetail = getBookDetail(bookID);
             } catch (JSONException e) {
-                System.out.println(e);
+                System.out.println(e.getMessage());
             }
-
-            bookDetail = getBookDetail(bookID);
         }
-
         return bookDetail;
     }
 
