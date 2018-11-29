@@ -21,7 +21,6 @@ class GoogleBookAPI {
     String searchBookWithCategory(String category) throws Exception{
 
         String url = getSearchUrlWithCategory(category);
-        System.out.println(url);
         HttpURLConnection connection = getHttpConnection(url);
         return parseHttpResponseText(connection);
     }

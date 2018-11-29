@@ -15,7 +15,6 @@ class Auth_model{
         $this->ip = $ip;
         $this->generateAccessToken();
         $this->refreshToken();
-
     }
 
     function getUsername(){

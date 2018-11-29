@@ -25,7 +25,6 @@ Bank.validateCard = function (cardId, callback) {
             callback(err, null);
         }
         else {
-            console.log(res);
             callback(null, res);
         }
     });
@@ -38,7 +37,6 @@ Bank.getBalanceByCardNumber = function (cardId, callback) {
             callback(err, null);
         }
         else {
-            console.log(res);
             callback(null, res);
         }
     });
@@ -51,7 +49,6 @@ Bank.subtractBalanceByCardNumber = function (deltaSaldo, cardId, callback) {
             callback(err, null);
         }
         else {
-            console.log(res);
             callback(null, res);
         }
     });
@@ -64,7 +61,6 @@ Bank.addBalanceByCardNumber = function (deltaSaldo, cardId, callback) {
             callback(err, null);
         }
         else {
-            console.log(res);
             callback(null, res);
         }
     });
@@ -77,7 +73,6 @@ Bank.createTransaction = function (senderCardNumber, recCardNumber, deltaSaldo, 
             callback(err, null);
         }
         else {
-            console.log(res);
             callback(null, res);
         }
     });

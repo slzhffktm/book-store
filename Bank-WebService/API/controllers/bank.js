@@ -12,16 +12,17 @@ exports.validate_card = function (req, res) {
             }
         }
     });
+
+    console.log(">>> Validate complete")
 };
 
 exports.transfer = function (req, res) {
-    console.log(req.body.nomor_pengirim);
+
     Bank.getBalanceByCardNumber(req.body["nomor_pengirim"], function (err, saldo) {
         if (err) {
             res.send(err);
         } else {
-            console.log("saldo", saldo[0]['saldo']);
-            console.log("jumlah", req.body["jumlah"]);
+
             if (saldo[0]['saldo'] < req.body["jumlah"]) {
                 res.json({err: "True", message: "Saldo tidak mencukupi."});
             } else {
@@ -45,6 +46,8 @@ exports.transfer = function (req, res) {
             }
         }
     });
+
+    console.log(">>> Transaction complete")
 };
 
 var OTP = require('otp.js');

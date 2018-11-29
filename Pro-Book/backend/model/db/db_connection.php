@@ -33,7 +33,7 @@
                 $conn = new PDO("mysql:host=$dbhost;dbname=$db", $dbuser, $dbpass);
                 $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
             } catch(PDOException $e) {
-                die("Connect failed: %s\n" . $conn->error);
+                die("Connect failed: %s\n" . $conn['error']);
             }
  
             return $conn;

@@ -46,9 +46,5 @@ class AuthService {
         $conn->query($sql);
         CloseCOn($conn);
     }
-
-
 }
-
-
 ?>
