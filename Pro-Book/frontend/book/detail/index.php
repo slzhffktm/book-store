@@ -99,7 +99,7 @@
             </div>
             <!-- recommendation -->
             <br>
-            <h2>Recommendation</h2>
+            <h2>Recommended for you</h2>
             <br>
             <div class="row">
                 <div class="kolom-md-2">

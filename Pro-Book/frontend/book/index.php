@@ -54,7 +54,7 @@
                             <div class="kolom-md-10 detail-container">
                                 <h2 class='book-title'>{{row.Title}}</h2>
                                 <h3>{{row.Author}} - {{row.Rating == null ? "0.0" : row.Rating | number:1}}/5.0
-                                    ({{row.Voters}} votes)</h3>
+                                    ({{row.Voters == null ? 0 : row.Voters}} votes)</h3>
                                 <p>{{row.Description}}</p>
                             </div>
                         </div>
