@@ -27,11 +27,10 @@
                     $results = $this->bookService->searchBook($keyword);
                     $results = json_decode($results->return, true);
                     $results = $results["Result"];
-
-                    foreach($results as $result) {
+                    foreach($results as $key => $result) {
                         $rating = $this->bookService->getBookDetailReview($result["ID"]);
-                        $result["Rating"] = $rating["rating"];
-                        $result["Voters"] = $rating["voters"];
+                        $results[$key]["Rating"] = $rating["rating"];
+                        $results[$key]["Voters"] = $rating["voters"];
                     }
 
                     $results = json_encode($results);

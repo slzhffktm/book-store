@@ -35,6 +35,7 @@
                     $stmt->execute();
                 }catch(Exception $e){
                     var_dump($e);
+                    return false;
                 }
                 $order_id = $stmt->insert_id;
                 $stmt->close();

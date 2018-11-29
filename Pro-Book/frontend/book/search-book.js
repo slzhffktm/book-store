@@ -25,7 +25,7 @@ app.controller('myCtrl', function ($scope) {
                 $scope.resultsLength = $scope.results.length;
                 document.getElementById("search-result-container").style.display = "block";
                 $scope.headTitle = "Search Result";
-
+                $scope.$apply();
             } else if (this.status == 400) {
                 alert('There was an error 400');
             }
