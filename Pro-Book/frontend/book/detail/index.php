@@ -66,10 +66,9 @@
                     <div id="order-btn-div" class="row" style="margin: auto">
                         <?php
                             if ($result["Price"] < 0) {
-                                echo "<button disabled id=\"order-btn\">Not For Sale</button>";
+                                echo "<button disabled>Not For Sale</button>";
                             } else {
-                                echo "<button onclick=\"displayModal('otp-modal')\" id='order-btn'>Order</button>";
-//                                echo "<button onclick=\"makeOrder('" . $result['ID'] . "')\" id=\"order-btn\">Order</button>";
+                                echo "<button class=\"order-btn\" onclick=\"displayModal('otp-modal')\">Order</button>";
                             }
                         ?>
                     </div>
@@ -164,8 +163,9 @@
         </div>
         <div class="otp-form">
             <form onsubmit="makeOrder('<?= $result['ID'] ?>', getOtpTokenValue());return false">
-                <input title="otp-token-field" id="otp-token-field" type="text">
-                <button type="submit" id="order-btn">Order</button>
+                <h3>Insert your OTP password !</h3>
+                <input title="otp-token-field" id="otp-token-field" type="password">
+                <button type="submit" class="order-btn">Submit</button>
             </form>
         </div>
 

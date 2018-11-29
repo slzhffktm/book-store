@@ -54,7 +54,7 @@
     justify-content: center;
 }
 
-#order-btn {
+.order-btn{
     float: right;
     text-align: center;
     color: #fff;
@@ -164,4 +164,39 @@
     max-height: 11vw;
     max-width: 61%;
     object-fit: contain;
+}
+
+.otp-form{
+    display: flex;
+    height: 100%;
+    padding: 10px;
+    justify-content: center;
+}
+
+.otp-form form{
+    display: flex;
+    flex-flow: column;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+}
+
+#otp-token-field{
+    width: 33%;
+    height: 2vw;
+    font-size: 2.5vw;
+    text-align: center;
+}
+
+.otp-form form h3{
+    margin: 20px;
+}
+
+.otp-form form .order-btn{
+    margin: 15px;
+    font-size: 130%;
+}
+
+.otp-form form .order-btn:hover{
+    background-color: #e68919;
 }
