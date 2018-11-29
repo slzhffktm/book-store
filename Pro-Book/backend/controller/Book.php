@@ -78,7 +78,11 @@
                     $recommendation = json_decode($recommendation->return, true);
                     $rating = $this->bookService->getBookDetailReview($recommendation["ID"]);
                     $recommendation["Rating"] = $rating["rating"];
-                    $recommendation["Voters"] = $rating["voters"];
+                    if ($rating["voters"]) {
+                        $recommendation["Voters"] = $rating["voters"];
+                    } else {
+                        $recommendation["Voters"] = 0;
+                    }
 
                     $this->bookView->render_book_detail_page($result, $reviews, $recommendation);
 
