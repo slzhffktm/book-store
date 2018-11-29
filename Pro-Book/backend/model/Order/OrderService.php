@@ -20,8 +20,8 @@
 
         public function orderBook($username, $cardId, $bookId, $bookAmount) {
             $params = array("arg0" => $bookId, "arg1" => $cardId, "arg2" => $bookAmount);
-            $isPurchaseSuccess = $this->client->buyBook($params);
-            if ($isPurchaseSuccess->return) {
+            $isPurchaseSuccess = $this->client->buyBook($params)->return;
+            if ($isPurchaseSuccess) {
                 $conn = OpenCon();
                 $username = strval($username);
 
@@ -31,6 +31,7 @@
                     $stmt->execute();
                 }catch(Exception $e){
                     var_dump($e);
+                    return false;
                 }
                 $order_id = $stmt->insert_id;
                 $stmt->close();

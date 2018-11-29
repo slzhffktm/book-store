@@ -141,7 +141,7 @@
 
         <div class="row">
             <div class="kolom-md-12" id="close-button-container">
-                <h3 class="close-button">X</h3>
+                <h3 class="close-button" id = "close-button">X</h3>
             </div>
         </div>
 

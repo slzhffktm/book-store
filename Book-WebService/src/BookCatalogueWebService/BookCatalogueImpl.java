@@ -78,6 +78,7 @@ public class BookCatalogueImpl implements BookCatalogue {
         } catch (Exception e) {
             System.out.println("error in buy book");
             System.out.println(e.getMessage());
+            return false;
         }
         return response;
     }

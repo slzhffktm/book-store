@@ -46,7 +46,7 @@ function makeOrder(book_id) {
                 document.getElementById("overlay").style.display = "flex";
                 document.getElementById("checklist").style.display = "none";
                 document.getElementById("feedback").style.display = "block";
-                document.getElementById("close-X").addEventListener("click", function () {
+                document.getElementById("close-button").addEventListener("click", function () {
                     document.getElementById("overlay").style.display = "none";
                     document.getElementById("feedback").style.display = "flex";
                 });
@@ -54,7 +54,7 @@ function makeOrder(book_id) {
                 document.getElementById("success-message").innerHTML = "<p style='font-weight:bold'>Pesanan berhasil!</p><p>Nomor Transaksi:" + xhttp.responseText + "</p>";
                 document.getElementById("overlay").style.display = "flex";
                 document.getElementById("feedback").style.display = "block";
-                document.getElementById("close-X").addEventListener("click", function () {
+                document.getElementById("close-button").addEventListener("click", function () {
                     document.getElementById("overlay").style.display = "none";
                     document.getElementById("feedback").style.display = "flex";
                 });
