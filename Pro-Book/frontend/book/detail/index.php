@@ -114,8 +114,9 @@
                 </div>
             </div>
             <div class="row">
-                <button class="detail-btn" onClick="redirectToDetails(<?php echo $recommendation["ID"] ?>)">Detail
-                </button>
+                <a href="http://localhost/tugasbesar2_2018/Pro-Book/index.php/Book/detail?id=<?php echo $recommendation["ID"] ?>">
+                    <button class="detail-btn">Detail</button>
+                </a>
             </div>
         </div>
         <div class="kolom-md-1"></div>

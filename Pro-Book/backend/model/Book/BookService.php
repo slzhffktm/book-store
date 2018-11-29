@@ -39,14 +39,14 @@
         // TODO
         public function getBookReviews($book_id) {
             $conn = OpenConPDO();
-            $sql = "SELECT user.username, user.image_url, book_review.rating, book_review.comment 
-                    FROM book INNER JOIN book_review ON book.book_id = book_review.book_id INNER JOIN user ON book_review.username = user.username 
-                    WHERE book.book_id = :book_id ORDER BY order_id DESC";
+            $sql = "SELECT username, image_url, rating, comment 
+                    FROM book_review NATURAL JOIN user
+                    WHERE book_id = :book_id ORDER BY order_id DESC";
             $query = $conn->prepare($sql);
             $parameters = array(':book_id' => $book_id);
             $query->execute($parameters);
 
-            $result = $query->fetch();
+            $result = $query->fetchAll();
             $conn = null;
             unset($conn);
             return $result;

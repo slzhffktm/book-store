@@ -22,9 +22,6 @@ class Review {
 			$user = checkAccessToken();
 
 			if($user){
-				$history = $this->model->get_user_history($page);
-				$this->view->render_history_page($history);
-			}else{
 				$order_id = $_GET['order_id'];
 				$book_id = $_GET['book_id'];
 				$book = $this->model->get_book_details($book_id);
@@ -37,6 +34,7 @@ class Review {
 						$this->view->render_review_page($book, $order_id);
 					}
 				}
+			}else{
 				// $this->auth_view->render_login_page();
 			}
 		} else {
