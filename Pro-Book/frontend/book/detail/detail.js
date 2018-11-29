@@ -66,3 +66,9 @@ function makeOrder(book_id) {
     xhttp.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
     xhttp.send(params);
 }
+
+// function redirectToDetails(book_id) {
+//     var url = "detail?id=" + book_id;
+//     console.log("moving to ", url);
+//     window.location = "http://localhost/tugasbesar2_2018/Pro-Book/index.php/Book/" + url;
+// };
