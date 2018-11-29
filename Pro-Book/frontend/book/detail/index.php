@@ -65,11 +65,11 @@
                     </div>
                     <div id="order-btn-div" class="row" style="margin: auto">
                         <?php
-                            if ($result["Price"] < 0){
+                            if ($result["Price"] < 0) {
                                 echo "<button disabled id=\"order-btn\">Not For Sale</button>";
-                            }
-                            else{
-                                echo "<button onclick=\"makeOrder('" . $result['ID'] . "')\" id=\"order-btn\">Order</button>";
+                            } else {
+                                echo "<button onclick=\"displayModal('otp-modal')\" id='order-btn'>Order</button>";
+//                                echo "<button onclick=\"makeOrder('" . $result['ID'] . "')\" id=\"order-btn\">Order</button>";
                             }
                         ?>
                     </div>
@@ -122,12 +122,10 @@
                     <?php echo "<h2 class='book-title'>" . $recommendation["Title"] . "</h2>" ?>
                     <?php echo "<h3>" . $recommendation["Author"] . " - " . sprintf("%.1f", $recommendation["Rating"]) . "/5.0 (" . $recommendation["Voters"] . " votes)</h3>" ?>
                     <?php echo "<p>" . $recommendation["Description"] . "</p>" ?>
+                    <a href="http://localhost/tugasbesar2_2018/Pro-Book/index.php/Book/detail?id=<?php echo $recommendation["ID"] ?>">
+                        <button class="detail-btn">Detail</button>
+                    </a>
                 </div>
-            </div>
-            <div class="row">
-                <a href="http://localhost/tugasbesar2_2018/Pro-Book/index.php/Book/detail?id=<?php echo $recommendation["ID"] ?>">
-                    <button class="detail-btn">Detail</button>
-                </a>
             </div>
         </div>
         <div class="kolom-md-1"></div>
@@ -135,13 +133,12 @@
 </div>
 
 
-
 <div id="overlay">
-    <div id="feedback">
+    <div id="feedback-modal">
 
         <div class="row">
             <div class="kolom-md-12" id="close-button-container">
-                <h3 class="close-button">X</h3>
+                <button class="close-button" id="close-feedback-modal-button" onclick="closeModal('feedback-modal')">X</button>
             </div>
         </div>
 
@@ -155,6 +152,21 @@
                 <h4 id="success-message"></h4>
             </div>
 
+        </div>
+    </div>
+
+    <div id="otp-modal">
+
+        <div class="row">
+            <div class="kolom-md-12" id="close-button-container">
+                <button class="close-button" id="close-feedback-modal-button" onclick="closeModal('otp-modal')">X</button>
+            </div>
+        </div>
+        <div class="otp-form">
+            <form onsubmit="makeOrder('<?= $result['ID'] ?>', getOtpTokenValue())">
+                <input title="otp-token-field" id="otp-token-field" type="text">
+                <button type="submit" id="order-btn">Order</button>
+            </form>
         </div>
 
     </div>

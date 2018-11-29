@@ -26,40 +26,54 @@ function showStars(rating) {
     }
 }
 
+function closeModal(modalId) {
+    document.getElementById("overlay").style.display = "none";
+    document.getElementById(modalId).style.display = "none";
+}
 
-function makeOrder(book_id) {
+function displayModal(modalId) {
+    document.getElementById("overlay").style.display = "flex";
+    document.getElementById(modalId).style.display = "flex";
+}
+
+function displayFeedbackModal(success, message) {
+    closeModal("otp-modal");
+    displayModal("feedback-modal");
+    document.getElementById("success-message").innerHTML = message;
+
+    if (success) {
+        document.getElementById("checklist").style.display = "flex";
+    }
+}
+
+function getOtpTokenValue() {
+    return document.getElementById("otp-token-field").value;
+}
+
+function makeOrder(book_id, otpToken) {
     let e = document.getElementById("order-quantity");
     let amount = parseInt(e.options[e.selectedIndex].text);
 
     let xhttp = new XMLHttpRequest();
     let url = "/tugasbesar2_2018/Pro-Book/index.php/Order/orderBook";
-    let params = "book_id=" + book_id + "&amount=" + amount;
+    let params = "book_id=" + book_id + "&amount=" + amount + "&otp=" + otpToken;
 
-    
+
     xhttp.onreadystatechange = function () {
+
         if (xhttp.readyState === 4 && xhttp.status === 200) {
+
             if (xhttp.responseText === "false") {
                 window.location = "http://localhost/tugasbesar2_2018/Pro-Book/index.php/Auth/index"
             }
-            if (this.responseText === " failed"){
-                document.getElementById("success-message").innerHTML = "<p style='font-weight:bold'>Pesanan Gagal!</p>";
-                document.getElementById("overlay").style.display = "flex";
-                document.getElementById("checklist").style.display = "none";
-                document.getElementById("feedback").style.display = "block";
-                document.getElementById("close-X").addEventListener("click", function () {
-                    document.getElementById("overlay").style.display = "none";
-                    document.getElementById("feedback").style.display = "flex";
-                });
-            }else{
-                document.getElementById("success-message").innerHTML = "<p style='font-weight:bold'>Pesanan berhasil!</p><p>Nomor Transaksi:" + xhttp.responseText + "</p>";
-                document.getElementById("overlay").style.display = "flex";
-                document.getElementById("feedback").style.display = "block";
-                document.getElementById("close-X").addEventListener("click", function () {
-                    document.getElementById("overlay").style.display = "none";
-                    document.getElementById("feedback").style.display = "flex";
-                });
+            let message;
+            let success = !(this.responseText === " failed"); // for some reason there's extra padding in front (?)
+            if (success) {
+                message = "<p style='font-weight:bold'>Pesanan berhasil!</p><p>Nomor Transaksi:" + xhttp.responseText + "</p>";
+            } else {
+                message = "<p style='font-weight:bold'>Pesanan Gagal!</p>";
             }
-            
+            displayFeedbackModal(success, message);
         }
     };
 
