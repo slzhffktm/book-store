@@ -6,6 +6,8 @@
 		public function __construct(){
 			require_once('backend/model/db/db_connection.php');
 
+			require_once('backend/model/Book/BookService.php');            
+            $this->bookService = new BookService();
 			$this->db = OpenCon();
 		}
 
@@ -13,13 +15,21 @@
 			$username = $GLOBALS['user']->getUserName();
 			$offset = $page*$limit;
 
-			$sql = "SELECT * FROM book_order JOIN book ON book_order.book_id = book.book_id WHERE username='{$username}' ORDER BY date DESC";
-
+			$sql = "SELECT * FROM book_order WHERE username='{$username}' ORDER BY date DESC";
+			
 			$result = $this->db->query($sql);
 			$book_history = array();
-
+			
 			while($history = $result->fetch_assoc()){
-				array_push($book_history, $history);
+				$detailRes = $this->bookService->getBookDetail($history["book_id"]);
+
+				$detail = json_decode($detailRes->return, true);
+				$bookHistory = array();
+				$bookHistory[]	= json_decode($detailRes->return, true);
+				$bookHistory[]	= $history;
+				$bookHistory = json_encode($bookHistory,true);
+				$bookHistory = json_decode($bookHistory,true);
+				array_push($book_history, $bookHistory);
 			}
 
 			return $book_history;

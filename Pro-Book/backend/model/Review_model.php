@@ -6,6 +6,7 @@ class Review_model {
 	public function __construct(){
 		require_once("backend/model/db/db_connection.php");
 		$this->db = OpenCon();
+		$this->client = connectToBookWebService();
 	}
 
 	public function __destruct(){
@@ -37,16 +38,14 @@ class Review_model {
 	}
 
 	public function get_book_details($book_id){
-		$sql = "SELECT * FROM book WHERE book_id={$book_id}";
-		
-		$result = $this->db->query($sql)->fetch_assoc();
-
-		return $result;
+		$params = array("arg0" => $book_id);
+		$detailRes =  $this->client->getBookDetail($params);
+		$detail = json_decode($detailRes->return, true);
+		return $detail;
 	}
 
 	public function get_order_details($order_id){
 		$sql = "SELECT * FROM book_order WHERE order_id='{$order_id}'";
-		echo $sql;
 		$result = $this->db->query($sql)->fetch_assoc();
 
 		return $result;
