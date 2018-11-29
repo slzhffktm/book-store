@@ -12,7 +12,7 @@
 	<body id="body">
 		<?php include 'frontend/common_files/navbar.php' ?>
 		<div class="container" id="content">
-			<input type="text" class="hidden-input" id="book-id" name="book-id" value="<?php echo $book['book_id'] ?>">
+			<input type="text" class="hidden-input" id="book-id" name="book-id" value="<?php echo $book['ID'] ?>">
 			<input type="text" class="hidden-input" id="order-id" name="order-id" value="<?php echo $purchase_id ?>">
 			<div class="row" id="first-row">
 				<div class="kolom-md-2">
