@@ -28,10 +28,12 @@
             $sql = "SELECT COUNT(order_id) AS voters, AVG(rating) AS rating FROM book_review WHERE book_id = :book_id GROUP BY book_id";
             $query = $conn->prepare($sql);
             $parameters = array(':book_id' => $book_id);
-            
             $query->execute($parameters);
 
-            return $query->fetch();
+            $result = $query->fetch();
+            $conn = null;
+            unset($conn);
+            return $result;
         }
 
         // TODO
@@ -42,10 +44,12 @@
                     WHERE book.book_id = :book_id ORDER BY order_id DESC";
             $query = $conn->prepare($sql);
             $parameters = array(':book_id' => $book_id);
-            
             $query->execute($parameters);
 
-            return $query->fetch();
+            $result = $query->fetch();
+            $conn = null;
+            unset($conn);
+            return $result;
         }
     }
 ?>
