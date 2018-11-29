@@ -75,10 +75,17 @@ public class BookCatalogueImpl implements BookCatalogue {
             JSONObject res = new JSONObject(checkoutResponse);
 
             if (!res.has("err")) {
+
+
                 System.out.println("UPDATE");
+
+
                 Boolean upsertSuccess = BuyBook.upsert(bookId, genres, bookAmount);
                 if (upsertSuccess){
+
+                    System.out.println(">>> return True from buybook upsert");
                     return "true";
+
                 }
             }
         } catch (Exception e) {

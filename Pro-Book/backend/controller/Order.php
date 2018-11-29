@@ -28,7 +28,9 @@
                 $bookAmount = $_POST["amount"];
                 $otpToken = $_POST["otp"];
 
+                //$order_id is boolean
                 $order_id = $this->orderService->orderBook($username, $cardNum, $bookId, $bookAmount, $otpToken);
+
                 if(!$order_id){
                     echo "failed";
                 }else{

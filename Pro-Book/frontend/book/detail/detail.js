@@ -26,22 +26,22 @@ function showStars(rating) {
     }
 }
 
-function closeModal(modalId) {
+function closeModal(modalId){
     document.getElementById("overlay").style.display = "none";
     document.getElementById(modalId).style.display = "none";
 }
 
-function displayModal(modalId) {
+function displayModal(modalId){
     document.getElementById("overlay").style.display = "flex";
     document.getElementById(modalId).style.display = "flex";
 }
 
-function displayFeedbackModal(success, message) {
+function displayFeedbackModal(success, message){
     closeModal("otp-modal");
     displayModal("feedback-modal");
     document.getElementById("success-message").innerHTML = message;
 
-    if (success) {
+    if (success){
         document.getElementById("checklist").style.display = "flex";
     }
 }
@@ -56,28 +56,27 @@ function makeOrder(book_id, otpToken) {
 
     let xhttp = new XMLHttpRequest();
     let url = "/tugasbesar2_2018/Pro-Book/index.php/Order/orderBook";
-    let params = "book_id=" + book_id + "&amount=" + amount + "&otp=" + otpToken;
-
+    let params = "book_id=" + book_id + "&amount=" + amount +"&otp=" + otpToken;
+    xhttp.open("POST", url, true);
+    xhttp.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+    xhttp.send(params);
 
     xhttp.onreadystatechange = function () {
 
         if (xhttp.readyState === 4 && xhttp.status === 200) {
-
             if (xhttp.responseText === "false") {
                 window.location = "http://localhost/tugasbesar2_2018/Pro-Book/index.php/Auth/index"
             }
             let message;
             let success = !(this.responseText === " failed"); // for some reason there's extra padding in front (?)
-            if (success) {
+            if (success){
                 message = "<p style='font-weight:bold'>Pesanan berhasil!</p><p>Nomor Transaksi:" + xhttp.responseText + "</p>";
-            } else {
+            }else{
                 message = "<p style='font-weight:bold'>Pesanan Gagal!</p>";
             }
             displayFeedbackModal(success, message);
         }
     };
 
-    xhttp.open("POST", url, true);
-    xhttp.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
-    xhttp.send(params);
+
 }

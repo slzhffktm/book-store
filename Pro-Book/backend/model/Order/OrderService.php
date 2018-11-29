@@ -22,9 +22,10 @@
 
             $params = array("arg0" => $bookId, "arg1" => $cardId, "arg2" => $bookAmount, "arg3" => $otpToken);
             $isPurchaseSuccess = $this->client->buyBook($params);
-            $isPurchaseSuccess = $isPurchaseSuccess == "true";
+            $isPurchaseSuccess = $isPurchaseSuccess->return == "true";
 
             if ($isPurchaseSuccess) {
+
                 $conn = OpenCon();
                 $username = strval($username);
 
