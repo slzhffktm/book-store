@@ -21,6 +21,8 @@
                 <div class="kolom-md-10 display-block info-text-wrapper">
                     <?php echo "<h1 style=\"color: orangered\">" . $result['Title'] . "</h1>" ?>
                     <?php echo "<h5>" . $result['Author'] . "</h5>" ?>
+                    <br>
+                    <?php echo "<h3 style=\"color: orangered\"> Rp" . $result['Price'] . "</h3>" ?>
                     <?php echo "<p>" . $result['Description'] . "</p>" ?>
                 </div>
                 <div class="kolom-md-2">
